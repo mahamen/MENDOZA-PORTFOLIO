@@ -69,10 +69,16 @@ document.addEventListener("DOMContentLoaded", function () {
       submitBtn.textContent = 'Sending...';
       submitBtn.disabled = true;
       const formData = new FormData(contactForm);
-      fetch('send_mail.php', { method: 'POST', body: formData })
-        .then(() => {
-          contactForm.style.display = 'none';
-          formSuccess.style.display = 'flex';
+      fetch('https://formspree.io/f/xeevqbbz', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+        .then(response => {
+          if (response.ok) {
+            contactForm.style.display = 'none';
+            formSuccess.style.display = 'flex';
+          }
         })
         .catch(() => {
           contactForm.style.display = 'none';
