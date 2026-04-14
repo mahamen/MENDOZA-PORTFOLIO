@@ -435,10 +435,25 @@
         <!-- Contact Info & Social Links Card -->
         <div class="card">
           <h2>Connect</h2>
-          <p style="margin-top:1rem;"><strong>Location:</strong><br>Calapan City · Oriental Mindoro</p>
+          <!-- Email -->
+          <div style="display:flex; align-items:center; gap:0.8rem; margin-top:1rem;">
+            <i class="fas fa-envelope" style="color:var(--green); font-size:1.2rem;"></i>
+            <div>
+              <p style="font-weight:600; margin-bottom:0.2rem;">Email</p>
+              <a href="mailto:hanahmendoza78@gmail.com" style="text-decoration:none; color:inherit;">hanahmendoza78@gmail.com</a>
+            </div>
+          </div>
+          <!-- Location -->
+          <div style="display:flex; align-items:center; gap:0.8rem; margin-top:1.2rem;">
+            <i class="fas fa-map-marker-alt" style="color:var(--green); font-size:1.2rem;"></i>
+            <div>
+              <p style="font-weight:600; margin-bottom:0.2rem;">Location</p>
+              <p>Calapan City · Oriental Mindoro</p>
+            </div>
+          </div>
           <!-- Social Media Links -->
           <div style="margin-top:2rem;">
-            <h3 style="margin-bottom:.8rem;">Social Links</h3>
+            <h3 style="margin-bottom:.8rem;">Connect With Me</h3>
             <div class="social-icons">
               <a href="https://github.com/mahamen" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
               <a href="https://facebook.com/mahamenn" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -453,6 +468,15 @@
           <form action="https://formspree.io/f/xeevqbbz" method="POST" class="contact-form" id="contactForm">
             <input type="text" name="name" placeholder="Your Name" required>
             <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit" class="btn btn-primary" id="submitBtn">Send Message</button>
+          </form>
+          <!-- Success Message (hidden by default, shown after successful submit) -->
+          <div id="formSuccess" class="form-success" style="display:none;">
+            <i class="fas fa-check-circle"></i>
+            <p>Message sent! I'll get back to you soon.</p>
+          </div>
+        </div>
             <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
             <button type="submit" class="btn btn-primary" id="submitBtn">Send Message</button>
           </form>
