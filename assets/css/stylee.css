@@ -1,17 +1,19 @@
-
+/* ===== CSS CUSTOM PROPERTIES (DESIGN TOKENS) =====
+   Centralized color palette for easy theming across dark and light modes */
 :root {
-  --green:       #1DB954;  
-  --dark:        #0f0f0f;  
-  --dark-card:   #181818; 
-  --light:       #ffffff;  
-  --light-bg:    #f6f6f7; 
-  --text-dark:   #ffffff; 
-  --text-light:  #111111;  
-  --border-dark: #222;     
-  --border-light:#e5e5e7; 
+  --green:       #1DB954;  /* Primary accent — Spotify-inspired green */
+  --dark:        #0f0f0f;  /* Page background (dark mode) */
+  --dark-card:   #181818;  /* Card/surface background (dark mode) */
+  --light:       #ffffff;  /* Pure white */
+  --light-bg:    #f6f6f7;  /* Page background (light mode) */
+  --text-dark:   #ffffff;  /* Body text color (dark mode) */
+  --text-light:  #111111;  /* Body text color (light mode) */
+  --border-dark: #222;     /* Card borders (dark mode) */
+  --border-light:#e5e5e7;  /* Card borders (light mode) */
 }
 
-
+/* ===== CSS RESET =====
+   Remove default browser margin/padding and use border-box sizing */
 * {
   margin: 0;
   padding: 0;
@@ -970,4 +972,21 @@ body.light footer {
 @keyframes popIn {
   from { transform: scale(0.5); opacity: 0; }
   to   { transform: scale(1);   opacity: 1; }
+}
+
+/* ===== PROJECT ROLE BADGE =====
+   Displays the contributor role under each project stack */
+.project-role {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--green);
+  margin-top: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  opacity: 0.85;
+}
+
+.project-role i {
+  font-size: 0.68rem;
 }
