@@ -1,18 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ===== SEND EMAIL VIA GMAIL =====
-  function sendViaGmail() {
-    const email   = "hanahmendoza78@gmail.com";
-    const subject = encodeURIComponent("");
-    const body    = encodeURIComponent("");
-    window.open(`https://mail.google.com/mail/?view=cm&to=${email}&su=${subject}&body=${body}`, "_blank");
-  }
-
+  // ===== SEND EMAIL =====
+  // Uses mailto: so it opens the compose window correctly on both desktop and mobile
   const sendEmailBtn = document.querySelector('.btn-send-email');
   if (sendEmailBtn) {
     sendEmailBtn.addEventListener('click', function (e) {
       e.preventDefault();
-      sendViaGmail();
+      window.location.href = "mailto:hanahmendoza78@gmail.com";
     });
   }
 
