@@ -7,27 +7,7 @@
 
   <!-- Circular Favicon — draws profile photo clipped to a circle via canvas -->
   <link rel="icon" id="favicon" type="image/png" href="assets/images/hanah.jpg">
-  <script>
-    (function () {
-      var img = new Image();
-      img.crossOrigin = "anonymous";
-      img.src = "assets/images/hanah.jpg";
-      img.onload = function () {
-        var size = 64;
-        var canvas = document.createElement("canvas");
-        canvas.width = size;
-        canvas.height = size;
-        var ctx = canvas.getContext("2d");
-        ctx.beginPath();
-        ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.clip();
-        ctx.drawImage(img, 0, 0, size, size);
-        document.getElementById("favicon").href = canvas.toDataURL("image/png");
-      };
-    })();
-  </script>
-
+  
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
