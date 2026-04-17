@@ -10,6 +10,25 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+    (function () {
+      var img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = "assets/images/hanah.jpg";
+      img.onload = function () {
+        var size = 64;
+        var canvas = document.createElement("canvas");
+        canvas.width = size;
+        canvas.height = size;
+        var ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.clip();
+        ctx.drawImage(img, 0, 0, size, size);
+        document.getElementById("favicon").href = canvas.toDataURL("image/png");
+      };
+    })();
+
   // ===== TAB NAVIGATION & INDICATOR =====
   const tabs      = document.querySelectorAll('.nav-tab');
   const contents  = document.querySelectorAll('.tab-content');
