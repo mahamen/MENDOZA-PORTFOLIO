@@ -214,9 +214,64 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // ===== DESIGN TAB SWITCHER =====
+  const designTabBar = document.getElementById('designTabBar');
+  if (designTabBar) {
+    designTabBar.addEventListener('click', e => {
+      const btn = e.target.closest('.design-tab');
+      if (!btn) return;
+      designTabBar.querySelectorAll('.design-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.design-panel').forEach(p => p.classList.remove('active'));
+      const target = document.getElementById(btn.getAttribute('data-design'));
+      if (target) target.classList.add('active');
+    });
+  }
+
+  // ===== CAROUSEL DOTS =====
+  const dotSetMap = {
+    set1: { el: document.getElementById('dots-set1'), count: 7 },
+    set2: { el: document.getElementById('dots-set2'), count: 8 },
+    set3: { el: document.getElementById('dots-set3'), count: 7 },
+    set4: { el: document.getElementById('dots-set4'), count: 7 }
+  };
+
+  function buildDots() {
+    Object.entries(dotSetMap).forEach(([setId, { el, count }]) => {
+      if (!el) return;
+      el.innerHTML = '';
+      for (let i = 0; i < count; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active-dot' : '');
+        dot.addEventListener('click', () => { jumpToSlide(setId, i); updateDots(setId, i); });
+        el.appendChild(dot);
+      }
+    });
+  }
+
+  function updateDots(setId, index) {
+    const { el } = dotSetMap[setId] || {};
+    if (!el) return;
+    el.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      d.classList.toggle('active-dot', i === index);
+    });
+  }
+
+  // Patch changeSlide & showSlide to also update dots
+  const _origShowSlide = showSlide;
+  function showSlide(setId, index) {
+    const set = carouselSets[setId];
+    if (!set || !set.slides.length) return;
+    set.slides.forEach(slide => slide.classList.remove('active-slide'));
+    set.slides[index].classList.add('active-slide');
+    set.currentSlide = index;
+    updateDots(setId, index);
+  }
+
   // ===== INIT =====
   window.addEventListener('load', () => {
     initCarousels();
+    buildDots();
   });
 
 });
