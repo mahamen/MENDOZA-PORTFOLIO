@@ -28,7 +28,7 @@
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <link rel="stylesheet" href="assets/css/stylee.css">
@@ -62,156 +62,276 @@
 
     <!-- ==================== ABOUT TAB ==================== -->
     <div id="about" class="tab-content active">
-      <div class="grid-2col">
+      <div class="about-cols">
 
-        <!-- About Me Card -->
-        <div class="card">
-          <h2>About</h2>
-          <p>An aspiring IT professional with a solid foundation in information technology fundamentals, including networking, systems administration, cybersecurity principles, and software development. Passionate about solving real-world problems through efficient, scalable, and well-structured technological solutions. Experienced in working on academic and personal projects that demonstrate analytical thinking, adaptability, and attention to detail. Continuously learning and exploring emerging technologies to stay current in the fast-evolving tech industry.</p>
+        <!-- LEFT COLUMN -->
+        <div class="about-col">
+
+          <!-- About Me Card -->
+          <div class="card about-card">
+            <h2>About</h2>
+            <p class="about-intro">A detail-driven UI/UX Designer and QA Analyst who bridges the gap between beautiful interfaces and reliable software — designing with users in mind and testing with precision.</p>
+            <div class="about-bullets">
+              <div class="about-bullet-item">
+                <div class="about-bullet-icon"><i class="fas fa-pen-nib"></i></div>
+                <div>
+                  <p class="about-bullet-title">UI/UX Design</p>
+                  <p class="about-bullet-desc">Crafts intuitive, user-centered interfaces using Figma and Canva — from wireframes and prototypes to polished, pixel-perfect final designs.</p>
+                </div>
+              </div>
+              <div class="about-bullet-item">
+                <div class="about-bullet-icon"><i class="fas fa-shield-halved"></i></div>
+                <div>
+                  <p class="about-bullet-title">Quality Assurance</p>
+                  <p class="about-bullet-desc">Writes test cases, identifies bugs, and verifies system functionality — ensuring every release is stable, reliable, and meets user expectations.</p>
+                </div>
+              </div>
+              <div class="about-bullet-item">
+                <div class="about-bullet-icon"><i class="fas fa-arrows-spin"></i></div>
+                <div>
+                  <p class="about-bullet-title">Design Meets Testing</p>
+                  <p class="about-bullet-desc">Brings a unique dual perspective — the empathy of a designer and the critical eye of a QA analyst — to every project she touches.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Technical Skills Card -->
+          <div class="tech-card">
+            <h2>Technical Skills</h2>
+            <!-- Design Tools -->
+            <div class="skill-category">
+              <p class="category-title"><i class="fas fa-pen-ruler"></i> Design</p>
+              <div class="skills-row">
+                <span>UI/UX Design</span><span>Graphic Design</span><span>Figma</span><span>Canva</span><span>Prototyping</span>
+              </div>
+            </div>
+            <!-- QA & Support Skills -->
+            <div class="skill-category">
+              <p class="category-title"><i class="fas fa-shield-halved"></i> Quality & Support</p>
+              <div class="skills-row">
+                <span>QA Testing</span><span>Technical Problem Solving</span><span>Documentation</span><span>Test Case Creation</span><span>End-User Training</span>
+              </div>
+            </div>
+            <!-- Programming Languages -->
+            <div class="skill-category">
+              <p class="category-title"><i class="fas fa-code"></i> Programming</p>
+              <div class="skills-row">
+                <span>JavaScript</span><span>PHP</span><span>HTML/CSS</span><span>SQL</span>
+              </div>
+            </div>
+            <!-- CMS Platforms -->
+            <div class="skill-category">
+              <p class="category-title"><i class="fas fa-cloud"></i> CMS & Platforms</p>
+              <div class="skills-row">
+                <span>WordPress</span><span>Wix</span>
+              </div>
+            </div>
+            <!-- Professional / Soft Skills -->
+            <div class="skill-category">
+              <p class="category-title"><i class="fas fa-users"></i> Professional</p>
+              <div class="skills-row">
+                <span>Project Management</span><span>Team Collaboration</span><span>Client Communication</span><span>Time Management</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end left col -->
+
+        <!-- RIGHT COLUMN -->
+        <div class="about-col">
+
+          <!-- Experience & Education Card -->
+          <div class="card">
+            <h2>Experience</h2>
+            <div style="margin-left:0.5rem;">
+
+              <!-- Timeline Entry: Current Role -->
+              <div style="position:relative; padding-left:1.5rem; margin-bottom:0;">
+                <div style="position:absolute; left:calc(-9px - 1.5px); top:3px; width:18px; height:18px; background:var(--green); border-radius:50%; box-shadow:0 0 10px green; z-index:1;"></div>
+                <div style="position:absolute; left:-1.5px; top:21px; width:3px; height:calc(100% + 2rem); background:var(--green);"></div>
+                <p style="font-weight:600; margin-bottom:.4rem;">Developer Intern – New San Jose Builders Inc.</p>
+                <p style="margin-bottom:.5rem;">2026 – Present</p>
+                <p style="font-size:0.86rem; opacity:0.8; line-height:1.6; margin-bottom:.6rem;">Part of the Developer Team — contributing to the design, development, and maintenance of internal web systems. Also involved in Quality Assurance testing: writing test cases, identifying and reporting bugs, and verifying system functionality to ensure stable and reliable software releases.</p>
+                <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:2rem;">
+                  <span style="background:rgba(29,185,84,0.1); color:var(--green); border:1px solid rgba(29,185,84,0.25); border-radius:20px; padding:2px 10px; font-size:0.75rem; font-weight:600;">Web Development</span>
+                  <span style="background:rgba(29,185,84,0.1); color:var(--green); border:1px solid rgba(29,185,84,0.25); border-radius:20px; padding:2px 10px; font-size:0.75rem; font-weight:600;">QA Testing</span>
+                  <span style="background:rgba(29,185,84,0.1); color:var(--green); border:1px solid rgba(29,185,84,0.25); border-radius:20px; padding:2px 10px; font-size:0.75rem; font-weight:600;">Test Case Writing</span>
+                  <span style="background:rgba(29,185,84,0.1); color:var(--green); border:1px solid rgba(29,185,84,0.25); border-radius:20px; padding:2px 10px; font-size:0.75rem; font-weight:600;">Bug Reporting</span>
+                </div>
+              </div>
+
+              <!-- Timeline Entry: Education -->
+              <div style="position:relative; padding-left:1.5rem;">
+                <div style="position:absolute; left:calc(-9px - 1.5px); top:3px; width:18px; height:18px; background:var(--green); border-radius:50%; z-index:1;"></div>
+                <div style="position:absolute; left:-1.5px; top:21px; width:3px; height:calc(100% - 21px); background:var(--green);"></div>
+                <p style="font-weight:600; margin-bottom:.4rem;">BS Information Technology – Mindoro State University</p>
+                <p>2022 – Present</p>
+                <p style="margin-top:.4rem;">Dean's Lister (AY 2022–2025)</p>
+                <p>Capstone Project: Documentation & UI Design Drafting</p>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Work Style & Tech Interests Card -->
+          <div class="tech-card">
+            <h2>Work Style & Tech Interests</h2>
+            <!-- How I Work -->
+            <div class="skill-category">
+              <p class="category-title"><i class="fas fa-laptop-code"></i> How I Work</p>
+              <div class="workstyle-list">
+                <div class="workstyle-item">
+                  <i class="fas fa-sitemap" style="color:var(--green);"></i>
+                  <div>
+                    <p class="workstyle-title">Detail-Oriented</p>
+                    <p class="workstyle-desc">Pixel-precise in design, thorough in QA — I catch what others miss.</p>
+                  </div>
+                </div>
+                <div class="workstyle-item">
+                  <i class="fas fa-users-gear" style="color:var(--green);"></i>
+                  <div>
+                    <p class="workstyle-title">Collaborative</p>
+                    <p class="workstyle-desc">I bridge developers, designers, and stakeholders through clear communication.</p>
+                  </div>
+                </div>
+                <div class="workstyle-item">
+                  <i class="fas fa-file-lines" style="color:var(--green);"></i>
+                  <div>
+                    <p class="workstyle-title">Documentation-Driven</p>
+                    <p class="workstyle-desc">Good docs keep teams aligned — I treat writing as part of the product.</p>
+                  </div>
+                </div>
+                <div class="workstyle-item">
+                  <i class="fas fa-rotate" style="color:var(--green);"></i>
+                  <div>
+                    <p class="workstyle-title">Iterative Thinker</p>
+                    <p class="workstyle-desc">Test, feedback, refine — whether in design, QA, or documentation.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Tech Interests -->
+            <div class="skill-category" style="margin-top:1.2rem;">
+              <p class="category-title"><i class="fas fa-microchip"></i> Tech Interests</p>
+              <div class="skills-row" style="margin-bottom:0.5rem;">
+                <span>UI/UX Research</span><span>Design Systems</span><span>Accessibility</span><span>HCI</span>
+              </div>
+              <div class="skills-row" style="margin-bottom:0.5rem;">
+                <span>QA Automation</span><span>Software Testing</span><span>Bug Tracking</span>
+              </div>
+              <div class="skills-row" style="margin-bottom:0.5rem;">
+                <span>Frontend Development</span><span>Responsive Design</span>
+              </div>
+              <div class="skills-row">
+                <span>AI & Machine Learning</span><span>Cybersecurity</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end right col -->
+
+      </div><!-- end about-cols -->
+
+      <!-- ===== CERTS + HOBBIES BENTO ROW ===== -->
+      <div class="ch-bento">
+
+        <!-- LEFT: Certifications -->
+        <div class="ch-card ch-certs">
+          <div class="ch-header">
+            <div class="ch-icon-wrap"><i class="fas fa-award"></i></div>
+            <div>
+              <h2 class="ch-title">Certifications</h2>
+              <p class="ch-subtitle">Verified credentials & courses</p>
+            </div>
+          </div>
+          <div class="cert-stack">
+            <a href="assets/files/CodechumPythonProgramming2.pdf" target="_blank" class="cert-row">
+              <div class="cert-row-left">
+                <div class="cert-dot"></div>
+                <span class="cert-row-name">Fortinet Certified Associate in Cybersecurity</span>
+              </div>
+              <i class="fas fa-arrow-up-right-from-square cert-row-icon"></i>
+            </a>
+            <a href="assets/files/FortinetCertifiedFundamentalsinCybersecurity.pdf" target="_blank" class="cert-row">
+              <div class="cert-row-left">
+                <div class="cert-dot"></div>
+                <span class="cert-row-name">Fortinet Certified Fundamentals in Cybersecurity</span>
+              </div>
+              <i class="fas fa-arrow-up-right-from-square cert-row-icon"></i>
+            </a>
+            <a href="assets/files/MicrosoftDataAnalytics.pdf" target="_blank" class="cert-row">
+              <div class="cert-row-left">
+                <div class="cert-dot"></div>
+                <span class="cert-row-name">Certificate in Microsoft Data Analytics</span>
+              </div>
+              <i class="fas fa-arrow-up-right-from-square cert-row-icon"></i>
+            </a>
+            <a href="assets/files/CodechumPythonProgramming2.pdf" target="_blank" class="cert-row">
+              <div class="cert-row-left">
+                <div class="cert-dot"></div>
+                <span class="cert-row-name">CodeChum Python Programming 2</span>
+              </div>
+              <i class="fas fa-arrow-up-right-from-square cert-row-icon"></i>
+            </a>
+          </div>
         </div>
 
-        <!-- Experience & Education Card -->
-        <div class="card">
-          <h2>Experience</h2>
-          <div style="margin-left:0.5rem;">
+        <!-- RIGHT: Hobbies — 2×2 tiles + insight strip -->
+        <div class="ch-card ch-hobbies">
+          <div class="ch-header">
+            <div class="ch-icon-wrap"><i class="fas fa-heart"></i></div>
+            <div>
+              <h2 class="ch-title">Hobbies & Interests</h2>
+              <p class="ch-subtitle">What fuels my creativity outside work</p>
+            </div>
+          </div>
 
-            <!-- Timeline Entry: Current Role -->
-            <div style="position:relative; padding-left:1.5rem; margin-bottom:0;">
-              <div style="position:absolute; left:calc(-9px - 1.5px); top:3px; width:18px; height:18px; background:var(--green); border-radius:50%; box-shadow:0 0 10px green; z-index:1;"></div>
-              <!-- Line starts from bottom of dot, connects down to next entry -->
-              <div style="position:absolute; left:-1.5px; top:21px; width:3px; height:calc(100% + 2rem); background:var(--green);"></div>
-              <p style="font-weight:600; margin-bottom:.4rem;">Developer Intern – New San Jose Builders Inc.</p>
-              <p style="margin-bottom:2rem;">2026 – Present</p>
+          <!-- 2×2 hobby tiles -->
+          <div class="hobby-tiles">
+            <div class="hobby-tile">
+              <i class="fas fa-camera"></i>
+              <p class="htile-label">Visual Arts</p>
+              <div class="htile-tags"><span>Photography</span><span>Videography</span><span>Editing</span></div>
             </div>
+            <div class="hobby-tile">
+              <i class="fas fa-film"></i>
+              <p class="htile-label">Film & Media</p>
+              <div class="htile-tags"><span>Films</span><span>Music</span><span>Podcasts</span></div>
+            </div>
+            <div class="hobby-tile">
+              <i class="fas fa-book-open"></i>
+              <p class="htile-label">Literature</p>
+              <div class="htile-tags"><span>Literature</span><span>Thrifting</span><span>Styling</span></div>
+            </div>
+            <div class="hobby-tile">
+              <i class="fas fa-palette"></i>
+              <p class="htile-label">Creative</p>
+              <div class="htile-tags"><span>Writing</span><span>Visual Design</span></div>
+            </div>
+          </div>
 
-            <!-- Timeline Entry: Education -->
-            <div style="position:relative; padding-left:1.5rem;">
-              <div style="position:absolute; left:calc(-9px - 1.5px); top:3px; width:18px; height:18px; background:var(--green); border-radius:50%; z-index:1;"></div>
-              <!-- Line extends from dot down to bottom of content -->
-              <div style="position:absolute; left:-1.5px; top:21px; width:3px; height:calc(100% - 21px); background:var(--green);"></div>
-              <p style="font-weight:600; margin-bottom:.4rem;">BS Information Technology – Mindoro State University</p>
-              <p>2022 – Present</p>
-              <p style="margin-top:.4rem;">Dean's Lister (AY 2022–2025)</p>
-              <p>Capstone Project: Documentation & UI Design Drafting</p>
+          <!-- Insight strip -->
+          <div class="hobby-insights">
+            <div class="hobby-insight-item">
+              <i class="fas fa-paint-brush" style="color:var(--green);"></i>
+              <div>
+                <p class="hi-title">Creative Eye</p>
+                <p class="hi-desc">Photography & film sharpen visual composition for UI</p>
+              </div>
             </div>
-
-          </div>
-        </div>
-
-        <!-- Technical Skills Card -->
-        <div class="tech-card">
-          <h2>Technical Skills</h2>
-          <!-- Programming Languages -->
-          <div class="skill-category">
-            <p class="category-title"><i class="fas fa-code"></i> Programming</p>
-            <div class="skills-row">
-              <span>JavaScript</span><span>PHP</span><span>HTML/CSS</span><span>SQL</span>
-            </div>
-          </div>
-          <!-- Design Tools -->
-          <div class="skill-category">
-            <p class="category-title"><i class="fas fa-pen-ruler"></i> Design</p>
-            <div class="skills-row">
-              <span>UI/UX Design</span><span>Graphic Design</span><span>Figma</span><span>Canva</span><span>Prototyping</span>
-            </div>
-          </div>
-          <!-- QA & Support Skills -->
-          <div class="skill-category">
-            <p class="category-title"><i class="fas fa-shield-halved"></i> Quality & Support</p>
-            <div class="skills-row">
-              <span>QA Testing</span><span>Technical Problem Solving</span><span>Documentation</span><span>Test Case Creation</span><span>End-User Training</span>
-            </div>
-          </div>
-          <!-- CMS Platforms -->
-          <div class="skill-category">
-            <p class="category-title"><i class="fas fa-cloud"></i> CMS & Platforms</p>
-            <div class="skills-row">
-              <span>WordPress</span><span>Wix</span>
-            </div>
-          </div>
-          <!-- Professional / Soft Skills -->
-          <div class="skill-category">
-            <p class="category-title"><i class="fas fa-users"></i> Professional</p>
-            <div class="skills-row">
-              <span>Project Management</span><span>Team Collaboration</span><span>Client Communication</span><span>Time Management</span>
+            <div class="hobby-insight-divider"></div>
+            <div class="hobby-insight-item">
+              <i class="fas fa-magnifying-glass" style="color:var(--green);"></i>
+              <div>
+                <p class="hi-title">Attention to Detail</p>
+                <p class="hi-desc">Editing & styling train the eye — crucial in QA & design</p>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Hobbies & Interests Card -->
-        <div class="tech-card">
-          <h2>Hobbies & Interests</h2>
-          <!-- Visual Arts Hobbies -->
-          <div class="skill-category">
-            <p class="category-title"><i class="fas fa-camera"></i> Visual Arts</p>
-            <div class="skills-row">
-              <span>Photography</span><span>Videography</span><span>Content Creation</span><span>Editing</span>
-            </div>
-          </div>
-          <!-- Film & Media Hobbies -->
-          <div class="skill-category">
-            <p class="category-title"><i class="fas fa-film"></i> Film & Media</p>
-            <div class="skills-row">
-              <span>Films</span><span>Movies</span><span>Music</span><span>Podcasts</span><span>Documentaries</span>
-            </div>
-          </div>
-          <!-- Literature & Fashion Hobbies -->
-          <div class="skill-category">
-            <p class="category-title"><i class="fas fa-book"></i> Literature & Fashion</p>
-            <div class="skills-row">
-              <span>Literature</span><span>Thrifting</span><span>Styling</span>
-            </div>
-          </div>
-          <!-- Creative Expression Hobbies -->
-          <div class="skill-category">
-            <p class="category-title"><i class="fas fa-palette"></i> Creative Expression</p>
-            <div class="skills-row">
-              <span>Creative Writing</span><span>Visual Design</span>
-            </div>
-          </div>
-          <!-- How Hobbies Influence Work -->
-          <div class="hobby-influence">
-            <div class="hobby-box">
-              <i class="fas fa-paint-brush hobby-icon"></i>
-              <h4>Creative Eye</h4>
-              <p>Photography & film sharpen my visual composition skills for UI design</p>
-            </div>
-            <div class="hobby-box">
-              <i class="fas fa-magic hobby-icon"></i>
-              <h4>Attention to Detail</h4>
-              <p>Editing & styling train my eye for detail — crucial in QA and design</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Certifications Card (Full Width) -->
-      <div class="card" style="width:100%; margin-top:2rem;">
-        <h2>Certifications</h2>
-        <div class="certifications-list">
-          <!-- Fortinet Associate Certification -->
-          <div class="cert-item">
-            <span class="cert-title" data-link="assets/files/CodechumPythonProgramming2.pdf">Fortinet Certified Associate in Cybersecurity</span>
-            <a href="assets/files/CodechumPythonProgramming2.pdf" target="_blank" class="cert-link">➔</a>
-          </div>
-          <!-- Fortinet Fundamentals Certification -->
-          <div class="cert-item">
-            <span class="cert-title" data-link="assets/files/FortinetCertifiedFundamentalsinCybersecurity.pdf">Fortinet Certified Fundamentals in Cybersecurity</span>
-            <a href="assets/files/FortinetCertifiedFundamentalsinCybersecurity.pdf" target="_blank" class="cert-link">➔</a>
-          </div>
-          <!-- Microsoft Data Analytics Certification -->
-          <div class="cert-item">
-            <span class="cert-title" data-link="assets/files/MicrosoftDataAnalytics.pdf">Certificate in Microsoft Data Analytics</span>
-            <a href="assets/files/MicrosoftDataAnalytics.pdf" target="_blank" class="cert-link">➔</a>
-          </div>
-          <!-- CodeChum Python Certification -->
-          <div class="cert-item">
-            <span class="cert-title" data-link="assets/files/CodechumPythonProgramming2.pdf">CodeChum Python Programming 2</span>
-            <a href="assets/files/CodechumPythonProgramming2.pdf" target="_blank" class="cert-link">➔</a>
-          </div>
-        </div>
-      </div>
+      </div><!-- end ch-bento -->
     </div>
     <!-- ==================== END ABOUT TAB ==================== -->
 
@@ -438,7 +558,7 @@
 
     <!-- ==================== CONNECT TAB ==================== -->
     <div id="CONNECT" class="tab-content">
-      <div class="grid-2col">
+      <div class="grid-2col" style="align-items:stretch;">
 
         <!-- Contact Info & Social Links Card -->
         <div class="card">
@@ -476,7 +596,7 @@
         </div>
 
         <!-- Send a Message / Contact Form Card -->
-        <div class="card">
+        <div class="card contact-form-card">
           <h2>Send a Message</h2>
           <form action="https://formspree.io/f/xeevqbbz" method="POST" class="contact-form" id="contactForm">
             <input type="text" name="name" placeholder="Your Name" required>
@@ -486,8 +606,21 @@
           </form>
           <!-- Success Message (hidden by default, shown after successful submit) -->
           <div id="formSuccess" class="form-success" style="display:none;">
-            <i class="fas fa-check-circle"></i>
-            <p>Message sent! I'll get back to you soon.</p>
+            <div class="success-icon-wrap">
+              <i class="fas fa-check"></i>
+            </div>
+            <h3 class="success-title">Message Sent!</h3>
+            <p class="success-msg">Thanks for reaching out — I'll get back to you as soon as possible.</p>
+            <div class="success-detail-row">
+              <div class="success-detail">
+                <i class="fas fa-clock"></i>
+                <span>Usually replies within 24 hours</span>
+              </div>
+              <div class="success-detail">
+                <i class="fas fa-envelope"></i>
+                <span>Check your inbox for a confirmation</span>
+              </div>
+            </div>
           </div>
         </div>
 
