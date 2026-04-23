@@ -1701,6 +1701,10 @@ body.light .hobby-insights {
   gap: 1.5rem;
 }
 
+.exp-card {
+  flex: 1;
+}
+
 @media (max-width: 768px) {
   .about-cols { grid-template-columns: 1fr; }
 }
@@ -1835,4 +1839,172 @@ body.light .about-intro {
   color: var(--green);
   font-size: 0.78rem;
   flex-shrink: 0;
+}
+
+/* =====================================================
+   EXPERIENCE & EDUCATION CARD — REDESIGNED
+   ===================================================== */
+
+.exp-timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.exp-entry {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Left col: dot + line */
+.exp-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 36px;
+}
+
+.exp-connector {
+  width: 2px;
+  flex: 1;
+  background: linear-gradient(to bottom, var(--green), rgba(29,185,84,0.15));
+  border-radius: 2px;
+  margin-top: 4px;
+}
+
+/* Dot */
+.exp-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.exp-dot--active {
+  background: var(--green);
+  color: #000;
+  box-shadow: 0 0 0 4px rgba(29,185,84,0.18), 0 0 20px rgba(29,185,84,0.35);
+  animation: exp-pulse 2.5s ease-in-out infinite;
+}
+
+.exp-dot--edu {
+  background: rgba(29,185,84,0.14);
+  border: 2px solid rgba(29,185,84,0.45);
+  color: var(--green);
+}
+
+@keyframes exp-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(29,185,84,0.18), 0 0 20px rgba(29,185,84,0.3); }
+  50%       { box-shadow: 0 0 0 7px rgba(29,185,84,0.1),  0 0 30px rgba(29,185,84,0.5); }
+}
+
+/* Body */
+.exp-body {
+  flex: 1;
+  padding-bottom: 1.6rem;
+}
+
+.exp-entry--last .exp-body {
+  padding-bottom: 0;
+}
+
+.exp-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.exp-role-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.exp-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.65rem;
+  border-radius: 20px;
+  width: fit-content;
+  margin-bottom: 0.2rem;
+}
+
+.exp-badge--current {
+  background: rgba(29,185,84,0.15);
+  color: var(--green);
+  border: 1px solid rgba(29,185,84,0.35);
+}
+
+.exp-badge--edu {
+  background: rgba(100,160,255,0.12);
+  color: #7eb8ff;
+  border: 1px solid rgba(100,160,255,0.3);
+}
+body.light .exp-badge--edu {
+  background: rgba(59,130,246,0.1);
+  color: #2563eb;
+  border-color: rgba(59,130,246,0.3);
+}
+
+.exp-role {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.exp-date {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+  opacity: 0.85;
+  padding-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+.exp-desc {
+  font-size: 0.84rem;
+  line-height: 1.7;
+  opacity: 0.72;
+  margin-bottom: 0.75rem;
+}
+
+.exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.exp-tags span {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  background: rgba(29,185,84,0.08);
+  color: var(--green);
+  border: 1px solid rgba(29,185,84,0.2);
+  transition: 0.2s ease;
+}
+
+.exp-tags span:hover {
+  background: var(--green);
+  color: #000;
+}
+
+@media (max-width: 480px) {
+  .exp-top-row { flex-direction: column; gap: 0.4rem; }
 }
