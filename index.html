@@ -141,34 +141,52 @@
         <!-- RIGHT COLUMN -->
         <div class="about-col">
 
-          <!-- Experience & Education Card -->
-          <div class="card">
-            <h2>Experience</h2>
-            <div style="margin-left:0.5rem;">
+          <!-- Experience & Education Card — Redesigned -->
+          <div class="card exp-card">
 
-              <!-- Timeline Entry: Current Role -->
-              <div style="position:relative; padding-left:1.5rem; margin-bottom:0;">
-                <div style="position:absolute; left:calc(-9px - 1.5px); top:3px; width:18px; height:18px; background:var(--green); border-radius:50%; box-shadow:0 0 10px green; z-index:1;"></div>
-                <div style="position:absolute; left:-1.5px; top:21px; width:3px; height:calc(100% + 2rem); background:var(--green);"></div>
-                <p style="font-weight:600; margin-bottom:.4rem;">Developer Intern – New San Jose Builders Inc.</p>
-                <p style="margin-bottom:.5rem;">2026 – Present</p>
-                <p style="font-size:0.86rem; opacity:0.8; line-height:1.6; margin-bottom:.6rem;">Part of the Developer Team — contributing to the design, development, and maintenance of internal web systems. Also involved in Quality Assurance testing: identifying and reporting bugs, and verifying system functionality to ensure stable and reliable software releases.</p>
-                <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:2rem;">
-                  <span style="background:rgba(29,185,84,0.1); color:var(--green); border:1px solid rgba(29,185,84,0.25); border-radius:20px; padding:2px 10px; font-size:0.75rem; font-weight:600;">Web Development</span>
-                  <span style="background:rgba(29,185,84,0.1); color:var(--green); border:1px solid rgba(29,185,84,0.25); border-radius:20px; padding:2px 10px; font-size:0.75rem; font-weight:600;">QA Testing</span>
-                  <span style="background:rgba(29,185,84,0.1); color:var(--green); border:1px solid rgba(29,185,84,0.25); border-radius:20px; padding:2px 10px; font-size:0.75rem; font-weight:600;">User Manual Making</span>
-                  <span style="background:rgba(29,185,84,0.1); color:var(--green); border:1px solid rgba(29,185,84,0.25); border-radius:20px; padding:2px 10px; font-size:0.75rem; font-weight:600;">Bug Reporting</span>
+            <h2>Experience</h2>
+
+            <div class="exp-timeline">
+
+              <!-- ── Entry 1: Internship ── -->
+              <div class="exp-entry">
+                <div class="exp-left">
+                  <div class="exp-dot exp-dot--active"><i class="fas fa-code"></i></div>
+                  <div class="exp-connector"></div>
+                </div>
+                <div class="exp-body">
+                  <div class="exp-top-row">
+                    <div class="exp-role-block">
+                      <span class="exp-badge exp-badge--current">Current</span>
+                      <h3 class="exp-role">Developer Intern · New San Jose Builders Inc.</h3>
+                    </div>
+                    <span class="exp-date"><i class="fas fa-calendar-alt"></i> 2026 – Present</span>
+                  </div>
+                  <p class="exp-desc">Part of the Developer Team — handled QA testing responsibilities including identifying and reporting bugs, and verifying system functionality to ensure stable, reliable software releases.</p>
+                  <div class="exp-tags">
+                    <span>Web Development</span>
+                    <span>QA Testing</span>
+                    <span>User Manual Making</span>
+                    <span>Bug Reporting</span>
+                  </div>
                 </div>
               </div>
 
-              <!-- Timeline Entry: Education -->
-              <div style="position:relative; padding-left:1.5rem;">
-                <div style="position:absolute; left:calc(-9px - 1.5px); top:3px; width:18px; height:18px; background:var(--green); border-radius:50%; z-index:1;"></div>
-                <div style="position:absolute; left:-1.5px; top:21px; width:3px; height:calc(100% - 21px); background:var(--green);"></div>
-                <p style="font-weight:600; margin-bottom:.4rem;">BS Information Technology – Mindoro State University</p>
-                <p>2022 – Present</p>
-                <p style="margin-top:.4rem;">Dean's Lister (AY 2022–2025)</p>
-                <p>Capstone Project: Documentation & UI Design Drafting</p>
+              <!-- ── Entry 2: Education ── -->
+              <div class="exp-entry exp-entry--last">
+                <div class="exp-left">
+                  <div class="exp-dot exp-dot--edu"><i class="fas fa-graduation-cap"></i></div>
+                </div>
+                <div class="exp-body">
+                  <div class="exp-top-row">
+                    <div class="exp-role-block">
+                      <h3 class="exp-role">BS Information Technology · Mindoro State University</h3>
+                    </div>
+                    <span class="exp-date"><i class="fas fa-calendar-alt"></i> 2022 – Present</span>
+                  </div>
+                  <p class="exp-desc">Dean's Lister, AY 2022–2025</p>
+                  <p class="exp-desc" style="margin-bottom:0;">Capstone Project: <span style="color:var(--green); font-weight:600;">Technical Writer · UI Design Drafter</span></p>
+                </div>
               </div>
 
             </div>
@@ -222,9 +240,6 @@
               </div>
               <div class="skills-row" style="margin-bottom:0.5rem;">
                 <span>Frontend Development</span><span>Responsive Design</span>
-              </div>
-              <div class="skills-row">
-                <span>AI & Machine Learning</span><span>Cybersecurity</span>
               </div>
             </div>
           </div>
