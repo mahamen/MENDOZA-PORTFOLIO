@@ -180,19 +180,16 @@
                     <div class="exp-role-block">
                       <h3 class="exp-role">BS Information Technology · Mindoro State University</h3>
                     </div>
-                    <span class="exp-date"><i class="fas fa-calendar-alt"></i> 2022 – Present</span>
+                    <span class="exp-date"><i class="fas fa-calendar-alt"></i> 2022 – 2026</span>
                   </div>
-                  <p class="exp-desc">Cum Laude, AY 2022–2025</p>
+                  <p class="exp-desc">Cum Laude</p>
 
                   <!-- Diploma Dropdown -->
                   <div class="diploma-dropdown">
-                    <button type="button" class="diploma-toggle" onclick="toggleDiploma(this)">
-                      <span><i class="fas fa-certificate" style="color:var(--green); margin-right:6px;"></i>View Certificate</span>
-                      <i class="fas fa-chevron-down diploma-chevron"></i>
+                    <button type="button" class="diploma-toggle" onclick="openDiploma()">
+                      <span><i class="fas fa-certificate" style="color:var(--green); margin-right:6px;"></i>Mendoza Diploma</span>
+                      <i class="fas fa-arrow-up-right-from-square diploma-chevron"></i>
                     </button>
-                    <div class="diploma-panel">
-                      <img src="assets/images/MENDOZA_DIPLOMA.jpg" alt="Cum Laude Diploma — Maria Hanah G. Mendoza" onclick="openModal('diploma',0)">
-                    </div>
                   </div>
 
                   <p class="exp-desc" style="margin-bottom:0; margin-top:0.8rem;">Capstone Project: <span style="color:var(--green); font-weight:600;">Technical Writer · UI Design Drafter · QA Analyst</span></p>
@@ -665,7 +662,7 @@
     <img id="modalImage" src="" alt="Gallery Image">
   </div>
 
-  <!-- Diploma Dropdown Styles + Logic -->
+  <!-- Diploma Button Styles + Logic -->
   <style>
     .diploma-dropdown{margin-top:0.7rem;}
     .diploma-toggle{
@@ -678,25 +675,32 @@
       color:inherit; transition:background 0.2s ease, border-color 0.2s ease;
     }
     .diploma-toggle:hover{ border-color:var(--green); }
-    .diploma-chevron{ transition:transform 0.25s ease; font-size:0.8rem; opacity:0.8; }
-    .diploma-toggle.open .diploma-chevron{ transform:rotate(180deg); }
-    .diploma-panel{
-      max-height:0; overflow:hidden;
-      transition:max-height 0.3s ease;
-      margin-top:0.5rem;
-    }
-    .diploma-panel.open{ max-height:400px; }
-    .diploma-panel img{
-      width:100%; max-width:340px; display:block;
-      border-radius:8px; cursor:zoom-in;
-      border:1px solid var(--border-color, rgba(150,150,150,0.2));
-    }
+    .diploma-chevron{ font-size:0.78rem; opacity:0.8; }
   </style>
   <script>
-    function toggleDiploma(btn){
-      btn.classList.toggle('open');
-      var panel = btn.nextElementSibling;
-      panel.classList.toggle('open');
+    function openDiploma(){
+      var modal = document.getElementById('galleryModal');
+      var img = document.getElementById('modalImage');
+      if (!modal || !img) return;
+      img.src = 'assets/images/MENDOZA_DIPLOMA.jpg';
+      img.alt = 'Cum Laude Diploma — Maria Hanah G. Mendoza';
+      modal.classList.add('active');
+      modal.style.display = 'flex';
+      // Hide prev/next arrows for this single-image view
+      var prev = modal.querySelector('.modal-prev');
+      var next = modal.querySelector('.modal-next');
+      if (prev) prev.style.display = 'none';
+      if (next) next.style.display = 'none';
+
+      // Restore arrows once the modal is closed, so normal carousels aren't affected
+      var closeBtn = modal.querySelector('.close-modal');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function restoreArrows(){
+          if (prev) prev.style.display = '';
+          if (next) next.style.display = '';
+          closeBtn.removeEventListener('click', restoreArrows);
+        });
+      }
     }
   </script>
 
