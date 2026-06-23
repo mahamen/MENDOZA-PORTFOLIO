@@ -184,13 +184,15 @@
                   </div>
                   <p class="exp-desc">Cum Laude</p>
 
-                  <!-- Diploma Dropdown -->
-                  <div class="diploma-dropdown">
-                    <button type="button" class="diploma-toggle" onclick="openDiploma()">
-                      <span><i class="fas fa-certificate" style="color:var(--green); margin-right:6px;"></i>Mendoza Diploma</span>
-                      <i class="fas fa-arrow-up-right-from-square diploma-chevron"></i>
-                    </button>
-                  </div>
+                  <!-- Diploma Credential Card -->
+                  <button type="button" class="diploma-card" onclick="openDiploma()">
+                    <div class="diploma-card-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="diploma-card-text">
+                      <span class="diploma-card-label">Mendoza Diploma</span>
+                      <span class="diploma-card-sub">Cum Laude · BS Information Technology</span>
+                    </div>
+                    <i class="fas fa-arrow-up-right-from-square diploma-card-arrow"></i>
+                  </button>
 
                   <p class="exp-desc" style="margin-bottom:0; margin-top:0.8rem;">Capstone Project: <span style="color:var(--green); font-weight:600;">Technical Writer · UI Design Drafter · QA Analyst</span></p>
                 </div>
@@ -662,20 +664,52 @@
     <img id="modalImage" src="" alt="Gallery Image">
   </div>
 
-  <!-- Diploma Button Styles + Logic -->
+  <!-- Diploma Credential Card Styles + Logic -->
   <style>
-    .diploma-dropdown{margin-top:0.7rem;}
-    .diploma-toggle{
-      display:flex; align-items:center; justify-content:space-between;
-      width:100%; padding:0.55rem 0.9rem;
-      background:var(--card-bg, rgba(255,255,255,0.04));
-      border:1px solid var(--border-color, rgba(150,150,150,0.25));
-      border-radius:10px; cursor:pointer;
-      font-family:inherit; font-size:0.88rem; font-weight:500;
-      color:inherit; transition:background 0.2s ease, border-color 0.2s ease;
+    .diploma-card{
+      display:flex; align-items:center; gap:0.85rem;
+      width:100%; margin-top:0.7rem;
+      padding:0.7rem 0.9rem;
+      background:linear-gradient(135deg, rgba(34,197,94,0.08), rgba(34,197,94,0.02));
+      border:1px solid rgba(34,197,94,0.25);
+      border-radius:12px; cursor:pointer;
+      font-family:inherit; text-align:left;
+      color:inherit;
+      transition:border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .diploma-toggle:hover{ border-color:var(--green); }
-    .diploma-chevron{ font-size:0.78rem; opacity:0.8; }
+    .diploma-card:hover{
+      border-color:var(--green);
+      transform:translateY(-1px);
+      box-shadow:0 4px 14px rgba(34,197,94,0.15);
+    }
+    .diploma-card-icon{
+      flex-shrink:0;
+      width:38px; height:38px;
+      display:flex; align-items:center; justify-content:center;
+      border-radius:9px;
+      background:var(--green);
+      color:#fff; font-size:1rem;
+    }
+    .diploma-card-text{
+      flex:1; min-width:0;
+      display:flex; flex-direction:column; gap:0.15rem;
+    }
+    .diploma-card-label{
+      font-size:0.92rem; font-weight:700;
+      color:inherit; line-height:1.2;
+    }
+    .diploma-card-sub{
+      font-size:0.76rem; opacity:0.65;
+      font-weight:500; line-height:1.2;
+    }
+    .diploma-card-arrow{
+      flex-shrink:0; font-size:0.82rem; opacity:0.5;
+      transition:opacity 0.2s ease, transform 0.2s ease;
+    }
+    .diploma-card:hover .diploma-card-arrow{
+      opacity:1; color:var(--green);
+      transform:translate(2px, -2px);
+    }
   </style>
   <script>
     function openDiploma(){
