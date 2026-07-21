@@ -557,12 +557,20 @@
       color: var(--green);
       font-weight: 600;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 0.35rem;
       margin-top: auto;
       padding-top: 0.7rem;
       border-top: 1px solid var(--border);
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+    }
+    .pc-role i {
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .pc-role-text {
+      flex: 1;
+      min-width: 0;
     }
 
     /* --- Designs Section --- */
@@ -1234,7 +1242,7 @@
             </div>
           </div>
           <div class="pc-stack"><span><i class="fab fa-node-js"></i> Node.js</span><span><i class="fas fa-brain"></i> AI</span></div>
-          <p class="pc-role"><i class="fas fa-user-pen"></i> Technical Writer · UI/UX Designer · QA Analyst · Administrator</p>
+          <p class="pc-role"><i class="fas fa-user-pen"></i><span class="pc-role-text">Technical Writer · UI/UX Designer · QA Analyst · Administrator</span></p>
         </a>
 
         <a href="assets/files/ILoveMilkteaECommerceKiosk.pdf" target="_blank" class="project-card">
@@ -1246,7 +1254,7 @@
             </div>
           </div>
           <div class="pc-stack"><span><i class="fab fa-node-js"></i> Node.js</span></div>
-          <p class="pc-role"><i class="fas fa-user-pen"></i> Developer · UI/UX Designer · QA Analyst · Administrator</p>
+          <p class="pc-role"><i class="fas fa-user-pen"></i><span class="pc-role-text">Developer · UI/UX Designer · QA Analyst · Administrator</span></p>
         </a>
 
         <a href="https://github.com/mahamen/MINSUCLINIC" target="_blank" class="project-card">
@@ -1258,7 +1266,7 @@
             </div>
           </div>
           <div class="pc-stack"><span><i class="fab fa-php"></i> PHP</span><span><i class="fab fa-html5"></i> HTML</span></div>
-          <p class="pc-role"><i class="fas fa-user-pen"></i> Programmer · UI/UX Designer · QA Analyst</p>
+          <p class="pc-role"><i class="fas fa-user-pen"></i><span class="pc-role-text">Programmer · UI/UX Designer · QA Analyst</span></p>
         </a>
 
         <a href="assets/files/PanChitanNiUnchangWix.pdf" target="_blank" class="project-card">
@@ -1270,7 +1278,7 @@
             </div>
           </div>
           <div class="pc-stack"><span><i class="fas fa-globe"></i> Wix CMS</span><span><i class="fas fa-credit-card"></i> PayPal</span></div>
-          <p class="pc-role"><i class="fas fa-user-pen"></i> Developer · UI/UX Designer · QA Analyst · Technical Writer · Administrator</p>
+          <p class="pc-role"><i class="fas fa-user-pen"></i><span class="pc-role-text">Developer · UI/UX Designer · QA Analyst · Technical Writer · Administrator</span></p>
         </a>
 
         <a href="assets/files/MeatQualityDetector.pdf" target="_blank" class="project-card">
@@ -1282,7 +1290,7 @@
             </div>
           </div>
           <div class="pc-stack"><span><i class="fab fa-python"></i> Python</span><span><i class="fab fa-django"></i> Django</span></div>
-          <p class="pc-role"><i class="fas fa-user-pen"></i> Technical Writer · QA Analyst</p>
+          <p class="pc-role"><i class="fas fa-user-pen"></i><span class="pc-role-text">Technical Writer · QA Analyst</span></p>
         </a>
 
         <a href="assets/files/SLites.pdf" target="_blank" class="project-card">
@@ -1294,7 +1302,7 @@
             </div>
           </div>
           <div class="pc-stack"><span><i class="fas fa-cubes"></i> Xianfire</span></div>
-          <p class="pc-role"><i class="fas fa-user-pen"></i> Technical Writer · QA Analyst</p>
+          <p class="pc-role"><i class="fas fa-user-pen"></i><span class="pc-role-text">Technical Writer · QA Analyst</span></p>
         </a>
 
         <a href="https://github.com/mahamen/MinSU-VAS.git" target="_blank" class="project-card">
@@ -1306,7 +1314,7 @@
             </div>
           </div>
           <div class="pc-stack"><span><i class="fas fa-globe"></i> Web App</span></div>
-          <p class="pc-role"><i class="fas fa-user-pen"></i> Developer · UI/UX Designer · QA Analyst · Administrator</p>
+          <p class="pc-role"><i class="fas fa-user-pen"></i><span class="pc-role-text">Developer · UI/UX Designer · QA Analyst · Administrator</span></p>
         </a>
 
       </div>
