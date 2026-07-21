@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maria Hanah | UI/UX Designer | QA Analyst</title>
+  <title>Maria Hanah | IT Administrator | Graphic Designer | QA Analyst</title>
   <link rel="icon" id="favicon" type="image/png" href="assets/images/hanah.jpg">
   <script>
     (function(){var img=new Image();img.onload=function(){var s=64,c=document.createElement('canvas');c.width=c.height=s;var ctx=c.getContext('2d');ctx.beginPath();ctx.arc(s/2,s/2,s/2,0,Math.PI*2);ctx.closePath();ctx.clip();ctx.drawImage(img,0,0,s,s);var lnk=document.getElementById('favicon');if(lnk)lnk.href=c.toDataURL('image/png');};img.src='assets/images/hanah.jpg';})();
@@ -102,7 +102,7 @@
     .hero .title {
       font-size: 0.78rem;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.08em;
       color: var(--green);
       text-transform: uppercase;
       margin-bottom: 0.3rem;
@@ -247,34 +247,15 @@
       grid-template-columns: 1fr 1fr;
       gap: 1.2rem;
       margin-bottom: 1.2rem;
+      align-items: start;
     }
     @media (max-width: 680px) { .about-grid { grid-template-columns: 1fr; } }
 
     .about-intro {
       font-size: 0.88rem;
-      line-height: 1.75;
+      line-height: 1.8;
       color: var(--muted);
-      margin-bottom: 1.2rem;
     }
-
-    .about-bullets { display: flex; flex-direction: column; gap: 0.85rem; }
-    .about-bullet-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-    }
-    .about-bullet-icon {
-      width: 32px; height: 32px;
-      background: var(--green-dim);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--green);
-      font-size: 0.8rem;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-    .about-bullet-title { font-size: 0.86rem; font-weight: 700; margin-bottom: 0.15rem; }
-    .about-bullet-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
 
     /* Skills */
     .skill-category { margin-bottom: 1rem; }
@@ -581,6 +562,7 @@
       margin-top: auto;
       padding-top: 0.7rem;
       border-top: 1px solid var(--border);
+      flex-wrap: wrap;
     }
 
     /* --- Designs Section --- */
@@ -978,7 +960,7 @@
       <img src="assets/images/hanah.jpg" alt="Maria Hanah Mendoza" onerror="this.src='https://via.placeholder.com/120?text=MH'">
     </div>
     <h1>Maria Hanah G. Mendoza</h1>
-    <p class="title">UI/UX Designer · QA Analyst</p>
+    <p class="title">IT Administrator · Graphic Designer · QA Analyst</p>
     <p class="location"><i class="fas fa-map-marker-alt" style="color:var(--green);margin-right:4px;font-size:0.8rem;"></i>Calapan City · Oriental Mindoro</p>
     <div class="btn-row">
       <a href="mailto:hanahmendoza78@gmail.com" class="btn btn-outline"><i class="fas fa-envelope"></i> Send Email</a>
@@ -1004,30 +986,7 @@
         <!-- About Me -->
         <div class="card">
           <h2><span class="h2-icon"><i class="fas fa-user"></i></span> About</h2>
-          <p class="about-intro">A detail-driven UI/UX Designer and QA Analyst who bridges the gap between beautiful interfaces and reliable software — designing with users in mind and testing with precision.</p>
-          <div class="about-bullets">
-            <div class="about-bullet-item">
-              <div class="about-bullet-icon"><i class="fas fa-pen-nib"></i></div>
-              <div>
-                <p class="about-bullet-title">UI/UX Design</p>
-                <p class="about-bullet-desc">Crafts intuitive, user-centered interfaces — from wireframes and prototypes to polished, pixel-perfect final designs.</p>
-              </div>
-            </div>
-            <div class="about-bullet-item">
-              <div class="about-bullet-icon"><i class="fas fa-shield-halved"></i></div>
-              <div>
-                <p class="about-bullet-title">Quality Assurance</p>
-                <p class="about-bullet-desc">Writes test cases, identifies bugs, and verifies system functionality — ensuring every release is stable and reliable.</p>
-              </div>
-            </div>
-            <div class="about-bullet-item">
-              <div class="about-bullet-icon"><i class="fas fa-arrows-spin"></i></div>
-              <div>
-                <p class="about-bullet-title">Design Meets Testing</p>
-                <p class="about-bullet-desc">Brings a unique dual perspective — the empathy of a designer and the critical eye of a QA analyst.</p>
-              </div>
-            </div>
-          </div>
+          <p class="about-intro">BS Information Technology graduate (Cum Laude) from Mindoro State University, working across IT administration, graphic design, and quality assurance. My internship at New San Jose Builders Inc. covered QA testing, defect documentation, and technical writing, while my university projects had me designing UI/UX, testing systems end-to-end, and administering platforms post-launch. Detail-oriented and documentation-driven, with a strong eye for both visuals and reliability.</p>
         </div>
 
         <!-- Technical Skills -->
@@ -1036,13 +995,19 @@
           <div class="skill-category">
             <p class="category-title"><i class="fas fa-pen-ruler"></i> Design</p>
             <div class="skills-row">
-              <span>UI/UX Design</span><span>Graphic Design</span><span>Canva</span><span>CapCut</span><span>Prototyping</span>
+              <span>UI/UX Design</span><span>Graphic Design</span><span>Canva</span><span>CapCut</span>
             </div>
           </div>
           <div class="skill-category">
             <p class="category-title"><i class="fas fa-shield-halved"></i> Quality &amp; Support</p>
             <div class="skills-row">
-              <span>QA Testing</span><span>Test Case Creation</span><span>Bug Reporting</span><span>Documentation</span><span>End-User Training</span>
+              <span>Quality Assurance</span><span>QA Testing</span><span>Test Case Creation</span><span>Bug Reporting</span><span>Technical Documentation</span><span>End-User Training</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <p class="category-title"><i class="fas fa-headset"></i> IT Administration</p>
+            <div class="skills-row">
+              <span>IT Helpdesk Support</span><span>Administration</span><span>Data Entry</span><span>System/Platform Administration</span>
             </div>
           </div>
           <div class="skill-category">
@@ -1081,14 +1046,14 @@
                 <div class="exp-connector"></div>
               </div>
               <div class="exp-body">
-                <h3 class="exp-role">Developer Intern · New San Jose Builders Inc.</h3>
-                <p class="exp-date"><i class="fas fa-calendar-alt"></i> Feb 2026 – May 2026</p>
-                <p class="exp-desc">Part of the Developer Team — handled QA testing responsibilities including identifying and reporting bugs, and verifying system functionality across independently developed systems.</p>
+                <h3 class="exp-role">Software Developer Intern · QA Specialist · Technical Writer</h3>
+                <p class="exp-date"><i class="fas fa-calendar-alt"></i> New San Jose Builders Inc. · Feb 2026 – May 2026</p>
+                <p class="exp-desc">Part of the Developer Team, handling QA testing across the company's Ticketing System, Employee Self-Service System, and HR Management System. Identified, documented, and reported software defects, verified bug fixes, and authored user manuals and test case documentation for internal and client-facing deliverables.</p>
                 <div class="exp-tags">
-                  <span>Web Development</span>
                   <span>QA Testing</span>
-                  <span>User Manual</span>
                   <span>Bug Reporting</span>
+                  <span>Technical Documentation</span>
+                  <span>Sprint Reviews</span>
                 </div>
               </div>
             </div>
@@ -1107,7 +1072,7 @@
                   </div>
                   <i class="fas fa-arrow-up-right-from-square" style="font-size:0.72rem;color:var(--muted2);"></i>
                 </button>
-                <p class="exp-desc" style="margin-top:0.7rem;margin-bottom:0;">Capstone role: <span style="color:var(--green);font-weight:700;">Technical Writer · UI Design Drafter · QA Analyst</span></p>
+                <p class="exp-desc" style="margin-top:0.7rem;margin-bottom:0;">Capstone role: <span style="color:var(--green);font-weight:700;">Technical Writer · UI/UX Designer · QA Analyst · Administrator</span></p>
               </div>
             </div>
 
@@ -1269,7 +1234,7 @@
             </div>
           </div>
           <div class="pc-stack"><span><i class="fab fa-node-js"></i> Node.js</span><span><i class="fas fa-brain"></i> AI</span></div>
-          <p class="pc-role"><i class="fas fa-user-pen"></i> Technical Writer · UI/UX Drafter · QA Analyst</p>
+          <p class="pc-role"><i class="fas fa-user-pen"></i> Technical Writer · UI/UX Designer · QA Analyst · Administrator</p>
         </a>
 
         <a href="assets/files/ILoveMilkteaECommerceKiosk.pdf" target="_blank" class="project-card">
@@ -1281,7 +1246,7 @@
             </div>
           </div>
           <div class="pc-stack"><span><i class="fab fa-node-js"></i> Node.js</span></div>
-          <p class="pc-role"><i class="fas fa-user-pen"></i> UI/UX Designer · Programmer</p>
+          <p class="pc-role"><i class="fas fa-user-pen"></i> Developer · UI/UX Designer · QA Analyst · Administrator</p>
         </a>
 
         <a href="https://github.com/mahamen/MINSUCLINIC" target="_blank" class="project-card">
@@ -1301,11 +1266,11 @@
             <div class="pc-icon"><i class="fas fa-store"></i></div>
             <div class="pc-meta">
               <div class="pc-title">PanChitan E-Commerce <span class="pc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></span></div>
-              <p class="pc-desc">A Wix-based online ordering site for a local Filipino restaurant, featuring a digital menu, secure PayPal checkout, and a mobile-friendly storefront for regular customers.</p>
+              <p class="pc-desc">A Wix CMS-based online ordering platform for a local Filipino restaurant, featuring a digital menu, secure PayPal checkout, and a mobile-friendly storefront for regular customers.</p>
             </div>
           </div>
           <div class="pc-stack"><span><i class="fas fa-globe"></i> Wix CMS</span><span><i class="fas fa-credit-card"></i> PayPal</span></div>
-          <p class="pc-role"><i class="fas fa-user-pen"></i> UI/UX Designer · Technical Writer · QA Analyst</p>
+          <p class="pc-role"><i class="fas fa-user-pen"></i> Developer · UI/UX Designer · QA Analyst · Technical Writer · Administrator</p>
         </a>
 
         <a href="assets/files/MeatQualityDetector.pdf" target="_blank" class="project-card">
@@ -1341,7 +1306,7 @@
             </div>
           </div>
           <div class="pc-stack"><span><i class="fas fa-globe"></i> Web App</span></div>
-          <p class="pc-role"><i class="fas fa-user-pen"></i> UI/UX Designer · Programmer</p>
+          <p class="pc-role"><i class="fas fa-user-pen"></i> Developer · UI/UX Designer · QA Analyst · Administrator</p>
         </a>
 
       </div>
