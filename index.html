@@ -1555,13 +1555,6 @@
           </div>
         </div>
         <div class="info-row">
-          <div class="info-icon"><i class="fas fa-phone"></i></div>
-          <div>
-            <p class="info-label">Phone</p>
-            <p class="info-value"><a href="tel:+639276317620">+63 927 631 7620</a></p>
-          </div>
-        </div>
-        <div class="info-row">
           <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
           <div>
             <p class="info-label">Location</p>
@@ -1805,14 +1798,24 @@
     const colWidth = (containerWidth - gap) / 2;
 
     wrap.classList.add('masonry-active');
-    const colHeights = [0, 0];
-    cards.forEach(card => {
+
+    // Measure every card's real height at the target column width first,
+    // then place the tallest cards first (LPT bin-packing). Placing the
+    // biggest pieces first — rather than in source order — lets smaller
+    // cards fill in the remaining gaps instead of leaving one column short.
+    const items = cards.map(card => {
       card.style.width = colWidth + 'px';
+      return { card, h: card.offsetHeight };
+    });
+    items.sort((a, b) => b.h - a.h);
+
+    const colHeights = [0, 0];
+    items.forEach(({ card, h }) => {
       const col = colHeights[0] <= colHeights[1] ? 0 : 1;
       card.style.position = 'absolute';
       card.style.top = colHeights[col] + 'px';
       card.style.left = (col === 0 ? 0 : colWidth + gap) + 'px';
-      colHeights[col] += card.offsetHeight + gap;
+      colHeights[col] += h + gap;
     });
     wrap.style.height = (Math.max(colHeights[0], colHeights[1]) - gap) + 'px';
   }
