@@ -105,25 +105,18 @@
       margin-bottom: 0.6rem;
     }
 
-    .role-row {
+    .hero-roles {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--green);
+      height: 1.3em;
       display: flex;
+      align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 0.7rem;
+      margin-bottom: 0.35rem;
+      opacity: 1;
+      transition: opacity 0.3s ease;
     }
-    .role-pill {
-      font-size: 0.73rem;
-      font-weight: 600;
-      padding: 0.32rem 0.7rem;
-      border-radius: 20px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      transition: border-color var(--transition), color var(--transition), transform var(--transition);
-    }
-    .role-pill:hover { border-color: var(--green); color: var(--green); transform: translateY(-1px); }
-    .role-pill i { color: var(--green); margin-right: 0.32rem; font-size: 0.72rem; }
 
     .btn-row {
       display: flex;
@@ -270,6 +263,32 @@
       left: 0;
       margin: 0;
     }
+
+    /* Ways I Can Help */
+    .role-tiles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+    @media (max-width: 380px) { .role-tiles { grid-template-columns: 1fr; } }
+    .role-tile {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.85rem;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .role-tile:hover { border-color: var(--green); transform: translateY(-2px); }
+    .role-tile-icon {
+      width: 32px; height: 32px;
+      background: var(--green-dim);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--green); font-size: 0.82rem;
+      margin-bottom: 0.4rem;
+    }
+    .role-tile-title { font-size: 0.81rem; font-weight: 700; margin-bottom: 0.22rem; }
+    .role-tile-desc { font-size: 0.74rem; color: var(--muted); line-height: 1.42; }
 
     /* Skills */
     .skill-category { margin-bottom: 0.55rem; }
@@ -1120,13 +1139,8 @@
       <img src="assets/images/hanah.jpg" alt="Maria Hanah Mendoza" onerror="this.src='https://via.placeholder.com/120?text=MH'">
     </div>
     <h1>Maria Hanah G. Mendoza</h1>
+    <p class="hero-roles" id="heroRoles">Software QA Analyst</p>
     <p class="location"><i class="fas fa-map-marker-alt" style="color:var(--green);margin-right:4px;font-size:0.8rem;"></i>Metro Manila, Philippines</p>
-    <div class="role-row">
-      <span class="role-pill"><i class="fas fa-shield-halved"></i>Software QA Analyst</span>
-      <span class="role-pill"><i class="fas fa-headset"></i>IT Admin / Technical Support</span>
-      <span class="role-pill"><i class="fas fa-user-clock"></i>Virtual Assistant</span>
-      <span class="role-pill"><i class="fas fa-pen-ruler"></i>Graphic Designer</span>
-    </div>
     <div class="btn-row">
       <a href="mailto:hanahmendoza78@gmail.com" class="btn btn-outline"><i class="fas fa-envelope"></i> Send Email</a>
       <a href="assets/files/MENDOZA_RESUME.pdf" class="btn btn-primary" target="_blank"><i class="fas fa-download"></i> Download Resume</a>
@@ -1238,6 +1252,33 @@
               </div>
             </div>
 
+          </div>
+        </div>
+
+        <!-- What I Do -->
+        <div class="card about-card">
+          <h2><span class="h2-icon"><i class="fas fa-compass"></i></span> What I Do</h2>
+          <div class="role-tiles">
+            <div class="role-tile">
+              <div class="role-tile-icon"><i class="fas fa-shield-halved"></i></div>
+              <p class="role-tile-title">Software QA Analyst</p>
+              <p class="role-tile-desc">Manual and exploratory testing, test case creation, and bug tracking — making sure what ships actually works.</p>
+            </div>
+            <div class="role-tile">
+              <div class="role-tile-icon"><i class="fas fa-headset"></i></div>
+              <p class="role-tile-title">IT Admin / Technical Support</p>
+              <p class="role-tile-desc">Helpdesk support, system administration, and troubleshooting that keep day-to-day operations running.</p>
+            </div>
+            <div class="role-tile">
+              <div class="role-tile-icon"><i class="fas fa-user-clock"></i></div>
+              <p class="role-tile-title">Virtual Assistant</p>
+              <p class="role-tile-desc">Data entry, scheduling, appointment setting, and admin support — organized and detail-driven.</p>
+            </div>
+            <div class="role-tile">
+              <div class="role-tile-icon"><i class="fas fa-pen-ruler"></i></div>
+              <p class="role-tile-title">Graphic Designer</p>
+              <p class="role-tile-desc">UI/UX and visual design across web, branding, and print — from concepts to polished mockups.</p>
+            </div>
           </div>
         </div>
 
@@ -1720,6 +1761,22 @@
       }
     });
   });
+
+  /* ==================== HERO ROLE ROTATOR ==================== */
+  (function(){
+    const roles = ['Software QA Analyst', 'IT Admin / Technical Support', 'Virtual Assistant', 'Graphic Designer'];
+    const el = document.getElementById('heroRoles');
+    if (!el) return;
+    let i = 0;
+    setInterval(() => {
+      el.style.opacity = 0;
+      setTimeout(() => {
+        i = (i + 1) % roles.length;
+        el.textContent = roles[i];
+        el.style.opacity = 1;
+      }, 300);
+    }, 2200);
+  })();
 
   /* ==================== THEME ==================== */
   const toggle = document.getElementById('themeToggle');
