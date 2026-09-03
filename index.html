@@ -259,6 +259,15 @@
     }
     body.light .tab-bar { background: rgba(248,248,248,0.9); }
 
+    body.light .cta-banner {
+      background:
+        radial-gradient(circle at 100% 0%, rgba(34,197,94,0.14), transparent 55%),
+        linear-gradient(135deg, #eefaf2, #ffffff 70%);
+      border-color: rgba(34,197,94,0.25);
+    }
+    body.light .cta-banner-title { color: #0f2318; }
+    body.light .cta-banner-sub { color: rgba(15,35,24,0.62); }
+
     /* ===================== TAB CONTENT ===================== */
     .tab-content { display: none; }
     .tab-content.active { display: block; }
@@ -788,8 +797,9 @@
       font-weight: 700;
       letter-spacing: -0.01em;
       margin-bottom: 0.15rem;
+      color: #f5f7f5;
     }
-    .cta-banner-sub { font-size: 0.8rem; color: var(--muted); }
+    .cta-banner-sub { font-size: 0.8rem; color: rgba(245,247,245,0.62); }
     .cta-banner-arrow {
       flex-shrink: 0;
       width: 38px; height: 38px;
