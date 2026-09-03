@@ -9,7 +9,7 @@
     (function(){var img=new Image();img.onload=function(){var s=64,c=document.createElement('canvas');c.width=c.height=s;var ctx=c.getContext('2d');ctx.beginPath();ctx.arc(s/2,s/2,s/2,0,Math.PI*2);ctx.closePath();ctx.clip();ctx.drawImage(img,0,0,s,s);var lnk=document.getElementById('favicon');if(lnk)lnk.href=c.toDataURL('image/png');};img.src='assets/images/hanah.jpg';})();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
@@ -19,28 +19,36 @@
 
     :root {
       --green: #22c55e;
+      --green-deep: #16a34a;
       --green-dim: rgba(34,197,94,0.12);
       --green-glow: rgba(34,197,94,0.2);
-      --bg: #0f0f10;
+      --amber: #f0b429;
+      --bg: #0c0d0e;
       --bg2: #18181b;
       --bg3: #1f2025;
-      --surface: #242428;
-      --surface2: #2c2c32;
+      --surface: #201f23;
+      --surface2: #29282d;
       --border: rgba(255,255,255,0.07);
-      --border-hover: rgba(255,255,255,0.14);
+      --border-hover: rgba(255,255,255,0.16);
       --text: #f1f1f2;
       --muted: rgba(241,241,242,0.55);
       --muted2: rgba(241,241,242,0.35);
       --radius: 16px;
       --radius-sm: 10px;
       --radius-xs: 7px;
-      --shadow: 0 4px 24px rgba(0,0,0,0.28);
+      --shadow: 0 10px 30px -6px rgba(0,0,0,0.4);
       --transition: 0.2s ease;
+      --font-display: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
     }
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg);
+      background:
+        radial-gradient(720px 420px at 12% -6%, rgba(34,197,94,0.10), transparent 60%),
+        radial-gradient(600px 380px at 96% 10%, rgba(34,197,94,0.05), transparent 55%),
+        var(--bg);
+      background-attachment: fixed;
       color: var(--text);
       min-height: 100vh;
       line-height: 1.55;
@@ -50,6 +58,19 @@
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
     button { cursor: pointer; border: none; background: none; font-family: inherit; color: inherit; }
+
+    ::selection { background: var(--green); color: #06110a; }
+
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 20px; border: 2px solid var(--bg); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
 
     /* ===================== LAYOUT ===================== */
     .container {
@@ -75,9 +96,9 @@
       position: absolute;
       inset: -4px;
       border-radius: 50%;
-      background: conic-gradient(var(--green) 0%, transparent 60%);
-      animation: spin 8s linear infinite;
-      opacity: 0.5;
+      background: conic-gradient(var(--green) 0%, var(--amber) 8%, transparent 55%);
+      animation: spin 9s linear infinite;
+      opacity: 0.6;
     }
 
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -90,32 +111,55 @@
       position: relative;
       z-index: 1;
       border: 3px solid var(--bg2);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
     }
 
     .hero h1 {
-      font-size: clamp(1.4rem, 4vw, 2rem);
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 0.3rem;
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 4vw, 2.15rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
     }
 
     .hero .location {
       font-size: 0.84rem;
       color: var(--muted);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-roles-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-roles-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 3px var(--green-dim);
+      flex-shrink: 0;
+      animation: pulse 2s ease-in-out infinite;
     }
 
     .hero-roles {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text);
       height: 1.3em;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 0.35rem;
       opacity: 1;
       transition: opacity 0.3s ease;
+      letter-spacing: -0.01em;
     }
 
     .btn-row {
@@ -129,22 +173,23 @@
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      padding: 0.55rem 1.2rem;
+      gap: 0.45rem;
+      padding: 0.6rem 1.25rem;
       border-radius: 40px;
       font-size: 0.84rem;
       font-weight: 600;
-      transition: var(--transition);
+      transition: transform var(--transition), box-shadow var(--transition), filter var(--transition), border-color var(--transition), color var(--transition);
     }
 
     .btn-primary {
-      background: var(--green);
-      color: #fff;
+      background: linear-gradient(180deg, var(--green), var(--green-deep));
+      color: #06110a;
+      box-shadow: 0 6px 18px rgba(34,197,94,0.28);
     }
-    .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn-primary:hover { filter: brightness(1.06); transform: translateY(-1px); box-shadow: 0 10px 24px rgba(34,197,94,0.36); }
 
     .btn-outline {
-      background: transparent;
+      background: var(--surface);
       border: 1.5px solid var(--border-hover);
       color: var(--text);
     }
@@ -168,8 +213,9 @@
 
     .nav-tab {
       position: relative;
-      padding: 0.6rem 1.2rem;
-      font-size: 0.84rem;
+      padding: 0.65rem 1.2rem;
+      font-family: var(--font-display);
+      font-size: 0.86rem;
       font-weight: 600;
       color: var(--muted);
       border-radius: 0;
@@ -219,26 +265,41 @@
 
     /* ===================== CARDS ===================== */
     .card {
+      position: relative;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1rem;
+      padding: 1.1rem;
+      overflow: hidden;
       transition: border-color var(--transition), box-shadow var(--transition);
     }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), transparent 65%);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
     .card:hover { border-color: var(--border-hover); box-shadow: var(--shadow); }
+    .card:hover::before { opacity: 1; }
 
     .card h2 {
-      font-size: 1rem;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
       font-weight: 700;
-      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.65rem;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.55rem;
     }
     .card h2 .h2-icon {
       width: 28px; height: 28px;
-      background: var(--green-dim);
-      border-radius: 7px;
+      background: linear-gradient(160deg, var(--green-dim), transparent);
+      border: 1px solid rgba(34,197,94,0.18);
+      border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
       color: var(--green);
       font-size: 0.75rem;
@@ -293,12 +354,12 @@
     /* Skills */
     .skill-category { margin-bottom: 0.55rem; }
     .category-title {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
       color: var(--muted);
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.4rem;
       display: flex;
       align-items: center;
       gap: 0.4rem;
@@ -311,14 +372,14 @@
     .skills-row span, .skill-tag {
       font-size: 0.77rem;
       font-weight: 600;
-      padding: 0.28rem 0.6rem;
+      padding: 0.28rem 0.62rem;
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 6px;
       color: var(--text);
-      transition: border-color var(--transition), color var(--transition);
+      transition: border-color var(--transition), color var(--transition), background var(--transition);
     }
-    .skills-row span:hover { border-color: var(--green); color: var(--green); }
+    .skills-row span:hover { border-color: var(--green); color: var(--green); background: var(--green-dim); }
 
     /* Experience */
     .exp-timeline { display: flex; flex-direction: column; gap: 0; }
@@ -332,12 +393,13 @@
       flex-shrink: 0;
       z-index: 1;
     }
-    .exp-dot--active { background: var(--green); color: #fff; }
+    .exp-dot--active { background: var(--green); color: #06110a; box-shadow: 0 0 0 4px var(--green-dim); }
     .exp-dot--edu { background: var(--surface2); border: 2px solid var(--border-hover); color: var(--muted); }
     .exp-connector { flex: 1; width: 1px; background: var(--border); margin: 4px 0; min-height: 12px; }
     .exp-body { padding-bottom: 0.75rem; flex: 1; min-width: 0; }
     .exp-role {
-      font-size: 0.88rem;
+      font-family: var(--font-display);
+      font-size: 0.92rem;
       font-weight: 700;
       line-height: 1.35;
       margin-bottom: 0.2rem;
@@ -439,7 +501,7 @@
       display: flex; align-items: center; justify-content: center;
       color: var(--green); font-size: 0.9rem; flex-shrink: 0;
     }
-    .ch-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.1rem; }
+    .ch-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.1rem; }
     .ch-subtitle { font-size: 0.76rem; color: var(--muted); }
 
     .cert-stack { display: flex; flex-direction: column; gap: 0.35rem; }
@@ -559,26 +621,27 @@
     }
     .pc-icon {
       width: 40px; height: 40px;
-      background: var(--green-dim);
-      border-radius: 10px;
+      background: linear-gradient(160deg, var(--surface2), var(--surface));
+      border: 1px solid var(--border);
+      border-radius: 11px;
       display: flex; align-items: center; justify-content: center;
       color: var(--green);
       font-size: 1rem;
       flex-shrink: 0;
-      transition: transform var(--transition);
+      transition: transform var(--transition), border-color var(--transition);
     }
+    .project-card:hover .pc-icon { border-color: rgba(34,197,94,0.35); }
     .project-card:hover .pc-icon { transform: scale(1.06) rotate(-2deg); }
     .pc-meta { flex: 1; min-width: 0; }
 
     .pc-category {
       display: inline-block;
-      font-size: 0.64rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
       padding: 0.18rem 0.5rem;
-      margin-bottom: 0.35rem;
-      border-radius: 20px;
+      margin-bottom: 0.4rem;
+      border-radius: 5px;
       background: var(--green-dim);
       color: var(--green);
       border: 1px solid rgba(34,197,94,0.22);
@@ -610,7 +673,8 @@
       border-color: var(--green);
     }
     .pc-title {
-      font-size: 0.88rem;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
       font-weight: 700;
       margin-bottom: 0.2rem;
       display: flex;
@@ -712,16 +776,17 @@
     }
     .cta-banner-body { flex: 1; min-width: 0; position: relative; z-index: 1; }
     .cta-banner-eyebrow {
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
       color: var(--green);
-      margin-bottom: 0.15rem;
+      margin-bottom: 0.2rem;
     }
     .cta-banner-title {
-      font-size: 1.05rem;
-      font-weight: 800;
+      font-family: var(--font-display);
+      font-size: 1.08rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
       margin-bottom: 0.15rem;
     }
     .cta-banner-sub { font-size: 0.8rem; color: var(--muted); }
@@ -769,7 +834,8 @@
       border-bottom: 1px solid var(--border);
     }
     .design-card-header h3 {
-      font-size: 0.87rem;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
       font-weight: 700;
       display: flex;
       align-items: center;
@@ -981,10 +1047,11 @@
     .available-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.45rem;
+      font-family: var(--font-mono);
       font-size: 0.76rem;
-      font-weight: 700;
-      padding: 0.3rem 0.7rem;
+      font-weight: 500;
+      padding: 0.32rem 0.75rem;
       background: rgba(34,197,94,0.12);
       color: var(--green);
       border-radius: 20px;
@@ -1023,19 +1090,19 @@
     .contact-form input,
     .contact-form textarea {
       width: 100%;
-      padding: 0.6rem 0.85rem;
-      background: var(--surface2);
+      padding: 0.65rem 0.9rem;
+      background: var(--bg2);
       border: 1px solid var(--border);
       border-radius: var(--radius-xs);
       color: var(--text);
       font-family: inherit;
       font-size: 0.85rem;
       outline: none;
-      transition: border-color var(--transition);
+      transition: border-color var(--transition), box-shadow var(--transition);
       resize: vertical;
     }
     .contact-form input:focus,
-    .contact-form textarea:focus { border-color: var(--green); }
+    .contact-form textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-dim); }
     .contact-form input::placeholder,
     .contact-form textarea::placeholder { color: var(--muted2); }
     .contact-form textarea { min-height: 100px; }
@@ -1071,8 +1138,11 @@
     /* ===================== FOOTER ===================== */
     footer {
       text-align: center;
-      padding: 0.9rem 0 0;
-      font-size: 0.78rem;
+      margin-top: 0.5rem;
+      padding: 1.1rem 0 0;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
       color: var(--muted2);
     }
 
@@ -1139,7 +1209,10 @@
       <img src="assets/images/hanah.jpg" alt="Maria Hanah Mendoza" onerror="this.src='https://via.placeholder.com/120?text=MH'">
     </div>
     <h1>Maria Hanah G. Mendoza</h1>
-    <p class="hero-roles" id="heroRoles">Software QA Analyst</p>
+    <div class="hero-roles-row">
+      <span class="hero-roles-dot"></span>
+      <p class="hero-roles" id="heroRoles">Software QA Analyst</p>
+    </div>
     <p class="location"><i class="fas fa-map-marker-alt" style="color:var(--green);margin-right:4px;font-size:0.8rem;"></i>Metro Manila, Philippines</p>
     <div class="btn-row">
       <a href="mailto:hanahmendoza78@gmail.com" class="btn btn-outline"><i class="fas fa-envelope"></i> Send Email</a>
@@ -1159,6 +1232,33 @@
   <div id="about" class="tab-content active">
     <div class="about-cards-wrap" id="aboutCardsWrap">
 
+       <!-- What I Do -->
+        <div class="card about-card">
+          <h2><span class="h2-icon"><i class="fas fa-compass"></i></span> What I Do</h2>
+          <div class="role-tiles">
+            <div class="role-tile">
+              <div class="role-tile-icon"><i class="fas fa-shield-halved"></i></div>
+              <p class="role-tile-title">Software QA Analyst</p>
+              <p class="role-tile-desc">Manual and exploratory testing, test case creation, and bug tracking — making sure what ships actually works.</p>
+            </div>
+            <div class="role-tile">
+              <div class="role-tile-icon"><i class="fas fa-headset"></i></div>
+              <p class="role-tile-title">IT Admin / Technical Support</p>
+              <p class="role-tile-desc">Helpdesk support, system administration, and troubleshooting that keep day-to-day operations running.</p>
+            </div>
+            <div class="role-tile">
+              <div class="role-tile-icon"><i class="fas fa-user-clock"></i></div>
+              <p class="role-tile-title">Virtual Assistant</p>
+              <p class="role-tile-desc">Data entry, scheduling, appointment setting, and admin support — organized and detail-driven.</p>
+            </div>
+            <div class="role-tile">
+              <div class="role-tile-icon"><i class="fas fa-pen-ruler"></i></div>
+              <p class="role-tile-title">Graphic Designer</p>
+              <p class="role-tile-desc">UI/UX and visual design across web, branding, and print — from concepts to polished mockups.</p>
+            </div>
+          </div>
+        </div>
+      
         <!-- Technical Skills -->
         <div class="card about-card">
           <h2><span class="h2-icon"><i class="fas fa-code"></i></span> Technical Skills</h2>
@@ -1213,7 +1313,7 @@
 
             <div class="exp-entry">
               <div class="exp-left">
-                <div class="exp-dot exp-dot--edu"><i class="fas fa-code"></i></div>
+                <div class="exp-dot exp-dot--active"><i class="fas fa-code"></i></div>
                 <div class="exp-connector"></div>
               </div>
               <div class="exp-body">
@@ -1252,33 +1352,6 @@
               </div>
             </div>
 
-          </div>
-        </div>
-
-        <!-- What I Do -->
-        <div class="card about-card">
-          <h2><span class="h2-icon"><i class="fas fa-compass"></i></span> What I Do</h2>
-          <div class="role-tiles">
-            <div class="role-tile">
-              <div class="role-tile-icon"><i class="fas fa-shield-halved"></i></div>
-              <p class="role-tile-title">Software QA Analyst</p>
-              <p class="role-tile-desc">Manual and exploratory testing, test case creation, and bug tracking — making sure what ships actually works.</p>
-            </div>
-            <div class="role-tile">
-              <div class="role-tile-icon"><i class="fas fa-headset"></i></div>
-              <p class="role-tile-title">IT Admin / Technical Support</p>
-              <p class="role-tile-desc">Helpdesk support, system administration, and troubleshooting that keep day-to-day operations running.</p>
-            </div>
-            <div class="role-tile">
-              <div class="role-tile-icon"><i class="fas fa-user-clock"></i></div>
-              <p class="role-tile-title">Virtual Assistant</p>
-              <p class="role-tile-desc">Data entry, scheduling, appointment setting, and admin support — organized and detail-driven.</p>
-            </div>
-            <div class="role-tile">
-              <div class="role-tile-icon"><i class="fas fa-pen-ruler"></i></div>
-              <p class="role-tile-title">Graphic Designer</p>
-              <p class="role-tile-desc">UI/UX and visual design across web, branding, and print — from concepts to polished mockups.</p>
-            </div>
           </div>
         </div>
 
