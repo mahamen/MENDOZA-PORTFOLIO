@@ -818,92 +818,160 @@
       transform: translate(3px,-3px);
     }
 
-    .designs-grid {
+    /* ===================== PORTFOLIO GALLERY ===================== */
+    .portfolio-intro {
+      font-size: 0.82rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: -0.35rem 0 1.05rem;
+      line-height: 1.5;
+    }
+
+    .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.6rem;
-    }
-    @media (max-width: 700px) { .designs-grid { grid-template-columns: 1fr; } }
-    @media (max-width: 860px) and (min-width: 701px) { .designs-grid { grid-template-columns: repeat(2, 1fr); } }
-
-    .design-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-    }
-    .design-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1rem;
+      grid-auto-flow: dense;
     }
 
-    .design-card-header {
-      padding: 0.7rem 0.9rem 0.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .design-card-header h3 {
-      font-family: var(--font-display);
-      font-size: 0.9rem;
-      font-weight: 700;
+    .portfolio-item {
       display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: portfolioIn 0.55s ease forwards;
+    }
+    @keyframes portfolioIn { to { opacity: 1; transform: translateY(0); } }
+
+    .portfolio-item.featured { grid-column: span 2; }
+    @media (max-width: 680px) { .portfolio-item.featured { grid-column: span 1; } }
+
+    .portfolio-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 30% 20%, rgba(34,197,94,0.06), transparent 55%),
+        var(--surface2);
+      border: 1px solid var(--border);
+      aspect-ratio: 4 / 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .portfolio-item.featured .portfolio-frame { aspect-ratio: 16 / 10; }
+
+    .portfolio-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      padding: 1px;
+      border-radius: inherit;
+      background: linear-gradient(140deg, rgba(34,197,94,0.35), transparent 40%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .portfolio-item:hover .portfolio-frame {
+      border-color: rgba(34,197,94,0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.32);
+    }
+    .portfolio-item:hover .portfolio-frame::before { opacity: 1; }
+
+    .portfolio-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 0.55rem;
+      transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .portfolio-item:hover .portfolio-frame img { transform: scale(1.07); }
+
+    .portfolio-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(6,8,7,0.72) 0%, rgba(6,8,7,0.15) 45%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 1rem;
+    }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+    .portfolio-view {
+      display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      margin-bottom: 0.2rem;
-      color: var(--text);
+      padding: 0.42rem 0.95rem;
+      background: var(--green);
+      color: #06110a;
+      font-weight: 700;
+      font-size: 0.76rem;
+      border-radius: 30px;
+      box-shadow: 0 6px 18px rgba(34,197,94,0.32);
+      transform: translateY(10px);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
-    .design-card-header h3 i { color: var(--green); font-size: 0.85rem; }
-    .design-card-header p { font-size: 0.74rem; color: var(--muted); line-height: 1.3; }
+    .portfolio-item:hover .portfolio-view { transform: translateY(0); opacity: 1; }
 
-    /* Carousel */
-    .design-carousel-wrap {
-      position: relative;
-      aspect-ratio: 4/3;
-      overflow: hidden;
-      background: var(--bg);
-    }
-    .design-carousel-wrap img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: top;
-      transition: opacity 0.3s ease;
-    }
-
-    .carousel-controls {
+    .portfolio-num-badge {
       position: absolute;
-      bottom: 0; left: 0; right: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.5rem 0.6rem;
-      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      top: 0.65rem;
+      left: 0.65rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      background: rgba(6,8,7,0.55);
+      backdrop-filter: blur(3px);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 6px;
+      padding: 0.15rem 0.45rem;
+      letter-spacing: 0.03em;
     }
-    .carousel-btn-new {
-      width: 28px; height: 28px;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(4px);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: #fff;
-      font-size: 0.7rem;
-      border: 1px solid rgba(255,255,255,0.2);
-      cursor: pointer;
-      transition: background var(--transition);
-    }
-    .carousel-btn-new:hover { background: var(--green); border-color: var(--green); }
 
-    .carousel-dots {
+    .portfolio-info {
       display: flex;
-      gap: 4px;
+      align-items: flex-start;
+      gap: 0.55rem;
+      margin-top: 0.6rem;
+      padding: 0 0.1rem;
     }
-    .carousel-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.35);
-      transition: background var(--transition), transform var(--transition);
+    .portfolio-num {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--green);
+      background: var(--green-dim);
+      border: 1px solid rgba(34,197,94,0.22);
+      border-radius: 6px;
+      padding: 0.16rem 0.44rem;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
     }
-    .carousel-dot.active { background: var(--green); transform: scale(1.3); }
+    .portfolio-text { min-width: 0; }
+    .portfolio-title {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: -0.005em;
+      line-height: 1.3;
+    }
+    .portfolio-cat {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
 
     /* --- Visual Media --- */
     .vm-section { margin-top: 1rem; }
@@ -1168,11 +1236,28 @@
       padding: 1rem;
     }
     .gallery-modal.active { display: flex; }
+    .modal-content-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.7rem;
+      max-width: min(90vw, 900px);
+    }
     .gallery-modal img {
       max-width: min(90vw, 900px);
-      max-height: 85vh;
+      max-height: 80vh;
       border-radius: var(--radius);
       object-fit: contain;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .modal-caption {
+      display: none;
+      text-align: center;
+      color: rgba(255,255,255,0.85);
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: -0.005em;
     }
     .close-modal {
       position: absolute;
@@ -1497,7 +1582,7 @@
         <i class="fas fa-folder-open"></i> Projects <span class="stab-count">10</span>
       </button>
       <button class="works-subtab" data-panel="panel-designs">
-        <i class="fas fa-pen-ruler"></i> Designs <span class="stab-count">3</span>
+        <i class="fas fa-pen-ruler"></i> Designs <span class="stab-count">12</span>
       </button>
       <button class="works-subtab" data-panel="panel-media">
         <i class="fas fa-clapperboard"></i> Visual Media
@@ -1644,65 +1729,13 @@
     <!-- ── Panel: Designs ── -->
     <div id="panel-designs" class="works-panel">
 
-      <!-- Emphasized link: full graphic design portfolio -->
-      <a href="https://drive.google.com/file/d/1kV7Ib3GrhTeoie4GTK9rPrX0JH5_UBbc/view?usp=sharing" target="_blank" class="cta-banner">
-        <div class="cta-banner-icon"><i class="fas fa-images"></i></div>
-        <div class="cta-banner-body">
-          <p class="cta-banner-eyebrow">Full Portfolio</p>
-          <p class="cta-banner-title">View all Graphic Design Works</p>
-          <p class="cta-banner-sub">Complete case studies &amp; mockups on Google Drive</p>
-        </div>
-        <div class="cta-banner-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
-      </a>
-
-      <div class="designs-grid">
-
-        <div class="design-card">
-          <div class="design-card-header">
-            <h3><i class="fas fa-mobile-alt"></i> PanChitan ni Unchang</h3>
-            <p>UI/UX design for a local Filipino food e-commerce mobile app</p>
-          </div>
-          <div class="design-carousel-wrap">
-            <img id="carousel-set2-img" src="assets/images/Panchitan1.png" alt="PanChitan design" onclick="openModal('set2',carouselState.set2)">
-            <div class="carousel-controls">
-              <button class="carousel-btn-new" onclick="changeCarousel('set2',-1)"><i class="fas fa-chevron-left"></i></button>
-              <div class="carousel-dots" id="dots-set2"></div>
-              <button class="carousel-btn-new" onclick="changeCarousel('set2',1)"><i class="fas fa-chevron-right"></i></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="design-card">
-          <div class="design-card-header">
-            <h3><i class="fas fa-id-badge"></i> iLoveMilktea</h3>
-            <p>Branding and UI design for a milktea kiosk ordering system</p>
-          </div>
-          <div class="design-carousel-wrap">
-            <img id="carousel-set1-img" src="assets/images/lovemilk1.jpg" alt="iLoveMilktea design" onclick="openModal('set1',carouselState.set1)">
-            <div class="carousel-controls">
-              <button class="carousel-btn-new" onclick="changeCarousel('set1',-1)"><i class="fas fa-chevron-left"></i></button>
-              <div class="carousel-dots" id="dots-set1"></div>
-              <button class="carousel-btn-new" onclick="changeCarousel('set1',1)"><i class="fas fa-chevron-right"></i></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="design-card">
-          <div class="design-card-header">
-            <h3><i class="fas fa-calendar-alt"></i> MinSU VAS</h3>
-            <p>UI/UX design for MinSU's Venue Appointment System web app</p>
-          </div>
-          <div class="design-carousel-wrap">
-            <img id="carousel-set3-img" src="assets/images/minsuvas1.png" alt="MinSU VAS design" onclick="openModal('set3',carouselState.set3)">
-            <div class="carousel-controls">
-              <button class="carousel-btn-new" onclick="changeCarousel('set3',-1)"><i class="fas fa-chevron-left"></i></button>
-              <div class="carousel-dots" id="dots-set3"></div>
-              <button class="carousel-btn-new" onclick="changeCarousel('set3',1)"><i class="fas fa-chevron-right"></i></button>
-            </div>
-          </div>
-        </div>
-
+      <div class="section-heading">
+        <h2>Design Portfolio</h2>
+        <span class="sh-count">12 Works</span>
       </div>
+      <p class="portfolio-intro">A curated set of UI/UX, branding, and visual design pieces — click any piece to view it full-size.</p>
+
+      <div class="portfolio-grid" id="portfolioGrid"></div>
     </div>
 
     <!-- ── Panel: Visual Media ── -->
@@ -1827,7 +1860,10 @@
   <span class="close-modal" onclick="closeModal()">&times;</span>
   <a class="modal-prev" onclick="modalChange(-1)">&#10094;</a>
   <a class="modal-next" onclick="modalChange(1)">&#10095;</a>
-  <img id="modalImage" src="" alt="Gallery Image">
+  <div class="modal-content-wrap">
+    <img id="modalImage" src="" alt="Gallery Image">
+    <p id="modalCaption" class="modal-caption"></p>
+  </div>
 </div>
 
 <script>
@@ -1868,82 +1904,114 @@
     toggle.textContent = document.body.classList.contains('light') ? '☀︎' : '☾';
   });
 
-  /* ==================== CAROUSEL ==================== */
-  const carouselImages = {
-    set1: ['assets/images/lovemilk1.jpg','assets/images/lovemilk2.jpg','assets/images/lovemilk3.jpg','assets/images/lovemilk4.jpg','assets/images/lovemilk5.jpg','assets/images/lovemilk6.jpg','assets/images/lovemilk7.jpg'],
-    set2: ['assets/images/Panchitan1.png','assets/images/Panchitan2.png','assets/images/Panchitan3.png','assets/images/Panchitan4.png','assets/images/Panchitan5.png','assets/images/Panchitan6.png','assets/images/Panchitan7.png','assets/images/Panchitan8.png'],
-    set3: ['assets/images/minsuvas1.png','assets/images/minsuvas2.png','assets/images/minsuvas3.png','assets/images/minsuvas4.png','assets/images/minsuvas5.png','assets/images/minsuvas6.png','assets/images/minsuvas7.png']
-  };
-  const carouselState = { set1: 0, set2: 0, set3: 0 };
+  /* ==================== DESIGN PORTFOLIO ==================== */
+  const portfolioDesigns = [
+    { file: 'assets/images/6.png',  title: 'iLoveMilkTea Ordering System', category: 'UI/UX Design',            featured: true },
+    { file: 'assets/images/9.png',  title: 'MinSU VAS — Venue System',     category: 'UI/UX Design' },
+    { file: 'assets/images/8.png',  title: 'E-DonateMo Dashboard',         category: 'UI/UX Design' },
+    { file: 'assets/images/5.png',  title: 'Book For Life — Brand Kit',    category: 'Branding & Social Media' },
+    { file: 'assets/images/12.png', title: 'Instagram Post Design',    category: 'Social Media Design',      featured: true },
+    { file: 'assets/images/3.png',  title: 'CyberShield Webinar Poster',   category: 'Event Poster' },
+    { file: 'assets/images/1.png',  title: '"Unveiling Beauty" Book Cover',category: 'Book Cover Design' },
+    { file: 'assets/images/11.png', title: "RM'S User Manual",             category: 'Book Cover Design' },
+    { file: 'assets/images/7.png',  title: 'OJT Interns Portfolio 2026',   category: 'Book Cover Design' },
+    { file: 'assets/images/2.png',  title: "RM'S Capstone Deck",           category: 'Presentation Design' },
+    { file: 'assets/images/10.png', title: 'OJT Narrative Presentation',   category: 'Presentation Design' },
+    { file: 'assets/images/4.png',  title: 'Related Literature Infographic', category: 'Infographic Design' }
+  ];
 
-  function buildDots(setId) {
-    const container = document.getElementById('dots-' + setId);
-    if (!container) return;
-    container.innerHTML = '';
-    carouselImages[setId].forEach((_, i) => {
-      const dot = document.createElement('div');
-      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-      container.appendChild(dot);
-    });
+  function renderPortfolioGrid() {
+    const grid = document.getElementById('portfolioGrid');
+    if (!grid) return;
+    grid.innerHTML = portfolioDesigns.map((d, i) => {
+      const num = String(i + 1).padStart(2, '0');
+      return `
+        <div class="portfolio-item${d.featured ? ' featured' : ''}" style="animation-delay:${i * 0.05}s" onclick="openPortfolio(${i})">
+          <div class="portfolio-frame">
+            <span class="portfolio-num-badge">${num} / ${portfolioDesigns.length}</span>
+            <img src="${d.file}" alt="${d.title}" loading="lazy">
+            <div class="portfolio-overlay">
+              <div class="portfolio-view"><i class="fas fa-eye"></i><span>View Design</span></div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-num">${num}</span>
+            <div class="portfolio-text">
+              <p class="portfolio-title">${d.title}</p>
+              <p class="portfolio-cat">${d.category}</p>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+  renderPortfolioGrid();
+
+  function openPortfolio(idx) {
+    openImageModal(
+      portfolioDesigns.map(d => d.file),
+      idx,
+      portfolioDesigns.map(d => `${d.title} — ${d.category}`)
+    );
   }
 
-  function updateDots(setId) {
-    const dots = document.querySelectorAll('#dots-' + setId + ' .carousel-dot');
-    dots.forEach((d, i) => d.classList.toggle('active', i === carouselState[setId]));
-  }
+  /* ==================== UNIFIED LIGHTBOX MODAL ==================== */
+  let modalImages = [], modalCaptions = [], modalIdx = 0;
 
-  function changeCarousel(setId, dir) {
-    const imgs = carouselImages[setId];
-    carouselState[setId] = (carouselState[setId] + dir + imgs.length) % imgs.length;
-    const imgEl = document.getElementById('carousel-' + setId + '-img');
-    if (imgEl) imgEl.src = imgs[carouselState[setId]];
-    updateDots(setId);
-  }
-
-  Object.keys(carouselImages).forEach(id => buildDots(id));
-
-  /* ==================== MODAL ==================== */
-  let modalSet = null, modalIdx = 0;
-
-  function openModal(setId, idx) {
-    modalSet = setId;
+  function openImageModal(images, idx, captions) {
+    modalImages = images;
+    modalCaptions = captions || [];
     modalIdx = idx;
     const modal = document.getElementById('galleryModal');
     const img = document.getElementById('modalImage');
-    img.src = carouselImages[setId][idx];
+    const cap = document.getElementById('modalCaption');
+    img.src = images[idx];
+    img.alt = modalCaptions[idx] || 'Gallery image';
+    if (modalCaptions.length) {
+      cap.textContent = modalCaptions[idx];
+      cap.style.display = 'block';
+    } else {
+      cap.style.display = 'none';
+    }
     modal.classList.add('active');
-    const hasPrev = document.querySelector('.modal-prev');
-    const hasNext = document.querySelector('.modal-next');
-    if (hasPrev) hasPrev.style.display = '';
-    if (hasNext) hasNext.style.display = '';
+    const showNav = images.length > 1;
+    const prev = modal.querySelector('.modal-prev');
+    const next = modal.querySelector('.modal-next');
+    if (prev) prev.style.display = showNav ? '' : 'none';
+    if (next) next.style.display = showNav ? '' : 'none';
   }
 
   function closeModal() {
     document.getElementById('galleryModal').classList.remove('active');
-    modalSet = null;
+    modalImages = [];
+    modalCaptions = [];
   }
 
   function modalChange(dir) {
-    if (!modalSet) return;
-    const imgs = carouselImages[modalSet];
-    modalIdx = (modalIdx + dir + imgs.length) % imgs.length;
-    document.getElementById('modalImage').src = imgs[modalIdx];
+    if (!modalImages.length) return;
+    modalIdx = (modalIdx + dir + modalImages.length) % modalImages.length;
+    const img = document.getElementById('modalImage');
+    img.src = modalImages[modalIdx];
+    if (modalCaptions.length) {
+      img.alt = modalCaptions[modalIdx];
+      document.getElementById('modalCaption').textContent = modalCaptions[modalIdx];
+    }
   }
 
   document.getElementById('galleryModal').addEventListener('click', function(e) {
     if (e.target === this) closeModal();
   });
 
-  function openDiploma() {
+  document.addEventListener('keydown', function(e) {
     const modal = document.getElementById('galleryModal');
-    const img = document.getElementById('modalImage');
-    img.src = 'assets/images/MENDOZA_DIPLOMA.jpg';
-    img.alt = 'Cum Laude Diploma — Maria Hanah G. Mendoza';
-    modal.classList.add('active');
-    const prev = modal.querySelector('.modal-prev');
-    const next = modal.querySelector('.modal-next');
-    if (prev) prev.style.display = 'none';
-    if (next) next.style.display = 'none';
+    if (!modal.classList.contains('active')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowLeft') modalChange(-1);
+    if (e.key === 'ArrowRight') modalChange(1);
+  });
+
+  function openDiploma() {
+    openImageModal(['assets/images/MENDOZA_DIPLOMA.jpg'], 0, []);
+    document.getElementById('modalImage').alt = 'Cum Laude Diploma — Maria Hanah G. Mendoza';
   }
 
   /* ==================== WORKS SUB-TABS ==================== */
