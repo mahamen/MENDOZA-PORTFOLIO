@@ -389,6 +389,17 @@
     }
 
     .skill-category { margin-bottom: 0.55rem; }
+    .skills-subgroup { margin-bottom: 0.42rem; }
+    .skills-subgroup:last-child { margin-bottom: 0; }
+    .skills-subgroup-label {
+      display: block;
+      font-size: 0.66rem;
+      font-weight: 700;
+      color: var(--muted2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.28rem;
+    }
     .category-title {
       font-family: var(--font-mono);
       font-size: 0.68rem;
@@ -1528,7 +1539,7 @@
       
         <!-- Technical Skills -->
         <div class="card about-card">
-          <h2><span class="h2-icon"><i class="fas fa-code"></i></span> Technical Skills <span class="h2-count" id="skillsCount">32 skills</span></h2>
+          <h2><span class="h2-icon"><i class="fas fa-code"></i></span> Technical Skills <span class="h2-count" id="skillsCount">46 skills</span></h2>
           <div class="skills-collapsible" id="skillsCollapsible">
           <div class="skill-category">
             <p class="category-title"><i class="fas fa-pen-ruler"></i> Design</p>
@@ -1543,9 +1554,33 @@
             </div>
           </div>
           <div class="skill-category">
-            <p class="category-title"><i class="fas fa-shield-halved"></i> Quality &amp; Support</p>
-            <div class="skills-row">
-              <span>Quality Assurance</span><span>QA Testing</span><span>Test Case Creation</span><span>Bug Reporting</span><span>Technical Documentation</span><span>End-User Training</span>
+            <p class="category-title"><i class="fas fa-shield-halved"></i> Quality Assurance &amp; Testing</p>
+            <div class="skills-row" style="margin-bottom:0.5rem;">
+              <span>Quality Assurance</span><span>Test Case Creation</span><span>Bug Reporting</span><span>Technical Documentation</span><span>End-User Training</span>
+            </div>
+            <div class="skills-subgroup">
+              <span class="skills-subgroup-label">Levels of Testing</span>
+              <div class="skills-row">
+                <span>Unit Testing</span><span>Integration Testing</span><span>System Testing</span><span>Acceptance Testing</span>
+              </div>
+            </div>
+            <div class="skills-subgroup">
+              <span class="skills-subgroup-label">Functional Testing</span>
+              <div class="skills-row">
+                <span>Smoke Testing</span><span>Sanity Testing</span><span>Regression Testing</span><span>End-to-End Testing</span>
+              </div>
+            </div>
+            <div class="skills-subgroup">
+              <span class="skills-subgroup-label">Non-Functional Testing</span>
+              <div class="skills-row">
+                <span>Performance Testing</span><span>Load Testing</span><span>Stress Testing</span><span>Security Testing</span><span>Usability Testing</span>
+              </div>
+            </div>
+            <div class="skills-subgroup" style="margin-bottom:0;">
+              <span class="skills-subgroup-label">Execution Methods</span>
+              <div class="skills-row">
+                <span>Manual Testing</span><span>Automation Testing</span>
+              </div>
             </div>
           </div>
           <div class="skill-category">
@@ -2001,7 +2036,7 @@
     <div class="skills-modal-header">
       <span class="h2-icon"><i class="fas fa-code"></i></span>
       <h3 class="skills-modal-title">Technical Skills</h3>
-      <span class="h2-count">32 skills</span>
+      <span class="h2-count">46 skills</span>
       <button type="button" class="skills-modal-close" onclick="closeSkillsModal()" title="Close"><i class="fas fa-xmark"></i></button>
     </div>
     <div class="skills-modal-body">
@@ -2018,9 +2053,33 @@
         </div>
       </div>
       <div class="skill-category">
-        <p class="category-title"><i class="fas fa-shield-halved"></i> Quality &amp; Support</p>
-        <div class="skills-row">
-          <span>Quality Assurance</span><span>QA Testing</span><span>Test Case Creation</span><span>Bug Reporting</span><span>Technical Documentation</span><span>End-User Training</span>
+        <p class="category-title"><i class="fas fa-shield-halved"></i> Quality Assurance &amp; Testing</p>
+        <div class="skills-row" style="margin-bottom:0.5rem;">
+          <span>Quality Assurance</span><span>Test Case Creation</span><span>Bug Reporting</span><span>Technical Documentation</span><span>End-User Training</span>
+        </div>
+        <div class="skills-subgroup">
+          <span class="skills-subgroup-label">Levels of Testing</span>
+          <div class="skills-row">
+            <span>Unit Testing</span><span>Integration Testing</span><span>System Testing</span><span>Acceptance Testing</span>
+          </div>
+        </div>
+        <div class="skills-subgroup">
+          <span class="skills-subgroup-label">Functional Testing</span>
+          <div class="skills-row">
+            <span>Smoke Testing</span><span>Sanity Testing</span><span>Regression Testing</span><span>End-to-End Testing</span>
+          </div>
+        </div>
+        <div class="skills-subgroup">
+          <span class="skills-subgroup-label">Non-Functional Testing</span>
+          <div class="skills-row">
+            <span>Performance Testing</span><span>Load Testing</span><span>Stress Testing</span><span>Security Testing</span><span>Usability Testing</span>
+          </div>
+        </div>
+        <div class="skills-subgroup" style="margin-bottom:0;">
+          <span class="skills-subgroup-label">Execution Methods</span>
+          <div class="skills-row">
+            <span>Manual Testing</span><span>Automation Testing</span>
+          </div>
         </div>
       </div>
       <div class="skill-category">
