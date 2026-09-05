@@ -315,6 +315,19 @@
       flex-shrink: 0;
     }
 
+    .card h2 .h2-count {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: var(--green);
+      background: var(--green-dim);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 20px;
+      padding: 0.16rem 0.55rem;
+      flex-shrink: 0;
+    }
+
     /* ===================== ABOUT LAYOUT (masonry) ===================== */
     .about-cards-wrap {
       display: flex;
@@ -361,6 +374,20 @@
     .role-tile-desc { font-size: 0.74rem; color: var(--muted); line-height: 1.42; }
 
     /* Skills */
+    .skills-collapsible {
+      position: relative;
+      max-height: 245px;
+      overflow: hidden;
+    }
+    .skills-collapsible::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 46px;
+      background: linear-gradient(to bottom, transparent, var(--surface) 88%);
+      pointer-events: none;
+    }
+
     .skill-category { margin-bottom: 0.55rem; }
     .category-title {
       font-family: var(--font-mono);
@@ -389,6 +416,102 @@
       transition: border-color var(--transition), color var(--transition), background var(--transition);
     }
     .skills-row span:hover { border-color: var(--green); color: var(--green); background: var(--green-dim); }
+
+    .skills-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      width: 100%;
+      margin-top: 0.75rem;
+      padding: 0.55rem 0.9rem;
+      font-size: 0.79rem;
+      font-weight: 700;
+      color: var(--green);
+      background: var(--green-dim);
+      border: 1px solid rgba(34,197,94,0.22);
+      border-radius: var(--radius-sm);
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+    .skills-toggle-btn:hover {
+      background: rgba(34,197,94,0.2);
+      border-color: var(--green);
+      transform: translateY(-1px);
+    }
+    .skills-toggle-btn i { font-size: 0.68rem; }
+
+    /* ===================== SKILLS MODAL ===================== */
+    .skills-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(6,7,8,0.78);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .skills-modal.active { display: flex; }
+
+    .skills-modal-card {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      max-height: 82vh;
+      background: var(--surface);
+      border: 1px solid var(--border-hover);
+      border-radius: var(--radius);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: skillsModalIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    @keyframes skillsModalIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .skills-modal-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 1rem 1.15rem;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .skills-modal-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      flex: 1;
+      min-width: 0;
+    }
+    .skills-modal-close {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+    }
+    .skills-modal-close:hover {
+      background: var(--green-dim);
+      border-color: var(--green);
+      color: var(--green);
+      transform: rotate(90deg);
+    }
+
+    .skills-modal-body {
+      padding: 1.1rem 1.15rem 1.25rem;
+      overflow-y: auto;
+    }
 
     /* Experience */
     .exp-timeline { display: flex; flex-direction: column; gap: 0; }
@@ -1327,80 +1450,6 @@
   <div id="about" class="tab-content active">
     <div class="about-cards-wrap" id="aboutCardsWrap">
 
-       <!-- What I Do -->
-        <div class="card about-card">
-          <h2><span class="h2-icon"><i class="fas fa-compass"></i></span> What I Do</h2>
-          <div class="role-tiles">
-            <div class="role-tile">
-              <div class="role-tile-icon"><i class="fas fa-shield-halved"></i></div>
-              <p class="role-tile-title">Software QA Analyst</p>
-              <p class="role-tile-desc">Manual and exploratory testing, test case creation, and bug tracking — making sure what ships actually works.</p>
-            </div>
-            <div class="role-tile">
-              <div class="role-tile-icon"><i class="fas fa-headset"></i></div>
-              <p class="role-tile-title">IT Admin / Technical Support</p>
-              <p class="role-tile-desc">Helpdesk support, system administration, and troubleshooting that keep day-to-day operations running.</p>
-            </div>
-            <div class="role-tile">
-              <div class="role-tile-icon"><i class="fas fa-user-clock"></i></div>
-              <p class="role-tile-title">Virtual Assistant</p>
-              <p class="role-tile-desc">Data entry, scheduling, appointment setting, and admin support — organized and detail-driven.</p>
-            </div>
-            <div class="role-tile">
-              <div class="role-tile-icon"><i class="fas fa-pen-ruler"></i></div>
-              <p class="role-tile-title">Graphic Designer</p>
-              <p class="role-tile-desc">UI/UX and visual design across web, branding, and print — from concepts to polished mockups.</p>
-            </div>
-          </div>
-        </div>
-      
-        <!-- Technical Skills -->
-        <div class="card about-card">
-          <h2><span class="h2-icon"><i class="fas fa-code"></i></span> Technical Skills</h2>
-          <div class="skill-category">
-            <p class="category-title"><i class="fas fa-pen-ruler"></i> Design</p>
-            <div class="skills-row">
-              <span>UI/UX Design</span><span>Graphic Design</span><span>Canva</span><span>CapCut</span>
-            </div>
-          </div>
-          <div class="skill-category">
-            <p class="category-title"><i class="fas fa-robot"></i> AI &amp; Design Tools</p>
-            <div class="skills-row">
-              <span>ChatGPT</span><span>Gemini</span><span>Claude</span>
-            </div>
-          </div>
-          <div class="skill-category">
-            <p class="category-title"><i class="fas fa-shield-halved"></i> Quality &amp; Support</p>
-            <div class="skills-row">
-              <span>Quality Assurance</span><span>QA Testing</span><span>Test Case Creation</span><span>Bug Reporting</span><span>Technical Documentation</span><span>End-User Training</span>
-            </div>
-          </div>
-          <div class="skill-category">
-            <p class="category-title"><i class="fas fa-headset"></i> IT Administration &amp; Virtual Assistance</p>
-            <div class="skills-row">
-              <span>IT Helpdesk Support</span><span>Administration</span><span>Data Entry</span><span>System/Platform Administration</span><span>Appointment Setting</span><span>Calendar Management</span>
-            </div>
-          </div>
-          <div class="skill-category">
-            <p class="category-title"><i class="fas fa-code"></i> Programming</p>
-            <div class="skills-row">
-              <span>JavaScript</span><span>PHP</span><span>HTML/CSS</span><span>SQL</span>
-            </div>
-          </div>
-          <div class="skill-category">
-            <p class="category-title"><i class="fas fa-cloud"></i> CMS &amp; Platforms</p>
-            <div class="skills-row">
-              <span>WordPress</span><span>Wix</span>
-            </div>
-          </div>
-          <div class="skill-category" style="margin-bottom:0;">
-            <p class="category-title"><i class="fas fa-users"></i> Professional</p>
-            <div class="skills-row">
-              <span>Project Management</span><span>Team Collaboration</span><span>Client Communication</span><span>Time Management</span>
-            </div>
-          </div>
-        </div>
-
         <!-- Experience & Education -->
         <div class="card about-card">
           <h2><span class="h2-icon"><i class="fas fa-briefcase"></i></span> Experience</h2>
@@ -1450,6 +1499,86 @@
           </div>
         </div>
 
+       <!-- What I Do -->
+        <div class="card about-card">
+          <h2><span class="h2-icon"><i class="fas fa-compass"></i></span> What I Do</h2>
+          <div class="role-tiles">
+            <div class="role-tile">
+              <div class="role-tile-icon"><i class="fas fa-shield-halved"></i></div>
+              <p class="role-tile-title">Software QA Analyst</p>
+              <p class="role-tile-desc">Manual and exploratory testing, test case creation, and bug tracking — making sure what ships actually works.</p>
+            </div>
+            <div class="role-tile">
+              <div class="role-tile-icon"><i class="fas fa-headset"></i></div>
+              <p class="role-tile-title">IT Admin / Technical Support</p>
+              <p class="role-tile-desc">Helpdesk support, system administration, and troubleshooting that keep day-to-day operations running.</p>
+            </div>
+            <div class="role-tile">
+              <div class="role-tile-icon"><i class="fas fa-user-clock"></i></div>
+              <p class="role-tile-title">Virtual Assistant</p>
+              <p class="role-tile-desc">Data entry, scheduling, appointment setting, and admin support — organized and detail-driven.</p>
+            </div>
+            <div class="role-tile">
+              <div class="role-tile-icon"><i class="fas fa-pen-ruler"></i></div>
+              <p class="role-tile-title">Graphic Designer</p>
+              <p class="role-tile-desc">UI/UX and visual design across web, branding, and print — from concepts to polished mockups.</p>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Technical Skills -->
+        <div class="card about-card">
+          <h2><span class="h2-icon"><i class="fas fa-code"></i></span> Technical Skills <span class="h2-count" id="skillsCount">32 skills</span></h2>
+          <div class="skills-collapsible" id="skillsCollapsible">
+          <div class="skill-category">
+            <p class="category-title"><i class="fas fa-pen-ruler"></i> Design</p>
+            <div class="skills-row">
+              <span>UI/UX Design</span><span>Graphic Design</span><span>Canva</span><span>CapCut</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <p class="category-title"><i class="fas fa-robot"></i> AI &amp; Design Tools</p>
+            <div class="skills-row">
+              <span>ChatGPT</span><span>Gemini</span><span>Claude</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <p class="category-title"><i class="fas fa-shield-halved"></i> Quality &amp; Support</p>
+            <div class="skills-row">
+              <span>Quality Assurance</span><span>QA Testing</span><span>Test Case Creation</span><span>Bug Reporting</span><span>Technical Documentation</span><span>End-User Training</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <p class="category-title"><i class="fas fa-headset"></i> IT Administration &amp; Virtual Assistance</p>
+            <div class="skills-row">
+              <span>IT Helpdesk Support</span><span>Administration</span><span>Data Entry</span><span>System/Platform Administration</span><span>Appointment Setting</span><span>Calendar Management</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <p class="category-title"><i class="fas fa-code"></i> Programming</p>
+            <div class="skills-row">
+              <span>JavaScript</span><span>PHP</span><span>HTML/CSS</span><span>SQL</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <p class="category-title"><i class="fas fa-cloud"></i> CMS &amp; Platforms</p>
+            <div class="skills-row">
+              <span>WordPress</span><span>Wix</span>
+            </div>
+          </div>
+          <div class="skill-category" style="margin-bottom:0;">
+            <p class="category-title"><i class="fas fa-users"></i> Professional</p>
+            <div class="skills-row">
+              <span>Project Management</span><span>Team Collaboration</span><span>Client Communication</span><span>Time Management</span>
+            </div>
+          </div>
+          </div>
+          <button type="button" class="skills-toggle-btn" id="skillsToggleBtn" onclick="openSkillsModal()">
+            <span>View All Skills</span>
+            <i class="fas fa-arrow-up-right-from-square"></i>
+          </button>
+        </div>
+
         <!-- Work Style -->
         <div class="card about-card">
           <h2><span class="h2-icon"><i class="fas fa-laptop-code"></i></span> Work Style &amp; Interests</h2>
@@ -1490,35 +1619,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Certifications -->
-        <div class="ch-card about-card">
-          <div class="ch-header">
-            <div class="ch-icon-wrap"><i class="fas fa-award"></i></div>
-            <div>
-              <h2 class="ch-title">Certifications</h2>
-              <p class="ch-subtitle">Verified credentials &amp; courses</p>
-            </div>
-          </div>
-        <div class="cert-stack">
-          <a href="assets/files/FortinetCertifiedAssociate.pdf" target="_blank" class="cert-row">
-            <div class="cert-row-left"><div class="cert-dot"></div><span class="cert-row-name">Fortinet Certified Associate in Cybersecurity</span></div>
-            <i class="fas fa-arrow-up-right-from-square cert-row-icon"></i>
-          </a>
-          <a href="assets/files/FortinetCertifiedFundamentalsinCybersecurity.pdf" target="_blank" class="cert-row">
-            <div class="cert-row-left"><div class="cert-dot"></div><span class="cert-row-name">Fortinet Certified Fundamentals in Cybersecurity</span></div>
-            <i class="fas fa-arrow-up-right-from-square cert-row-icon"></i>
-          </a>
-          <a href="assets/files/MicrosoftDataAnalytics.pdf" target="_blank" class="cert-row">
-            <div class="cert-row-left"><div class="cert-dot"></div><span class="cert-row-name">Certificate in Microsoft Data Analytics</span></div>
-            <i class="fas fa-arrow-up-right-from-square cert-row-icon"></i>
-          </a>
-          <a href="assets/files/CodechumPythonProgramming2.pdf" target="_blank" class="cert-row">
-            <div class="cert-row-left"><div class="cert-dot"></div><span class="cert-row-name">CodeChum Python Programming 2</span></div>
-            <i class="fas fa-arrow-up-right-from-square cert-row-icon"></i>
-          </a>
-        </div>
-      </div>
 
         <!-- Hobbies -->
         <div class="ch-card about-card">
@@ -1567,6 +1667,35 @@
               <p class="hi-desc">Editing &amp; styling train the eye — crucial in QA &amp; design</p>
             </div>
           </div>
+        </div>
+      </div>
+
+        <!-- Certifications -->
+        <div class="ch-card about-card">
+          <div class="ch-header">
+            <div class="ch-icon-wrap"><i class="fas fa-award"></i></div>
+            <div>
+              <h2 class="ch-title">Certifications</h2>
+              <p class="ch-subtitle">Verified credentials &amp; courses</p>
+            </div>
+          </div>
+        <div class="cert-stack">
+          <a href="assets/files/FortinetCertifiedAssociate.pdf" target="_blank" class="cert-row">
+            <div class="cert-row-left"><div class="cert-dot"></div><span class="cert-row-name">Fortinet Certified Associate in Cybersecurity</span></div>
+            <i class="fas fa-arrow-up-right-from-square cert-row-icon"></i>
+          </a>
+          <a href="assets/files/FortinetCertifiedFundamentalsinCybersecurity.pdf" target="_blank" class="cert-row">
+            <div class="cert-row-left"><div class="cert-dot"></div><span class="cert-row-name">Fortinet Certified Fundamentals in Cybersecurity</span></div>
+            <i class="fas fa-arrow-up-right-from-square cert-row-icon"></i>
+          </a>
+          <a href="assets/files/MicrosoftDataAnalytics.pdf" target="_blank" class="cert-row">
+            <div class="cert-row-left"><div class="cert-dot"></div><span class="cert-row-name">Certificate in Microsoft Data Analytics</span></div>
+            <i class="fas fa-arrow-up-right-from-square cert-row-icon"></i>
+          </a>
+          <a href="assets/files/CodechumPythonProgramming2.pdf" target="_blank" class="cert-row">
+            <div class="cert-row-left"><div class="cert-dot"></div><span class="cert-row-name">CodeChum Python Programming 2</span></div>
+            <i class="fas fa-arrow-up-right-from-square cert-row-icon"></i>
+          </a>
         </div>
       </div>
     </div>
@@ -1866,6 +1995,62 @@
   </div>
 </div>
 
+<!-- ==================== SKILLS MODAL ==================== -->
+<div id="skillsModal" class="skills-modal">
+  <div class="skills-modal-card">
+    <div class="skills-modal-header">
+      <span class="h2-icon"><i class="fas fa-code"></i></span>
+      <h3 class="skills-modal-title">Technical Skills</h3>
+      <span class="h2-count">32 skills</span>
+      <button type="button" class="skills-modal-close" onclick="closeSkillsModal()" title="Close"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="skills-modal-body">
+      <div class="skill-category">
+        <p class="category-title"><i class="fas fa-pen-ruler"></i> Design</p>
+        <div class="skills-row">
+          <span>UI/UX Design</span><span>Graphic Design</span><span>Canva</span><span>CapCut</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <p class="category-title"><i class="fas fa-robot"></i> AI &amp; Design Tools</p>
+        <div class="skills-row">
+          <span>ChatGPT</span><span>Gemini</span><span>Claude</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <p class="category-title"><i class="fas fa-shield-halved"></i> Quality &amp; Support</p>
+        <div class="skills-row">
+          <span>Quality Assurance</span><span>QA Testing</span><span>Test Case Creation</span><span>Bug Reporting</span><span>Technical Documentation</span><span>End-User Training</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <p class="category-title"><i class="fas fa-headset"></i> IT Administration &amp; Virtual Assistance</p>
+        <div class="skills-row">
+          <span>IT Helpdesk Support</span><span>Administration</span><span>Data Entry</span><span>System/Platform Administration</span><span>Appointment Setting</span><span>Calendar Management</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <p class="category-title"><i class="fas fa-code"></i> Programming</p>
+        <div class="skills-row">
+          <span>JavaScript</span><span>PHP</span><span>HTML/CSS</span><span>SQL</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <p class="category-title"><i class="fas fa-cloud"></i> CMS &amp; Platforms</p>
+        <div class="skills-row">
+          <span>WordPress</span><span>Wix</span>
+        </div>
+      </div>
+      <div class="skill-category" style="margin-bottom:0;">
+        <p class="category-title"><i class="fas fa-users"></i> Professional</p>
+        <div class="skills-row">
+          <span>Project Management</span><span>Team Collaboration</span><span>Client Communication</span><span>Time Management</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   /* ==================== TABS ==================== */
   document.querySelectorAll('.nav-tab').forEach(tab => {
@@ -1902,6 +2087,26 @@
   toggle.addEventListener('click', () => {
     document.body.classList.toggle('light');
     toggle.textContent = document.body.classList.contains('light') ? '☀︎' : '☾';
+  });
+
+  /* ==================== TECHNICAL SKILLS: VIEW ALL MODAL ==================== */
+  function openSkillsModal() {
+    const modal = document.getElementById('skillsModal');
+    if (modal) modal.classList.add('active');
+  }
+  function closeSkillsModal() {
+    const modal = document.getElementById('skillsModal');
+    if (modal) modal.classList.remove('active');
+  }
+  const skillsModalEl = document.getElementById('skillsModal');
+  if (skillsModalEl) {
+    skillsModalEl.addEventListener('click', function(e) {
+      if (e.target === this) closeSkillsModal();
+    });
+  }
+  document.addEventListener('keydown', function(e) {
+    const modal = document.getElementById('skillsModal');
+    if (modal && modal.classList.contains('active') && e.key === 'Escape') closeSkillsModal();
   });
 
   /* ==================== DESIGN PORTFOLIO ==================== */
@@ -2099,15 +2304,15 @@
 
     wrap.classList.add('masonry-active');
 
-    // Measure every card's real height at the target column width first,
-    // then place the tallest cards first (LPT bin-packing). Placing the
-    // biggest pieces first — rather than in source order — lets smaller
-    // cards fill in the remaining gaps instead of leaving one column short.
+    // Measure every card's real height at the target column width, then
+    // place them in their original source order — the first card always
+    // lands top-left, the second lands top-right (whichever column is
+    // currently shortest), and so on. This keeps manual ordering (e.g.
+    // "Experience" first) predictable instead of re-sorting by height.
     const items = cards.map(card => {
       card.style.width = colWidth + 'px';
       return { card, h: card.offsetHeight };
     });
-    items.sort((a, b) => b.h - a.h);
 
     const colHeights = [0, 0];
     items.forEach(({ card, h }) => {
