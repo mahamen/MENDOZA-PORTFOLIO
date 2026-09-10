@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maria Hanah | QA Analyst | IT Support | Virtual Assistant | Graphic Designer</title>
-  <link rel="icon" id="favicon" type="image/png" href="assets/images/MENDOZA_PICTURE.jpg">
+  <link rel="icon" id="favicon" type="image/png" href="assets/images/hanah.jpg">
   <script>
-    (function(){var img=new Image();img.onload=function(){var s=64,c=document.createElement('canvas');c.width=c.height=s;var ctx=c.getContext('2d');ctx.beginPath();ctx.arc(s/2,s/2,s/2,0,Math.PI*2);ctx.closePath();ctx.clip();ctx.drawImage(img,0,0,s,s);var lnk=document.getElementById('favicon');if(lnk)lnk.href=c.toDataURL('image/png');};img.src='assets/images/MENDOZA_PICTURE.jpg';})();
+    (function(){var img=new Image();img.onload=function(){var s=64,c=document.createElement('canvas');c.width=c.height=s;var ctx=c.getContext('2d');ctx.beginPath();ctx.arc(s/2,s/2,s/2,0,Math.PI*2);ctx.closePath();ctx.clip();ctx.drawImage(img,0,0,s,s);var lnk=document.getElementById('favicon');if(lnk)lnk.href=c.toDataURL('image/png');};img.src='assets/images/hanah.jpg';})();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -90,11 +90,7 @@
       position: relative;
       display: inline-block;
       margin-bottom: 0.45rem;
-      cursor: pointer;
-      transition: transform var(--transition);
     }
-    .hero-avatar-wrap:hover { transform: scale(1.03); }
-    .hero-avatar-wrap:hover .hero-avatar-hint { opacity: 1; }
 
     .hero-avatar-ring {
       position: absolute;
@@ -108,31 +104,14 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .hero img {
-      width: 130px;
-      height: 130px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       object-fit: cover;
       position: relative;
       z-index: 1;
       border: 3px solid var(--bg2);
       box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-    }
-
-    .hero-avatar-hint {
-      position: absolute;
-      bottom: 2px;
-      right: 2px;
-      z-index: 2;
-      width: 30px; height: 30px;
-      border-radius: 50%;
-      background: var(--green);
-      color: #06110a;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.75rem;
-      border: 2px solid var(--bg2);
-      opacity: 0;
-      transition: opacity var(--transition);
-      pointer-events: none;
     }
 
     .hero h1 {
@@ -688,14 +667,6 @@
     .cert-row-name { font-size: 0.8rem; font-weight: 600; line-height: 1.3; }
     .cert-row-icon { font-size: 0.7rem; color: var(--muted); flex-shrink: 0; }
 
-    .cert-row--honor {
-      background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(34,197,94,0.02));
-      border-color: rgba(34,197,94,0.25);
-      cursor: pointer;
-    }
-    .cert-row--honor .cert-dot { background: var(--amber); box-shadow: 0 0 0 3px rgba(240,180,41,0.18); }
-    .cert-row--honor .cert-row-name { color: var(--green); }
-
     .hobby-tiles {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -777,7 +748,6 @@
       background: var(--green);
       opacity: 0;
       transition: opacity var(--transition);
-      z-index: 2;
     }
     .project-card:hover {
       border-color: var(--border-hover);
@@ -785,29 +755,6 @@
       box-shadow: 0 8px 28px rgba(0,0,0,0.22);
     }
     .project-card:hover::before { opacity: 1; }
-
-    .pc-cover {
-      width: calc(100% + 2rem);
-      margin: -0.9rem -1rem 0.75rem;
-      height: 132px;
-      overflow: hidden;
-      position: relative;
-      background: var(--surface2);
-    }
-    .pc-cover img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.45s cubic-bezier(0.2,0.8,0.2,1);
-    }
-    .project-card:hover .pc-cover img { transform: scale(1.06); }
-    .pc-cover-fallback {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(160deg, var(--surface2), var(--surface));
-      color: var(--muted2);
-      font-size: 1.6rem;
-    }
 
     .pc-top {
       display: flex;
@@ -860,7 +807,6 @@
       opacity: 0;
       transform: translateY(-4px) scale(0.9);
       transition: opacity var(--transition), transform var(--transition), background var(--transition), color var(--transition), border-color var(--transition);
-      z-index: 2;
     }
     .project-card:hover .pc-preview {
       opacity: 1;
@@ -1126,23 +1072,6 @@
       border-radius: 6px;
       padding: 0.15rem 0.45rem;
       letter-spacing: 0.03em;
-    }
-
-    .portfolio-pdf-badge {
-      position: absolute;
-      top: 0.65rem;
-      right: 0.65rem;
-      font-family: var(--font-mono);
-      font-size: 0.66rem;
-      font-weight: 600;
-      color: #06110a;
-      background: var(--green);
-      border-radius: 6px;
-      padding: 0.15rem 0.45rem;
-      letter-spacing: 0.03em;
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
     }
 
     .portfolio-info {
@@ -1471,7 +1400,6 @@
       color: rgba(255,255,255,0.7);
       cursor: pointer;
       transition: color var(--transition);
-      z-index: 2;
     }
     .close-modal:hover { color: #fff; }
     .modal-prev, .modal-next {
@@ -1489,70 +1417,7 @@
     .modal-next { right: 1rem; }
     .modal-prev:hover, .modal-next:hover { background: var(--green); color: #fff; }
 
-    /* ===================== PDF MODAL ===================== */
-    .pdf-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.92);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-    }
-    .pdf-modal.active { display: flex; }
-    .pdf-modal-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      width: min(920px, 94vw);
-      height: 90vh;
-      position: relative;
-    }
-    .pdf-modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.6rem;
-      padding: 0 0.1rem;
-    }
-    .pdf-modal-title {
-      color: #f5f5f6;
-      font-family: var(--font-display);
-      font-size: 0.92rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      min-width: 0;
-    }
-    .pdf-modal-title span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .pdf-modal-actions { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
-    .pdf-modal-open {
-      font-size: 0.76rem;
-      font-weight: 700;
-      color: var(--green);
-      background: rgba(34,197,94,0.12);
-      border: 1px solid rgba(34,197,94,0.3);
-      border-radius: 20px;
-      padding: 0.35rem 0.8rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      transition: background var(--transition), border-color var(--transition);
-    }
-    .pdf-modal-open:hover { background: rgba(34,197,94,0.22); border-color: var(--green); }
-    .pdf-modal-body {
-      flex: 1;
-      min-height: 0;
-      background: #2a2a2c;
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    }
-    .pdf-modal-body iframe { width: 100%; height: 100%; border: 0; display: block; }
-
-    /* ===================== SKILLS MODAL end / UTILITY ===================== */
+    /* ===================== UTILITY ===================== */
     .mt-sm { margin-top: 0.5rem; }
     .mt-md { margin-top: 0.6rem; }
 
@@ -1560,7 +1425,6 @@
       .container { padding: 0.85rem 0.85rem 1.5rem; }
       .hero h1 { font-size: 1.5rem; }
       .cta-banner { flex-wrap: wrap; }
-      .pdf-modal-wrap { height: 92vh; }
     }
   </style>
 </head>
@@ -1569,10 +1433,9 @@
 
   <!-- ==================== HERO ==================== -->
   <div class="hero">
-    <div class="hero-avatar-wrap" onclick="openAvatarModal()" title="Click to view full photo">
+    <div class="hero-avatar-wrap">
       <div class="hero-avatar-ring"></div>
-      <img src="assets/images/MENDOZA_PICTURE.jpg" alt="Maria Hanah Mendoza" onerror="this.src='https://via.placeholder.com/130?text=MH'">
-      <span class="hero-avatar-hint"><i class="fas fa-magnifying-glass-plus"></i></span>
+      <img src="assets/images/hanah.jpg" alt="Maria Hanah Mendoza" onerror="this.src='https://via.placeholder.com/120?text=MH'">
     </div>
     <h1>Maria Hanah G. Mendoza</h1>
     <div class="hero-roles-row">
@@ -1852,10 +1715,6 @@
             </div>
           </div>
         <div class="cert-stack">
-          <div class="cert-row cert-row--honor" onclick="openDiploma()" role="button" tabindex="0" onkeydown="if(event.key==='Enter'){openDiploma();}">
-            <div class="cert-row-left"><div class="cert-dot"></div><span class="cert-row-name">Latin Honor Graduate — Cum Laude (GWA 1.47)</span></div>
-            <i class="fas fa-arrow-up-right-from-square cert-row-icon"></i>
-          </div>
           <a href="assets/files/FortinetCertifiedAssociate.pdf" target="_blank" class="cert-row">
             <div class="cert-row-left"><div class="cert-dot"></div><span class="cert-row-name">Fortinet Certified Associate in Cybersecurity</span></div>
             <i class="fas fa-arrow-up-right-from-square cert-row-icon"></i>
@@ -1887,7 +1746,7 @@
         <i class="fas fa-folder-open"></i> Projects <span class="stab-count">10</span>
       </button>
       <button class="works-subtab" data-panel="panel-designs">
-        <i class="fas fa-pen-ruler"></i> Designs <span class="stab-count">14</span>
+        <i class="fas fa-pen-ruler"></i> Designs <span class="stab-count">12</span>
       </button>
       <button class="works-subtab" data-panel="panel-media">
         <i class="fas fa-clapperboard"></i> Visual Media
@@ -1896,7 +1755,139 @@
 
     <!-- ── Panel: Projects ── -->
     <div id="panel-projects" class="works-panel active">
-      <div class="projects-grid" id="projectsGrid"></div>
+      <div class="projects-grid">
+
+        <a href="assets/files/RM'SCapstone.pdf" target="_blank" class="project-card">
+          <span class="pc-preview" title="Preview"><i class="fas fa-eye"></i></span>
+          <div class="pc-top">
+            <div class="pc-icon"><i class="fas fa-robot"></i></div>
+            <div class="pc-meta">
+              <span class="pc-category">Capstone Project</span>
+              <div class="pc-title">RM'S: AI Inventory <span class="pc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></span></div>
+              <p class="pc-desc">Capstone project — an AI-powered inventory and e-commerce platform that automates stock tracking, forecasts restocking needs, and streamlines order management for small retail businesses.</p>
+            </div>
+          </div>
+          <div class="pc-stack"><span><i class="fab fa-php"></i> PHP</span><span><i class="fas fa-database"></i> MySQL</span><span><i class="fab fa-node-js"></i> Node.js</span><span><i class="fas fa-brain"></i> AI</span></div>
+        </a>
+
+        <a href="assets/files/ILoveMilkteaECommerceKiosk.pdf" target="_blank" class="project-card">
+          <span class="pc-preview" title="Preview"><i class="fas fa-eye"></i></span>
+          <div class="pc-top">
+            <div class="pc-icon"><i class="fas fa-mug-hot"></i></div>
+            <div class="pc-meta">
+              <span class="pc-category">E-Commerce</span>
+              <div class="pc-title">ILoveMilktea Kiosk <span class="pc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></span></div>
+              <p class="pc-desc">A self-service e-commerce and kiosk ordering system built for a milktea shop, covering menu browsing, customization, and order queuing for both in-store and online customers.</p>
+            </div>
+          </div>
+          <div class="pc-stack"><span><i class="fab fa-php"></i> PHP</span><span><i class="fas fa-database"></i> MySQL</span><span><i class="fab fa-node-js"></i> Node.js</span></div>
+        </a>
+
+        <a href="https://github.com/mahamen/MINSUCLINIC" target="_blank" class="project-card">
+          <span class="pc-preview" title="Preview"><i class="fas fa-eye"></i></span>
+          <div class="pc-top">
+            <div class="pc-icon"><i class="fas fa-clinic-medical"></i></div>
+            <div class="pc-meta">
+              <span class="pc-category">Web App</span>
+              <div class="pc-title">MinSU Clinic System <span class="pc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></span></div>
+              <p class="pc-desc">A full clinic management system for the university health office, handling patient records, appointment scheduling, and consultation logs in one centralized platform.</p>
+            </div>
+          </div>
+          <div class="pc-stack"><span><i class="fab fa-php"></i> PHP</span><span><i class="fab fa-html5"></i> HTML</span><span><i class="fas fa-database"></i> MySQL</span></div>
+        </a>
+
+        <a href="assets/files/PanChitanNiUnchangWix.pdf" target="_blank" class="project-card">
+          <span class="pc-preview" title="Preview"><i class="fas fa-eye"></i></span>
+          <div class="pc-top">
+            <div class="pc-icon"><i class="fas fa-store"></i></div>
+            <div class="pc-meta">
+              <span class="pc-category">E-Commerce</span>
+              <div class="pc-title">PanChitan E-Commerce <span class="pc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></span></div>
+              <p class="pc-desc">A Wix CMS-based online ordering platform for a local Filipino restaurant, featuring a digital menu, secure PayPal checkout, and a mobile-friendly storefront for regular customers.</p>
+            </div>
+          </div>
+          <div class="pc-stack"><span><i class="fas fa-globe"></i> Wix CMS</span><span><i class="fas fa-credit-card"></i> PayPal</span></div>
+        </a>
+
+        <a href="assets/files/MeatQualityDetector.pdf" target="_blank" class="project-card">
+          <span class="pc-preview" title="Preview"><i class="fas fa-eye"></i></span>
+          <div class="pc-top">
+            <div class="pc-icon"><i class="fas fa-drumstick-bite"></i></div>
+            <div class="pc-meta">
+              <span class="pc-category">AI / ML</span>
+              <div class="pc-title">Meat Quality Detector <span class="pc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></span></div>
+              <p class="pc-desc">An AI-based image classification tool that analyzes photos of meat to detect freshness and spoilage, aimed at helping vendors and consumers make safer purchasing decisions.</p>
+            </div>
+          </div>
+          <div class="pc-stack"><span><i class="fab fa-python"></i> Python</span><span><i class="fab fa-django"></i> Django</span><span><i class="fas fa-brain"></i> AI</span><span><i class="fas fa-diagram-project"></i> ML</span></div>
+        </a>
+
+        <a href="assets/files/SLites.pdf" target="_blank" class="project-card">
+          <span class="pc-preview" title="Preview"><i class="fas fa-eye"></i></span>
+          <div class="pc-top">
+            <div class="pc-icon"><i class="fas fa-bolt"></i></div>
+            <div class="pc-meta">
+              <span class="pc-category">Coursework</span>
+              <div class="pc-title">SLites <span class="pc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></span></div>
+              <p class="pc-desc">A lightweight application built on the Xianfire framework, developed as part of coursework to explore rapid feature prototyping and framework-based development practices.</p>
+            </div>
+          </div>
+          <div class="pc-stack"><span><i class="fas fa-cubes"></i> Xianfire</span></div>
+        </a>
+
+        <a href="https://github.com/mahamen/MinSU-VAS.git" target="_blank" class="project-card">
+          <span class="pc-preview" title="Preview"><i class="fas fa-eye"></i></span>
+          <div class="pc-top">
+            <div class="pc-icon"><i class="fas fa-calendar-check"></i></div>
+            <div class="pc-meta">
+              <span class="pc-category">Web App</span>
+              <div class="pc-title">MinSU VAS <span class="pc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></span></div>
+              <p class="pc-desc">A Venue Appointment System web app that lets students and staff request, schedule, and track the availability of campus venues, reducing booking conflicts and manual paperwork.</p>
+            </div>
+          </div>
+          <div class="pc-stack"><span><i class="fab fa-node-js"></i> Node.js</span><span><i class="fab fa-php"></i> PHP</span><span><i class="fas fa-database"></i> MySQL</span></div>
+        </a>
+
+        <a href="https://drive.google.com/drive/folders/1H6dfVLOOxX7wkKBwU9erUVfEMyMJJjir?usp=sharing" target="_blank" class="project-card">
+          <span class="pc-preview" title="Preview"><i class="fas fa-eye"></i></span>
+          <div class="pc-top">
+            <div class="pc-icon"><i class="fas fa-brain"></i></div>
+            <div class="pc-meta">
+              <span class="pc-category">Desktop App</span>
+              <div class="pc-title">Brainster Quivia <span class="pc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></span></div>
+              <p class="pc-desc">A 2-in-1 quiz and trivia desktop game built for a Discrete Mathematics course project, testing players' knowledge while flashing educational trivia facts as they play.</p>
+            </div>
+          </div>
+          <div class="pc-stack"><span><i class="fas fa-hashtag"></i> C#</span><span><i class="fas fa-window-maximize"></i> Windows Forms</span><span><i class="fas fa-database"></i> MySQL</span></div>
+        </a>
+
+        <a href="assets/files/MinSUEventSchedulingSystem.pdf" target="_blank" class="project-card">
+          <span class="pc-preview" title="Preview"><i class="fas fa-eye"></i></span>
+          <div class="pc-top">
+            <div class="pc-icon"><i class="fas fa-calendar-days"></i></div>
+            <div class="pc-meta">
+              <span class="pc-category">Web App</span>
+              <div class="pc-title">MinSU Event Scheduling System <span class="pc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></span></div>
+              <p class="pc-desc">A scheduling system for MinSU that helps organize and manage campus events, reducing conflicts and streamlining the planning process.</p>
+            </div>
+          </div>
+          <div class="pc-stack"><span><i class="fab fa-php"></i> PHP</span><span><i class="fas fa-database"></i> MySQL</span><span><i class="fab fa-node-js"></i> Node.js</span></div>
+        </a>
+
+        <a href="https://github.com/mahamen/PANCHITANLAVALUST" target="_blank" class="project-card">
+          <span class="pc-preview" title="Preview"><i class="fas fa-eye"></i></span>
+          <div class="pc-top">
+            <div class="pc-icon"><i class="fas fa-bowl-food"></i></div>
+            <div class="pc-meta">
+              <span class="pc-category">E-Commerce</span>
+              <div class="pc-title">PanChitan ni Unchang (Lavalust) <span class="pc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></span></div>
+              <p class="pc-desc">A PHP Lavalust framework build of the PanChitan ni Unchang online ordering platform, covering menu browsing and order placement for the local Filipino restaurant.</p>
+            </div>
+          </div>
+          <div class="pc-stack"><span><i class="fab fa-php"></i> PHP</span><span><i class="fas fa-layer-group"></i> Lavalust</span><span><i class="fas fa-database"></i> MySQL</span></div>
+        </a>
+
+      </div>
     </div>
 
     <!-- ── Panel: Designs ── -->
@@ -1904,9 +1895,9 @@
 
       <div class="section-heading">
         <h2>Design Portfolio</h2>
-        <span class="sh-count">14 Works</span>
+        <span class="sh-count">12 Works</span>
       </div>
-      <p class="portfolio-intro">A curated set of UI/UX, branding, and visual design pieces — click any piece to view it full-size, or open the PDF where available.</p>
+      <p class="portfolio-intro">A curated set of UI/UX, branding, and visual design pieces — click any piece to view it full-size.</p>
 
       <div class="portfolio-grid" id="portfolioGrid"></div>
     </div>
@@ -2039,22 +2030,6 @@
   </div>
 </div>
 
-<!-- ==================== PDF MODAL ==================== -->
-<div id="pdfModal" class="pdf-modal">
-  <div class="pdf-modal-wrap">
-    <div class="pdf-modal-header">
-      <div class="pdf-modal-title"><i class="fas fa-file-pdf" style="color:var(--green);"></i><span id="pdfModalTitle">Document</span></div>
-      <div class="pdf-modal-actions">
-        <a id="pdfModalOpenLink" href="#" target="_blank" class="pdf-modal-open"><i class="fas fa-arrow-up-right-from-square"></i> Open in new tab</a>
-        <span class="close-modal" style="position:static;" onclick="closePdfModal()">&times;</span>
-      </div>
-    </div>
-    <div class="pdf-modal-body">
-      <iframe id="pdfFrame" src="" title="PDF preview"></iframe>
-    </div>
-  </div>
-</div>
-
 <!-- ==================== SKILLS MODAL ==================== -->
 <div id="skillsModal" class="skills-modal">
   <div class="skills-modal-card">
@@ -2166,11 +2141,6 @@
     }, 2200);
   })();
 
-  /* ==================== HERO AVATAR MODAL ==================== */
-  function openAvatarModal() {
-    openImageModal(['assets/images/MENDOZA_PICTURE.jpg'], 0, ['Maria Hanah G. Mendoza']);
-  }
-
   /* ==================== THEME ==================== */
   const toggle = document.getElementById('themeToggle');
   toggle.addEventListener('click', () => {
@@ -2198,130 +2168,19 @@
     if (modal && modal.classList.contains('active') && e.key === 'Escape') closeSkillsModal();
   });
 
-  /* ==================== PROJECTS (with cover photos) ==================== */
-  const projects = [
-    {
-      cover: 'assets/images/cover-rms-inventory.png',
-      icon: 'fa-robot', category: "Capstone Project",
-      title: "RM'S: AI Inventory",
-      desc: "Capstone project — an AI-powered inventory and e-commerce platform that automates stock tracking, forecasts restocking needs, and streamlines order management for small retail businesses.",
-      stack: [['fab fa-php','PHP'],['fas fa-database','MySQL'],['fab fa-node-js','Node.js'],['fas fa-brain','AI']],
-      link: "assets/files/RM'SCapstone.pdf"
-    },
-    {
-      cover: 'assets/images/cover-ilovemilktea-kiosk.jpg',
-      icon: 'fa-mug-hot', category: "E-Commerce",
-      title: "ILoveMilktea Kiosk",
-      desc: "A self-service e-commerce and kiosk ordering system built for a milktea shop, covering menu browsing, customization, and order queuing for both in-store and online customers.",
-      stack: [['fab fa-php','PHP'],['fas fa-database','MySQL'],['fab fa-node-js','Node.js']],
-      link: "assets/files/ILoveMilkteaECommerceKiosk.pdf"
-    },
-    {
-      cover: 'assets/images/cover-minsu-clinic.jpg',
-      icon: 'fa-clinic-medical', category: "Web App",
-      title: "MinSU Clinic System",
-      desc: "A full clinic management system for the university health office, handling patient records, appointment scheduling, and consultation logs in one centralized platform.",
-      stack: [['fab fa-php','PHP'],['fab fa-html5','HTML'],['fas fa-database','MySQL']],
-      link: "https://github.com/mahamen/MINSUCLINIC"
-    },
-    {
-      cover: 'assets/images/cover-panchitan-ecommerce.png',
-      icon: 'fa-store', category: "E-Commerce",
-      title: "PanChitan E-Commerce",
-      desc: "A Wix CMS-based online ordering platform for a local Filipino restaurant, featuring a digital menu, secure PayPal checkout, and a mobile-friendly storefront for regular customers.",
-      stack: [['fas fa-globe','Wix CMS'],['fas fa-credit-card','PayPal']],
-      link: "assets/files/PanChitanNiUnchangWix.pdf"
-    },
-    {
-      cover: 'assets/images/cover-meat-quality-detector.jpg',
-      icon: 'fa-drumstick-bite', category: "AI / ML",
-      title: "Meat Quality Detector",
-      desc: "An AI-based image classification tool that analyzes photos of meat to detect freshness and spoilage, aimed at helping vendors and consumers make safer purchasing decisions.",
-      stack: [['fab fa-python','Python'],['fab fa-django','Django'],['fas fa-brain','AI'],['fas fa-diagram-project','ML']],
-      link: "assets/files/MeatQualityDetector.pdf"
-    },
-    {
-      cover: 'assets/images/cover-slites.png',
-      icon: 'fa-bolt', category: "Coursework",
-      title: "SLites",
-      desc: "A lightweight application built on the Xianfire framework, developed as part of coursework to explore rapid feature prototyping and framework-based development practices.",
-      stack: [['fas fa-cubes','Xianfire']],
-      link: "assets/files/SLites.pdf"
-    },
-    {
-      cover: 'assets/images/cover-minsu-vas.png',
-      icon: 'fa-calendar-check', category: "Web App",
-      title: "MinSU VAS",
-      desc: "A Venue Appointment System web app that lets students and staff request, schedule, and track the availability of campus venues, reducing booking conflicts and manual paperwork.",
-      stack: [['fab fa-node-js','Node.js'],['fab fa-php','PHP'],['fas fa-database','MySQL']],
-      link: "https://github.com/mahamen/MinSU-VAS.git"
-    },
-    {
-      cover: 'assets/images/cover-brainster-quivia.png',
-      icon: 'fa-brain', category: "Desktop App",
-      title: "Brainster Quivia",
-      desc: "A 2-in-1 quiz and trivia desktop game built for a Discrete Mathematics course project, testing players' knowledge while flashing educational trivia facts as they play.",
-      stack: [['fas fa-hashtag','C#'],['fas fa-window-maximize','Windows Forms'],['fas fa-database','MySQL']],
-      link: "https://drive.google.com/drive/folders/1H6dfVLOOxX7wkKBwU9erUVfEMyMJJjir?usp=sharing"
-    },
-    {
-      cover: 'assets/images/cover-minsu-event-scheduling.png',
-      icon: 'fa-calendar-days', category: "Web App",
-      title: "MinSU Event Scheduling System",
-      desc: "A scheduling system for MinSU that helps organize and manage campus events, reducing conflicts and streamlining the planning process.",
-      stack: [['fab fa-php','PHP'],['fas fa-database','MySQL'],['fab fa-node-js','Node.js']],
-      link: "assets/files/MinSUEventSchedulingSystem.pdf"
-    },
-    {
-      cover: 'assets/images/cover-panchitan-lavalust.jpg',
-      icon: 'fa-bowl-food', category: "E-Commerce",
-      title: "PanChitan ni Unchang (Lavalust)",
-      desc: "A PHP Lavalust framework build of the PanChitan ni Unchang online ordering platform, covering menu browsing and order placement for the local Filipino restaurant.",
-      stack: [['fab fa-php','PHP'],['fas fa-layer-group','Lavalust'],['fas fa-database','MySQL']],
-      link: "https://github.com/mahamen/PANCHITANLAVALUST"
-    }
-  ];
-
-  function renderProjectsGrid() {
-    const grid = document.getElementById('projectsGrid');
-    if (!grid) return;
-    grid.innerHTML = projects.map(p => {
-      const stackHtml = p.stack.map(([icon, label]) => `<span><i class="${icon}"></i> ${label}</span>`).join('');
-      return `
-        <a href="${p.link}" target="_blank" class="project-card">
-          <span class="pc-preview" title="Preview"><i class="fas fa-eye"></i></span>
-          <div class="pc-cover">
-            <img src="${p.cover}" alt="${p.title} cover" loading="lazy" onerror="this.parentElement.innerHTML='<div class=&quot;pc-cover-fallback&quot;><i class=&quot;fas fa-image&quot;></i></div>'">
-          </div>
-          <div class="pc-top">
-            <div class="pc-icon"><i class="fas ${p.icon}"></i></div>
-            <div class="pc-meta">
-              <span class="pc-category">${p.category}</span>
-              <div class="pc-title">${p.title} <span class="pc-arrow"><i class="fas fa-arrow-up-right-from-square"></i></span></div>
-              <p class="pc-desc">${p.desc}</p>
-            </div>
-          </div>
-          <div class="pc-stack">${stackHtml}</div>
-        </a>`;
-    }).join('');
-  }
-  renderProjectsGrid();
-
   /* ==================== DESIGN PORTFOLIO ==================== */
   const portfolioDesigns = [
-    { file: 'assets/images/6.png',  title: 'iLoveMilkTea Ordering System', category: 'UI/UX Design',            featured: true, pdf: 'assets/files/ilovemilktea.pdf' },
-    { file: 'assets/images/9.png',  title: 'MinSU VAS — Venue System',     category: 'UI/UX Design',                             pdf: 'assets/files/minsuvas.pdf' },
-    { file: 'assets/images/13.png', title: 'PanChitan ni Unchang — Wix Design',      category: 'UI/UX Design',                   pdf: 'assets/files/panchitanwix.pdf' },
-    { file: 'assets/images/14.png', title: 'PanChitan ni Unchang — Lavalust Design', category: 'UI/UX Design',                   pdf: 'assets/files/panchitanlava.pdf' },
-    { file: 'assets/images/8.png',  title: 'E-DonateMo Dashboard',         category: 'UI/UX Design',                             pdf: 'assets/files/edonatemo.pdf' },
+    { file: 'assets/images/6.png',  title: 'iLoveMilkTea Ordering System', category: 'UI/UX Design',            featured: true },
+    { file: 'assets/images/9.png',  title: 'MinSU VAS — Venue System',     category: 'UI/UX Design' },
+    { file: 'assets/images/8.png',  title: 'E-DonateMo Dashboard',         category: 'UI/UX Design' },
     { file: 'assets/images/5.png',  title: 'Book For Life — Brand Kit',    category: 'Branding & Social Media' },
-    { file: 'assets/images/12.png', title: 'Instagram Post Design',        category: 'Social Media Design',      featured: true, pdf: 'assets/files/instagrampost.pdf' },
+    { file: 'assets/images/12.png', title: 'Instagram Post Design',    category: 'Social Media Design',      featured: true },
     { file: 'assets/images/3.png',  title: 'CyberShield Webinar Poster',   category: 'Event Poster' },
     { file: 'assets/images/1.png',  title: '"Unveiling Beauty" Book Cover',category: 'Book Cover Design' },
-    { file: 'assets/images/11.png', title: "RM'S User Manual",             category: 'Book Cover Design',                        pdf: 'assets/files/rmsmanual.pdf' },
+    { file: 'assets/images/11.png', title: "RM'S User Manual",             category: 'Book Cover Design' },
     { file: 'assets/images/7.png',  title: 'OJT Interns Portfolio 2026',   category: 'Book Cover Design' },
-    { file: 'assets/images/2.png',  title: "RM'S Capstone Deck",           category: 'Presentation Design',                      pdf: 'assets/files/rmsppt.pdf' },
-    { file: 'assets/images/10.png', title: 'OJT Narrative Presentation',   category: 'Presentation Design',                      pdf: 'assets/files/ojtnarrativereport.pdf' },
+    { file: 'assets/images/2.png',  title: "RM'S Capstone Deck",           category: 'Presentation Design' },
+    { file: 'assets/images/10.png', title: 'OJT Narrative Presentation',   category: 'Presentation Design' },
     { file: 'assets/images/4.png',  title: 'Related Literature Infographic', category: 'Infographic Design' }
   ];
 
@@ -2330,15 +2189,13 @@
     if (!grid) return;
     grid.innerHTML = portfolioDesigns.map((d, i) => {
       const num = String(i + 1).padStart(2, '0');
-      const pdfBadge = d.pdf ? `<span class="portfolio-pdf-badge"><i class="fas fa-file-pdf"></i> PDF</span>` : '';
       return `
         <div class="portfolio-item${d.featured ? ' featured' : ''}" style="animation-delay:${i * 0.05}s" onclick="openPortfolio(${i})">
           <div class="portfolio-frame">
             <span class="portfolio-num-badge">${num} / ${portfolioDesigns.length}</span>
-            ${pdfBadge}
             <img src="${d.file}" alt="${d.title}" loading="lazy">
             <div class="portfolio-overlay">
-              <div class="portfolio-view"><i class="fas ${d.pdf ? 'fa-file-pdf' : 'fa-eye'}"></i><span>${d.pdf ? 'View PDF' : 'View Design'}</span></div>
+              <div class="portfolio-view"><i class="fas fa-eye"></i><span>View Design</span></div>
             </div>
           </div>
           <div class="portfolio-info">
@@ -2354,16 +2211,11 @@
   renderPortfolioGrid();
 
   function openPortfolio(idx) {
-    const d = portfolioDesigns[idx];
-    if (d.pdf) {
-      openPdfModal(d.pdf, d.title);
-    } else {
-      openImageModal(
-        portfolioDesigns.map(x => x.file),
-        idx,
-        portfolioDesigns.map(x => `${x.title} — ${x.category}`)
-      );
-    }
+    openImageModal(
+      portfolioDesigns.map(d => d.file),
+      idx,
+      portfolioDesigns.map(d => `${d.title} — ${d.category}`)
+    );
   }
 
   /* ==================== UNIFIED LIGHTBOX MODAL ==================== */
@@ -2422,30 +2274,9 @@
   });
 
   function openDiploma() {
-    openImageModal(['assets/images/MENDOZA_DIPLOMA.jpg'], 0, ['Cum Laude Diploma — Maria Hanah G. Mendoza']);
+    openImageModal(['assets/images/MENDOZA_DIPLOMA.jpg'], 0, []);
+    document.getElementById('modalImage').alt = 'Cum Laude Diploma — Maria Hanah G. Mendoza';
   }
-
-  /* ==================== PDF MODAL ==================== */
-  function openPdfModal(src, title) {
-    document.getElementById('pdfFrame').src = src;
-    document.getElementById('pdfModalTitle').textContent = title || 'Document';
-    document.getElementById('pdfModalOpenLink').href = src;
-    document.getElementById('pdfModal').classList.add('active');
-  }
-  function closePdfModal() {
-    document.getElementById('pdfModal').classList.remove('active');
-    document.getElementById('pdfFrame').src = '';
-  }
-  const pdfModalEl = document.getElementById('pdfModal');
-  if (pdfModalEl) {
-    pdfModalEl.addEventListener('click', function(e) {
-      if (e.target === this) closePdfModal();
-    });
-  }
-  document.addEventListener('keydown', function(e) {
-    const modal = document.getElementById('pdfModal');
-    if (modal && modal.classList.contains('active') && e.key === 'Escape') closePdfModal();
-  });
 
   /* ==================== WORKS SUB-TABS ==================== */
   document.querySelectorAll('.works-subtab').forEach(tab => {
