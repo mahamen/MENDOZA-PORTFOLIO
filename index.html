@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maria Hanah | QA Analyst | IT Support | Virtual Assistant | Graphic Designer</title>
+  <title>Maria Hanah | QA Analyst | IT Support | Virtual Assistant | UI/UX Designer</title>
   <link rel="icon" id="favicon" type="image/png" href="assets/images/MENDOZA_PICTURE.jpg">
   <script>
     (function(){var img=new Image();img.onload=function(){var s=64,c=document.createElement('canvas');c.width=c.height=s;var ctx=c.getContext('2d');ctx.beginPath();ctx.arc(s/2,s/2,s/2,0,Math.PI*2);ctx.closePath();ctx.clip();ctx.drawImage(img,0,0,s,s);var lnk=document.getElementById('favicon');if(lnk)lnk.href=c.toDataURL('image/png');};img.src='assets/images/MENDOZA_PICTURE.jpg';})();
@@ -651,11 +651,29 @@
 
     /* Certs & Hobbies */
     .ch-card {
+      position: relative;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 1rem;
+      overflow: hidden;
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
     }
+    .ch-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), transparent 65%);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .ch-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+    .ch-card:hover::before { opacity: 1; }
     .ch-header { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.7rem; }
     .ch-icon-wrap {
       width: 36px; height: 36px;
@@ -706,7 +724,9 @@
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       padding: 0.65rem 0.75rem;
+      transition: border-color var(--transition), transform var(--transition);
     }
+    .hobby-tile:hover { border-color: var(--green); transform: translateY(-2px); }
     .hobby-tile i { font-size: 1.2rem; color: var(--green); margin-bottom: 0.2rem; }
     .htile-label { font-size: 0.79rem; font-weight: 700; margin-bottom: 0.2rem; }
     .htile-tags { display: flex; flex-wrap: wrap; gap: 0.25rem; }
@@ -1674,6 +1694,11 @@
               <p class="role-tile-title">Graphic Designer</p>
               <p class="role-tile-desc">UI/UX and visual design across web, branding, and print — from concepts to polished mockups.</p>
             </div>
+            <div class="role-tile">
+              <div class="role-tile-icon"><i class="fas fa-swatchbook"></i></div>
+              <p class="role-tile-title">UI/UX Designer</p>
+              <p class="role-tile-desc">Wireframes, prototypes, and interface design grounded in usability — designing experiences, not just screens.</p>
+            </div>
           </div>
         </div>
       
@@ -1887,7 +1912,7 @@
     <!-- Sub-tab bar -->
     <div class="works-subtab-bar">
       <button class="works-subtab active" data-panel="panel-projects">
-        <i class="fas fa-folder-open"></i> Projects <span class="stab-count">10</span>
+        <i class="fas fa-folder-open"></i> Projects <span class="stab-count">11</span>
       </button>
       <button class="works-subtab" data-panel="panel-designs">
         <i class="fas fa-pen-ruler"></i> Designs <span class="stab-count">14</span>
@@ -1902,7 +1927,7 @@
 
       <div class="section-heading">
         <h2>Project Portfolio</h2>
-        <span class="sh-count">10 Works</span>
+        <span class="sh-count">11 Works</span>
       </div>
       <p class="portfolio-intro">A collection of web apps, systems, and tools I've built and tested — click any project to open its case study, repo, or documentation.</p>
 
@@ -2162,7 +2187,7 @@
 
   /* ==================== HERO ROLE ROTATOR ==================== */
   (function(){
-    const roles = ['Software QA Analyst', 'IT Admin / Technical Support', 'Virtual Assistant', 'Graphic Designer'];
+    const roles = ['Software QA Analyst', 'IT Admin / Technical Support', 'Virtual Assistant', 'Graphic Designer', 'UI/UX Designer'];
     const el = document.getElementById('heroRoles');
     if (!el) return;
     let i = 0;
@@ -2289,6 +2314,14 @@
       desc: "A PHP Lavalust framework build of the PanChitan ni Unchang online ordering platform, covering menu browsing and order placement for the local Filipino restaurant.",
       stack: [['fab fa-php','PHP'],['fas fa-layer-group','Lavalust'],['fas fa-database','MySQL']],
       link: "https://github.com/mahamen/PANCHITANLAVALUST"
+    },
+    {
+      cover: 'assets/images/cover-mushroom.png',
+      icon: 'fa-seedling', category: "IoT / Hardware",
+      title: "Mushroom Cultivation Monitoring System",
+      desc: "A group IoT project that senses humidity and temperature inside a mushroom growing container, displays live readings on an LCD, logs data to MySQL, and auto-triggers a water pump and cooling fan to keep conditions optimal.",
+      stack: [['fas fa-microchip','Wemos D1 R1'],['fas fa-temperature-half','DHT11'],['fas fa-database','MySQL'],['fas fa-wifi','ESP8266 WiFi']],
+      link: "assets/files/MushroomCultivationMonitoringSystem.pdf"
     }
   ];
 
