@@ -788,18 +788,22 @@
     .pc-cover {
       width: calc(100% + 2rem);
       margin: -0.9rem -1rem 0.75rem;
-      height: 132px;
+      aspect-ratio: 16 / 10;
       overflow: hidden;
       position: relative;
       background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .pc-cover img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      object-position: center;
       transition: transform 0.45s cubic-bezier(0.2,0.8,0.2,1);
     }
-    .project-card:hover .pc-cover img { transform: scale(1.06); }
+    .project-card:hover .pc-cover img { transform: scale(1.04); }
     .pc-cover-fallback {
       width: 100%; height: 100%;
       display: flex; align-items: center; justify-content: center;
@@ -2310,8 +2314,8 @@
   const portfolioDesigns = [
     { file: 'assets/images/6.png',  title: 'iLoveMilkTea Ordering System', category: 'UI/UX Design',            featured: true, pdf: 'assets/files/ilovemilktea.pdf' },
     { file: 'assets/images/9.png',  title: 'MinSU VAS — Venue System',     category: 'UI/UX Design',                             pdf: 'assets/files/minsuvas.pdf' },
-    { file: 'assets/images/13.png', title: 'PanChitan ni Unchang — Wix Design',      category: 'UI/UX Design',                   pdf: 'assets/files/panchitanwix.pdf' },
-    { file: 'assets/images/14.png', title: 'PanChitan ni Unchang — Lavalust Design', category: 'UI/UX Design',                   pdf: 'assets/files/panchitanlava.pdf' },
+    { file: 'assets/images/cover-panchitan-ecommerce.png', title: 'PanChitan ni Unchang — Wix Design',      category: 'UI/UX Design',                   pdf: 'assets/files/panchitanwix.pdf' },
+    { file: 'assets/images/cover-panchitan-lavalust.jpg', title: 'PanChitan ni Unchang — Lavalust Design', category: 'UI/UX Design',                   pdf: 'assets/files/panchitanlava.pdf' },
     { file: 'assets/images/8.png',  title: 'E-DonateMo Dashboard',         category: 'UI/UX Design',                             pdf: 'assets/files/edonatemo.pdf' },
     { file: 'assets/images/5.png',  title: 'Book For Life — Brand Kit',    category: 'Branding & Social Media' },
     { file: 'assets/images/12.png', title: 'Instagram Post Design',        category: 'Social Media Design',      featured: true, pdf: 'assets/files/instagrampost.pdf' },
