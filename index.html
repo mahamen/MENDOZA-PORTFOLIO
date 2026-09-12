@@ -430,189 +430,294 @@ section+section{border-top:1px solid var(--line)}
 .view-all-btn:hover i{transform:translate(2px,-2px)}
 
 /* ============================================================
-   07 DESIGN ARCHIVE — CREATIVE MASONRY / TILT / GRADIENT BORDERS
+   07 DESIGN ARCHIVE — EDITORIAL STAGGERED LAYOUT
    ============================================================ */
-.archive-intro{font-size:0.92rem;line-height:1.65;color:var(--ink-dim);max-width:60ch;margin-bottom:2rem}
+.archive-intro{font-size:0.92rem;line-height:1.65;color:var(--ink-dim);max-width:60ch;margin-bottom:2.4rem}
 
-/* Masonry-style grid using CSS columns for organic feel */
-.archive-grid{
-  column-count:4;
-  column-gap:1.1rem;
+/* Asymmetric editorial grid — 12 columns for flexible placement */
+.archive-editorial{
+  display:grid;
+  grid-template-columns:repeat(12, 1fr);
+  gap:1.4rem 1.2rem;
+  position:relative;
 }
-@media(max-width:1000px){.archive-grid{column-count:3}}
-@media(max-width:700px){.archive-grid{column-count:2}}
-@media(max-width:420px){.archive-grid{column-count:1}}
 
 .archive-item{
   cursor:pointer;
-  break-inside:avoid;
-  margin-bottom:1.1rem;
-  display:block;
+  position:relative;
   opacity:0;
-  transform:translateY(20px) scale(0.96);
-  animation:archiveIn .6s var(--ease) forwards;
+  transform:translateY(24px);
+  animation:archiveIn .7s var(--ease) forwards;
 }
 @keyframes archiveIn{
-  to{opacity:1;transform:translateY(0) scale(1)}
+  to{opacity:1;transform:translateY(0)}
 }
 /* Staggered delays */
-.archive-item:nth-child(1){animation-delay:.04s}
-.archive-item:nth-child(2){animation-delay:.08s}
-.archive-item:nth-child(3){animation-delay:.12s}
-.archive-item:nth-child(4){animation-delay:.16s}
-.archive-item:nth-child(5){animation-delay:.20s}
-.archive-item:nth-child(6){animation-delay:.24s}
-.archive-item:nth-child(7){animation-delay:.28s}
-.archive-item:nth-child(8){animation-delay:.32s}
-.archive-item:nth-child(9){animation-delay:.36s}
-.archive-item:nth-child(10){animation-delay:.40s}
-.archive-item:nth-child(11){animation-delay:.44s}
-.archive-item:nth-child(12){animation-delay:.48s}
-.archive-item:nth-child(13){animation-delay:.52s}
-.archive-item:nth-child(14){animation-delay:.56s}
+.archive-item:nth-child(1){animation-delay:.05s}
+.archive-item:nth-child(2){animation-delay:.10s}
+.archive-item:nth-child(3){animation-delay:.15s}
+.archive-item:nth-child(4){animation-delay:.20s}
+.archive-item:nth-child(5){animation-delay:.25s}
+.archive-item:nth-child(6){animation-delay:.30s}
+.archive-item:nth-child(7){animation-delay:.35s}
+.archive-item:nth-child(8){animation-delay:.40s}
 
-/* The frame — gradient border wrapper with 3D tilt */
+/* ==== UNIQUE SPANS PER ITEM (asymmetric magazine feel) ==== */
+/* Item 1 — large hero left */
+.archive-item:nth-child(1){grid-column:span 7;grid-row:span 2}
+/* Item 2 — tall narrow right */
+.archive-item:nth-child(2){grid-column:span 5;grid-row:span 1}
+/* Item 3 — tall narrow right */
+.archive-item:nth-child(3){grid-column:span 5;grid-row:span 1}
+/* Item 4 — medium left */
+.archive-item:nth-child(4){grid-column:span 5;grid-row:span 1}
+/* Item 5 — medium middle */
+.archive-item:nth-child(5){grid-column:span 4;grid-row:span 1}
+/* Item 6 — wide right */
+.archive-item:nth-child(6){grid-column:span 3;grid-row:span 1}
+/* Item 7 — wide center */
+.archive-item:nth-child(7){grid-column:span 6;grid-row:span 1}
+/* Item 8 — narrow right */
+.archive-item:nth-child(8){grid-column:span 6;grid-row:span 1}
+
+/* Responsive collapse */
+@media(max-width:1000px){
+  .archive-item:nth-child(n){grid-column:span 6;grid-row:span 1}
+  .archive-item:nth-child(1){grid-column:span 12;grid-row:span 1}
+  .archive-item:nth-child(2),
+  .archive-item:nth-child(3),
+  .archive-item:nth-child(6),
+  .archive-item:nth-child(8){grid-column:span 6}
+}
+@media(max-width:640px){
+  .archive-item:nth-child(n){grid-column:span 12 !important;grid-row:span 1 !important}
+}
+
+/* Frame — editorial card with corner accents */
 .archive-frame{
   position:relative;
-  border-radius:12px;
-  padding:2px;
-  background:linear-gradient(135deg, rgba(238,242,238,0.10), rgba(238,242,238,0.03));
-  transition:background .5s var(--ease), transform .5s var(--ease), box-shadow .5s var(--ease);
-  transform-style:preserve-3d;
-  perspective:800px;
-  box-shadow:0 4px 20px -10px rgba(0,0,0,0.5);
+  overflow:hidden;
+  background:var(--moss);
+  border:1px solid var(--line);
+  box-shadow:0 8px 24px -14px rgba(0,0,0,0.6);
+  transition:border-color .4s var(--ease), box-shadow .4s var(--ease), transform .5s var(--ease);
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  min-height:280px;
+  aspect-ratio:auto;
 }
+/* Corner accents — animated L-shaped brackets */
+.archive-frame::before,
+.archive-frame::after{
+  content:'';
+  position:absolute;
+  width:26px;height:26px;
+  border-color:var(--signal);
+  border-style:solid;
+  opacity:0;
+  transition:opacity .4s var(--ease), transform .4s var(--ease);
+  z-index:4;
+  pointer-events:none;
+}
+.archive-frame::before{
+  top:10px;left:10px;
+  border-width:2px 0 0 2px;
+  transform:translate(-6px,-6px);
+}
+.archive-frame::after{
+  bottom:10px;right:10px;
+  border-width:0 2px 2px 0;
+  transform:translate(6px,6px);
+}
+.archive-item:hover .archive-frame::before{opacity:1;transform:translate(0,0)}
+.archive-item:hover .archive-frame::after{opacity:1;transform:translate(0,0)}
+
 .archive-item:hover .archive-frame{
-  background:linear-gradient(135deg, var(--signal), var(--violet), var(--cyan));
-  transform:translateY(-6px) rotateX(2deg) rotateY(-2deg) scale(1.02);
-  box-shadow:0 28px 50px -20px rgba(73,224,138,0.4), 0 0 0 1px rgba(73,224,138,0.2);
+  border-color:var(--signal-line);
+  transform:translateY(-5px);
+  box-shadow:0 24px 48px -20px rgba(73,224,138,0.4), 0 0 0 1px rgba(73,224,138,0.15);
 }
+
+/* Image container — fills the frame, varies aspect per slot */
 .archive-frame-inner{
   position:relative;
   overflow:hidden;
-  border-radius:10px;
-  background:var(--moss);
-  aspect-ratio:4/5;
+  flex:1;
+  background:var(--pine-2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 .archive-frame-inner img{
-  width:100%;height:100%;object-fit:contain;padding:0.6rem;
-  transition:transform .8s var(--ease);
-  transform-origin:center;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .8s var(--ease), filter .5s ease;
+  filter:brightness(0.92) saturate(0.95);
 }
 .archive-item:hover .archive-frame-inner img{
-  transform:scale(1.08) rotate(0.5deg);
+  transform:scale(1.06);
+  filter:brightness(1.02) saturate(1.05);
 }
+/* Special: first item uses contain to show full design */
+.archive-item:nth-child(1) .archive-frame-inner img{object-fit:contain;padding:1.2rem;background:var(--pine-2);}
 
-/* Number badge — floats top-left, morphs on hover */
+/* Number badge — large, floating, semi-transparent */
 .archive-badge{
   position:absolute;top:0.7rem;left:0.7rem;
-  font-family:var(--mono);font-size:0.62rem;font-weight:600;
+  font-family:var(--serif-display);
+  font-size:0.7rem;font-weight:700;
+  letter-spacing:0.04em;
   color:var(--ink-dim);
-  background:rgba(6,9,7,0.7);
-  backdrop-filter:blur(6px);
-  padding:0.18rem 0.5rem;
-  border-radius:20px;
+  background:rgba(6,9,7,0.55);
+  backdrop-filter:blur(8px);
+  padding:0.3rem 0.6rem;
+  border-radius:3px;
   border:1px solid rgba(238,242,238,0.08);
   transition:all .4s var(--ease);
-  z-index:2;
+  z-index:5;
 }
 .archive-item:hover .archive-badge{
-  color:#04160c;
-  background:var(--signal);
-  border-color:var(--signal);
-  transform:translateX(2px) scale(1.05);
+  color:var(--signal);
+  background:rgba(6,9,7,0.85);
+  border-color:var(--signal-line);
+  letter-spacing:0.08em;
 }
 
-/* PDF badge — animated corner ribbon */
+/* PDF badge — vertical tab on right side */
 .archive-pdf{
-  position:absolute;top:0.7rem;right:0.7rem;
-  font-family:var(--mono);font-size:0.6rem;font-weight:700;
+  position:absolute;top:50%;right:0;
+  transform:translateY(-50%) translateX(0);
+  font-family:var(--mono);font-size:0.58rem;font-weight:700;
+  letter-spacing:0.1em;
   color:#04160c;
   background:linear-gradient(135deg,var(--signal),var(--signal-deep));
-  padding:0.2rem 0.5rem;
-  border-radius:4px;
-  display:flex;gap:0.25rem;align-items:center;
-  box-shadow:0 4px 12px -4px rgba(73,224,138,0.5);
-  z-index:2;
-  animation:pdfPulse 2.5s ease-in-out infinite;
+  padding:0.5rem 0.35rem;
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  display:flex;gap:0.35rem;align-items:center;
+  border-radius:3px 0 0 3px;
+  box-shadow:-4px 0 16px -4px rgba(73,224,138,0.6);
+  z-index:5;
+  transition:transform .4s var(--ease), padding .3s ease;
 }
-@keyframes pdfPulse{
-  0%,100%{box-shadow:0 4px 12px -4px rgba(73,224,138,0.5)}
-  50%{box-shadow:0 4px 18px -2px rgba(73,224,138,0.8)}
-}
+.archive-pdf i{transform:rotate(90deg);font-size:0.7rem}
+.archive-item:hover .archive-pdf{transform:translateY(-50%) translateX(-3px);}
 
-/* Overlay — radial gradient with floating "View" pill */
+/* Overlay — bottom sliding info */
 .archive-overlay{
-  position:absolute;inset:0;
-  background:radial-gradient(circle at center bottom, rgba(6,9,7,0.9), rgba(6,9,7,0.4) 60%, transparent 80%);
-  display:flex;align-items:flex-end;justify-content:center;
-  padding-bottom:1.2rem;
+  position:absolute;left:0;right:0;bottom:0;
+  background:linear-gradient(to top, rgba(6,9,7,0.95), rgba(6,9,7,0.7) 60%, transparent);
+  padding:1.4rem 1rem 0.9rem;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:0.7rem;
   opacity:0;
-  transition:opacity .4s ease;
-  z-index:1;
+  transform:translateY(20px);
+  transition:opacity .4s ease, transform .4s var(--ease);
+  z-index:3;
 }
-.archive-item:hover .archive-overlay{opacity:1}
+.archive-item:hover .archive-overlay{opacity:1;transform:translateY(0)}
+.archive-overlay .ov-title{
+  font-family:var(--serif-display);
+  font-size:0.82rem;font-weight:700;
+  color:var(--ink);
+  line-height:1.3;
+  flex:1;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.archive-overlay .ov-cat{
+  font-family:var(--mono);font-size:0.6rem;
+  color:var(--signal);
+  letter-spacing:0.05em;
+  display:block;
+  margin-top:0.15rem;
+}
 .archive-view{
-  font-size:0.7rem;font-weight:700;letter-spacing:0.02em;
+  font-family:var(--mono);
+  font-size:0.6rem;font-weight:700;
+  letter-spacing:0.05em;
   color:#04160c;
   background:var(--signal);
-  border:none;
-  padding:0.45rem 1rem;
-  border-radius:30px;
-  display:inline-flex;align-items:center;gap:0.4rem;
-  box-shadow:0 8px 20px -8px rgba(73,224,138,0.6);
-  transform:translateY(12px);
-  transition:transform .4s var(--ease);
+  padding:0.42rem 0.7rem;
+  border-radius:3px;
+  display:inline-flex;align-items:center;gap:0.35rem;
+  flex-shrink:0;
+  transition:background .25s ease, transform .25s ease;
+  white-space:nowrap;
 }
 .archive-view::before{
   content:'\f00e';
   font-family:'Font Awesome 6 Free';
   font-weight:900;
-  font-size:0.65rem;
+  font-size:0.6rem;
 }
-.archive-item:hover .archive-view{transform:translateY(0)}
+.archive-item:hover .archive-view{background:#5aeb98;transform:translateY(-1px)}
 
-/* Info below the frame */
+/* Info strip below frame (only shown when not hovering to keep it clean) */
 .archive-info{
-  margin-top:0.65rem;
-  display:flex;gap:0.5rem;align-items:flex-start;
+  margin-top:0.7rem;
+  display:flex;gap:0.5rem;align-items:baseline;
   padding:0 0.2rem;
+  transition:opacity .3s ease;
 }
+.archive-item:hover .archive-info{opacity:0.6}
 .archive-info .num{
   color:var(--signal);
-  flex-shrink:0;
+  font-family:var(--mono);
   font-size:0.68rem;
   font-weight:600;
-  padding-top:0.15rem;
-  transition:transform .3s var(--ease);
+  flex-shrink:0;
 }
-.archive-item:hover .archive-info .num{transform:translateX(2px)}
 .archive-title{
-  font-size:0.8rem;font-weight:700;line-height:1.35;
+  font-family:var(--serif-display);
+  font-size:0.85rem;font-weight:700;line-height:1.3;
   transition:color .25s ease;
   margin-bottom:0.1rem;
 }
-.archive-item:hover .archive-title{color:var(--signal)}
-.archive-cat{font-size:0.68rem;color:var(--ink-faint);letter-spacing:0.01em;transition:color .25s ease}
-.archive-item:hover .archive-cat{color:var(--ink-dim)}
-
-/* Floating sparkles on hover (pseudo-element on frame) */
-.archive-frame::after{
-  content:'';
-  position:absolute;inset:0;
-  border-radius:12px;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(73,224,138,0.35) 0, transparent 25%),
-    radial-gradient(circle at 80% 70%, rgba(167,139,250,0.3) 0, transparent 25%);
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .5s ease;
-  z-index:3;
+.archive-cat{
+  font-size:0.68rem;
+  color:var(--ink-faint);
+  font-family:var(--mono);
+  letter-spacing:0.02em;
 }
-.archive-item:hover .archive-frame::after{opacity:1}
+
+/* Decorative label — rotated category tag inside frame top-right (only on 1st and 5th items) */
+.archive-item:nth-child(1) .archive-frame-inner::after,
+.archive-item:nth-child(5) .archive-frame-inner::after{
+  content:attr(data-label);
+  position:absolute;
+  top:0.7rem;right:0.7rem;
+  font-family:var(--mono);
+  font-size:0.55rem;
+  letter-spacing:0.12em;
+  color:var(--signal);
+  background:rgba(6,9,7,0.7);
+  padding:0.25rem 0.5rem;
+  border:1px solid var(--signal-line);
+  text-transform:uppercase;
+  z-index:5;
+}
 
 /* View All button row */
-.view-all-wrap{display:flex;justify-content:center;margin-top:1.6rem}
+.view-all-wrap{display:flex;justify-content:center;margin-top:2rem}
+
+/* ==== MODAL version — also editorially staggered ==== */
+.modal-archive-grid{
+  display:grid;
+  grid-template-columns:repeat(12, 1fr);
+  gap:1.2rem 1rem;
+}
+.modal-archive-grid .archive-item:nth-child(n){grid-column:span 4;grid-row:span 1}
+.modal-archive-grid .archive-item:nth-child(6n+1){grid-column:span 6}
+.modal-archive-grid .archive-item:nth-child(6n+4){grid-column:span 6}
+@media(max-width:900px){
+  .modal-archive-grid .archive-item:nth-child(n){grid-column:span 6}
+}
+@media(max-width:520px){
+  .modal-archive-grid .archive-item:nth-child(n){grid-column:span 12}
+}
 
 /* ============================================================
    08 CREATIVE WORK
@@ -727,7 +832,7 @@ footer{padding:1.8rem 0 2.5rem;text-align:left;font-family:var(--mono);font-size
 
 .skills-modal{background:rgba(4,6,5,0.92);z-index:9998}
 .skills-card{width:100%;max-width:600px;max-height:82vh;background:var(--pine-2);border:1px solid var(--line-strong);display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--shadow-lg)}
-.skills-card.browse-card{max-width:1000px;max-height:88vh}
+.skills-card.browse-card{max-width:1100px;max-height:88vh}
 .skills-head{display:flex;align-items:center;gap:0.7rem;padding:1.15rem 1.3rem;border-bottom:1px solid var(--line)}
 .skills-head h3{font-family:var(--serif-display);font-size:1rem;font-weight:700;flex:1}
 .skills-body{padding:1.15rem 1.3rem 1.4rem;overflow-y:auto;scroll-behavior:smooth;}
@@ -735,16 +840,6 @@ footer{padding:1.8rem 0 2.5rem;text-align:left;font-family:var(--mono);font-size
 .modal-work-list .work-row{padding:1.6rem 0.6rem;margin:0 -0.6rem}
 .modal-work-list .work-row:first-child{border-top:none}
 @media(max-width:700px){.modal-work-list .work-row,.modal-work-list .work-row:nth-child(even){grid-template-columns:1fr}.modal-work-list .work-row:nth-child(even) .work-media{order:0}}
-
-/* Modal archive grid — keep the creative masonry feel */
-.modal-archive-grid{
-  column-count:4;
-  column-gap:1rem;
-}
-@media(max-width:900px){.modal-archive-grid{column-count:3}}
-@media(max-width:640px){.modal-archive-grid{column-count:2}}
-@media(max-width:420px){.modal-archive-grid{column-count:1}}
-.modal-archive-grid .archive-item{break-inside:avoid;margin-bottom:1rem;display:block}
 
 /* Skills modal grid */
 .skills-modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem 2.2rem}
@@ -754,7 +849,7 @@ footer{padding:1.8rem 0 2.5rem;text-align:left;font-family:var(--mono);font-size
 .skills-modal-block .cap-list span{font-size:0.8rem;}
 
 /* ============================================================
-   CREATIVE EXTRAS
+   CREATIVE EXTRAS (cursor glow removed)
    ============================================================ */
 .orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;opacity:0.4;animation:float 18s ease-in-out infinite}
 .orb-1{width:320px;height:320px;background:radial-gradient(circle,rgba(73,224,138,0.18),transparent 70%);top:12%;right:-80px}
@@ -802,16 +897,6 @@ section+section::before{
   50%{opacity:0.6}
 }
 
-.cursor-glow{
-  position:fixed;width:400px;height:400px;border-radius:50%;
-  background:radial-gradient(circle,rgba(73,224,138,0.06),transparent 70%);
-  pointer-events:none;z-index:1;
-  transform:translate(-50%,-50%);
-  transition:opacity .4s ease;
-  opacity:0;
-}
-@media(prefers-reduced-motion:reduce){.cursor-glow{display:none}}
-
 .interest-tags span{position:relative;overflow:hidden}
 .interest-tags span::before{
   content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
@@ -839,7 +924,6 @@ section+section::before{
   .hobby-card{padding:0.95rem 0.8rem;}
   section[id]::before{font-size:3.5rem;}
   .orb{display:none}
-  .archive-grid{column-count:2;}
 }
 </style>
 </head>
@@ -849,7 +933,6 @@ section+section::before{
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
-<div class="cursor-glow" id="cursorGlow"></div>
 
 <!-- ============ DESKTOP INDEX NAV ============ -->
 <nav class="index-nav" aria-label="Section navigation">
@@ -1053,11 +1136,11 @@ section+section::before{
     </div>
   </section>
 
-  <!-- ============ 06 DESIGN ARCHIVE (CREATIVE) ============ -->
+  <!-- ============ 06 DESIGN ARCHIVE (EDITORIAL STAGGERED) ============ -->
   <section id="designs" data-num="06">
     <div class="section-head" data-reveal><h2>Design Archive</h2><span class="section-tag">14 pieces — 06 / 09</span></div>
-    <p class="archive-intro">UI/UX, branding, and visual design work — hover to feel the gradient shift, click any piece to view it full-size, or open the PDF where available.</p>
-    <div class="archive-grid" id="archiveGrid"></div>
+    <p class="archive-intro">UI/UX, branding, and visual design work — arranged as an editorial spread so each piece gets room to breathe. Click any design to view full-size, or open the PDF where available.</p>
+    <div class="archive-editorial" id="archiveGrid"></div>
     <div class="view-all-wrap">
       <button class="btn btn-line view-all-btn" onclick="openDesignsModal()">View All Designs <i class="fas fa-arrow-up-right-from-square"></i></button>
     </div>
@@ -1324,23 +1407,6 @@ document.querySelectorAll('[data-reveal]').forEach(el=>revealObserver.observe(el
 function openAvatarModal(){ openLightbox(['assets/images/MENDOZA_PICTURE.jpg'],0,['Maria Hanah G. Mendoza']); }
 function openDiploma(){ openLightbox(['assets/images/MENDOZA_DIPLOMA.jpg'],0,['Cum Laude Diploma — Maria Hanah G. Mendoza']); }
 
-/* ============ CURSOR GLOW ============ */
-(function(){
-  const glow = document.getElementById('cursorGlow');
-  if(!glow) return;
-  let raf = null;
-  document.addEventListener('mousemove', (e)=>{
-    if(raf) return;
-    raf = requestAnimationFrame(()=>{
-      glow.style.left = e.clientX + 'px';
-      glow.style.top = e.clientY + 'px';
-      glow.style.opacity = '1';
-      raf = null;
-    });
-  });
-  document.addEventListener('mouseleave', ()=>{ glow.style.opacity = '0'; });
-})();
-
 /* ============ PROJECTS DATA ============ */
 const projects = [
   { cover:'assets/images/cover-rms-inventory.png', icon:'fa-robot', category:'Capstone Project', title:"RM'S: AI Inventory",
@@ -1423,11 +1489,11 @@ function openWorkModal(){
 
 /* ============ DESIGN ARCHIVE DATA ============ */
 const designs = [
-  { file:'assets/images/6.png', title:'iLoveMilkTea Ordering System', category:'UI/UX Design', pdf:'assets/files/ilovemilktea.pdf' },
+  { file:'assets/images/6.png', title:'iLoveMilkTea Ordering System', category:'UI/UX Design', pdf:'assets/files/ilovemilktea.pdf', label:'FEATURED' },
   { file:'assets/images/9.png', title:'MinSU VAS — Venue System', category:'UI/UX Design', pdf:'assets/files/minsuvas.pdf' },
   { file:'assets/images/cover-panchitan-ecommerce.png', title:'PanChitan ni Unchang — Wix Design', category:'UI/UX Design', pdf:'assets/files/panchitanwix.pdf' },
   { file:'assets/images/cover-panchitan-lavalust.jpg', title:'PanChitan ni Unchang — Lavalust Design', category:'UI/UX Design', pdf:'assets/files/panchitanlava.pdf' },
-  { file:'assets/images/8.png', title:'E-DonateMo Dashboard', category:'UI/UX Design', pdf:'assets/files/edonatemo.pdf' },
+  { file:'assets/images/8.png', title:'E-DonateMo Dashboard', category:'UI/UX Design', pdf:'assets/files/edonatemo.pdf', label:'DASHBOARD' },
   { file:'assets/images/5.png', title:'Book For Life — Brand Kit', category:'Branding & Social Media' },
   { file:'assets/images/12.png', title:'Instagram Post Design', category:'Social Media Design', pdf:'assets/files/instagrampost.pdf' },
   { file:'assets/images/3.png', title:'CyberShield Webinar Poster', category:'Event Poster' },
@@ -1443,14 +1509,18 @@ const DESIGN_PREVIEW_COUNT = 8;
 function archiveItemHTML(d,i,total){
   const num = String(i+1).padStart(2,'0');
   const pdfBadge = d.pdf ? `<span class="archive-pdf"><i class="fas fa-file-pdf"></i> PDF</span>` : '';
+  const labelAttr = d.label ? `data-label="${d.label}"` : '';
   return `
     <div class="archive-item" onclick="openDesign(${i})">
       <div class="archive-frame">
-        <div class="archive-frame-inner">
+        <div class="archive-frame-inner" ${labelAttr}>
           <span class="archive-badge">${num} / ${total}</span>
           ${pdfBadge}
           <img src="${d.file}" alt="${d.title}" loading="lazy">
-          <div class="archive-overlay"><span class="archive-view">${d.pdf ? 'Open PDF' : 'View Design'}</span></div>
+          <div class="archive-overlay">
+            <div class="ov-title">${d.title}<span class="ov-cat">${d.category}</span></div>
+            <span class="archive-view">${d.pdf ? 'Open PDF' : 'View'}</span>
+          </div>
         </div>
       </div>
       <div class="archive-info">
