@@ -36,10 +36,12 @@
   --mono:'JetBrains Mono',monospace;
   --max:1180px;
   --ease:cubic-bezier(0.22,1,0.36,1);
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
   --shadow-sm:0 1px 2px rgba(0,0,0,0.24);
   --shadow-md:0 12px 28px -12px rgba(0,0,0,0.45);
   --shadow-lg:0 24px 48px -18px rgba(0,0,0,0.55);
   --shadow-glow:0 0 0 1px var(--signal-line),0 16px 32px -16px rgba(73,224,138,0.28);
+  --shadow-glow-strong:0 0 0 2px var(--signal-line),0 20px 40px -16px rgba(73,224,138,0.45);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -109,7 +111,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 .index-item:hover{color:var(--ink);background:rgba(238,242,238,0.035);padding-left:1.05rem}
 .index-item.active{color:var(--signal);border-left-color:var(--signal);background:var(--signal-dim)}
 .index-item.active .num{color:var(--signal)}
-.index-foot{font-family:var(--mono);font-size:0.68rem;color:var(--ink-faint);padding-left:0.85rem;line-height:1.7}
+.index-foot{font-family:var(--mono);font-size:0.68rem;color:var(--ink-faint);padding-left:0.85rem;line-height:1.7;text-align:center;}
 .index-foot a{transition:color .2s ease}
 .index-foot a:hover{color:var(--signal)}
 
@@ -188,7 +190,7 @@ section+section{border-top:1px solid var(--line)}
 .btn i{transition:transform .3s var(--ease)}
 .btn:hover i{transform:translateX(2px)}
 .btn-fill{background:var(--signal);color:#04160c;box-shadow:0 1px 0 rgba(0,0,0,0.15) inset}
-.btn-fill:hover{transform:translateY(-2px);background:#5aeb98;box-shadow:var(--shadow-glow)}
+.btn-fill:hover{transform:translateY(-2px);background:#5aeb98;box-shadow:var(--shadow-glow-strong)}
 .btn-fill:active{transform:translateY(0)}
 .btn-line{border:1px solid var(--line-strong);color:var(--ink)}
 .btn-line:hover{border-color:var(--signal);color:var(--signal);transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(73,224,138,0.35)}
@@ -203,7 +205,7 @@ section+section{border-top:1px solid var(--line)}
   box-shadow:var(--shadow-lg);
   transition:border-color .3s ease,box-shadow .3s ease,transform .4s var(--ease);
 }
-.intro-frame:hover{border-color:var(--signal-line);transform:translateY(-3px)}
+.intro-frame:hover{border-color:var(--signal-line);transform:translateY(-3px);box-shadow:var(--shadow-glow-strong)}
 .intro-frame img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .6s var(--ease)}
 .intro-frame:hover img{transform:scale(1.045)}
 .intro-frame-tag{
@@ -245,40 +247,59 @@ section+section{border-top:1px solid var(--line)}
 .role-row h3{font-size:0.98rem;font-weight:700;margin-bottom:0.3rem}
 .role-row p{font-size:0.84rem;line-height:1.55;color:var(--ink-dim);max-width:56ch}
 
-.workstyle-block{margin-top:2.5rem}
-.workstyle-block h3{font-family:var(--serif-display);font-size:1.1rem;font-weight:700;margin-bottom:1.2rem}
-.ws-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem 1.6rem}
-@media(max-width:560px){.ws-grid{grid-template-columns:1fr}}
-.ws-item{display:flex;gap:0.65rem;padding:0.15rem;border-radius:6px;transition:transform .25s var(--ease)}
-.ws-item:hover{transform:translateX(3px)}
-.ws-item i{color:var(--signal);margin-top:0.2rem;font-size:0.85rem;flex-shrink:0;transition:transform .25s var(--ease)}
-.ws-item:hover i{transform:scale(1.2)}
-.ws-item h4{font-size:0.86rem;font-weight:700;margin-bottom:0.18rem}
-.ws-item p{font-size:0.78rem;color:var(--ink-dim);line-height:1.55}
-
 .interest-tags{display:flex;flex-wrap:wrap;gap:0.45rem;margin-top:1.15rem}
 .interest-tags span{font-size:0.74rem;font-weight:600;padding:0.32rem 0.75rem;border:1px solid var(--line-strong);border-radius:20px;color:var(--ink-dim);transition:border-color .25s ease,color .25s ease,transform .25s ease}
 .interest-tags span:hover{border-color:var(--signal-line);color:var(--signal);transform:translateY(-1px)}
 
-/* hobbies strip */
-.hobby-strip{margin-top:2.7rem;padding-top:1.9rem;border-top:1px solid var(--line)}
-.hobby-strip h3{font-family:var(--serif-display);font-size:1.05rem;font-weight:700;margin-bottom:1.1rem}
-.hobby-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem}
-@media(max-width:700px){.hobby-cols{grid-template-columns:1fr 1fr}}
-.hobby-col b{display:flex;align-items:center;gap:0.5rem;font-size:0.84rem;font-weight:700;margin-bottom:0.5rem}
-.hobby-col b i{color:var(--signal);transition:transform .25s var(--ease)}
-.hobby-col:hover b i{transform:rotate(-8deg) scale(1.1)}
-.hobby-col ul{list-style:none;display:flex;flex-direction:column;gap:0.25rem}
-.hobby-col li{font-size:0.78rem;color:var(--ink-dim);transition:color .2s ease}
-.hobby-col:hover li{color:var(--ink)}
-.hobby-insights{display:flex;gap:1.7rem;margin-top:1.4rem;flex-wrap:wrap}
-.hobby-insight{display:flex;gap:0.55rem;max-width:32ch}
-.hobby-insight i{color:var(--signal);font-size:0.85rem;margin-top:0.2rem}
-.hobby-insight h5{font-size:0.8rem;font-weight:700;margin-bottom:0.18rem}
-.hobby-insight p{font-size:0.75rem;line-height:1.55;color:var(--ink-dim)}
+/* ============================================================
+   03 WORK STYLE (separate section)
+   ============================================================ */
+.workstyle-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem}
+@media(max-width:640px){.workstyle-grid{grid-template-columns:1fr}}
+.ws-item{
+  display:flex;gap:1rem;padding:1.4rem 1.2rem;border:1px solid var(--line);
+  border-radius:8px;background:rgba(238,242,238,0.015);
+  transition:border-color .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease),background .3s ease;
+}
+.ws-item:hover{
+  border-color:var(--signal-line);transform:translateY(-3px);
+  box-shadow:0 16px 32px -18px rgba(73,224,138,0.35);
+  background:rgba(73,224,138,0.03);
+}
+.ws-item i{color:var(--signal);margin-top:0.2rem;font-size:1.1rem;flex-shrink:0;transition:transform .3s var(--ease)}
+.ws-item:hover i{transform:scale(1.2) rotate(-4deg)}
+.ws-item h4{font-size:0.9rem;font-weight:700;margin-bottom:0.25rem}
+.ws-item p{font-size:0.8rem;color:var(--ink-dim);line-height:1.55}
 
 /* ============================================================
-   03 EXPERIENCE — timeline
+   04 HOBBIES (separate section)
+   ============================================================ */
+.hobby-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}
+@media(max-width:700px){.hobby-grid{grid-template-columns:1fr 1fr}}
+.hobby-card{
+  padding:1.4rem 1.1rem;border:1px solid var(--line);border-radius:8px;
+  background:rgba(238,242,238,0.015);
+  transition:border-color .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease),background .3s ease;
+}
+.hobby-card:hover{
+  border-color:var(--signal-line);transform:translateY(-3px);
+  box-shadow:0 16px 32px -18px rgba(73,224,138,0.35);
+  background:rgba(73,224,138,0.03);
+}
+.hobby-card b{display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;font-weight:700;margin-bottom:0.6rem}
+.hobby-card b i{color:var(--signal);transition:transform .3s var(--ease)}
+.hobby-card:hover b i{transform:rotate(-8deg) scale(1.15)}
+.hobby-card ul{list-style:none;display:flex;flex-direction:column;gap:0.3rem}
+.hobby-card li{font-size:0.8rem;color:var(--ink-dim);transition:color .2s ease}
+.hobby-card:hover li{color:var(--ink)}
+.hobby-insights{display:flex;gap:2rem;margin-top:1.8rem;flex-wrap:wrap}
+.hobby-insight{display:flex;gap:0.6rem;max-width:34ch}
+.hobby-insight i{color:var(--signal);font-size:0.9rem;margin-top:0.2rem}
+.hobby-insight h5{font-size:0.83rem;font-weight:700;margin-bottom:0.2rem}
+.hobby-insight p{font-size:0.78rem;line-height:1.55;color:var(--ink-dim)}
+
+/* ============================================================
+   05 EXPERIENCE — timeline
    ============================================================ */
 .timeline{display:flex;flex-direction:column}
 .tl-entry{display:grid;grid-template-columns:120px 1fr;gap:1.6rem;padding:2rem 0.9rem;margin:0 -0.9rem;border-top:1px solid var(--line);border-radius:8px;transition:background .3s ease}
@@ -309,7 +330,7 @@ section+section{border-top:1px solid var(--line)}
 .tl-note b{color:var(--signal)}
 
 /* ============================================================
-   04 CAPABILITIES — technical index
+   06 SKILLS — technical index
    ============================================================ */
 .cap-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(2rem,4vw,4rem)}
 @media(max-width:820px){.cap-grid{grid-template-columns:1fr}}
@@ -330,7 +351,7 @@ section+section{border-top:1px solid var(--line)}
 .cap-sub-label{font-size:0.66rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-faint);display:block;margin-bottom:0.32rem}
 
 /* ============================================================
-   05 SELECTED WORK — editorial project rows
+   07 SELECTED WORK — editorial project rows
    ============================================================ */
 .work-list{display:flex;flex-direction:column}
 .work-row{
@@ -377,7 +398,7 @@ section+section{border-top:1px solid var(--line)}
 .view-all-btn:hover i{transform:translate(2px,-2px)}
 
 /* ============================================================
-   06 DESIGN ARCHIVE — visual grid
+   08 DESIGN ARCHIVE — visual grid
    ============================================================ */
 .archive-intro{font-size:0.92rem;line-height:1.65;color:var(--ink-dim);max-width:60ch;margin-bottom:2.5rem}
 .archive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.2rem}
@@ -390,7 +411,7 @@ section+section{border-top:1px solid var(--line)}
 }
 .archive-frame img{width:100%;height:100%;object-fit:contain;padding:0.55rem;transition:transform .5s var(--ease)}
 .archive-item:hover .archive-frame img{transform:scale(1.065)}
-.archive-item:hover .archive-frame{border-color:var(--signal-line);box-shadow:var(--shadow-md);transform:translateY(-4px)}
+.archive-item:hover .archive-frame{border-color:var(--signal-line);box-shadow:var(--shadow-glow-strong);transform:translateY(-4px)}
 .archive-badge{position:absolute;top:0.6rem;left:0.6rem;font-family:var(--mono);font-size:0.65rem;color:var(--ink-dim);background:rgba(6,9,7,0.65);padding:0.16rem 0.48rem;transition:color .25s ease,background .25s ease}
 .archive-item:hover .archive-badge{color:var(--signal);background:rgba(6,9,7,0.85)}
 .archive-pdf{position:absolute;top:0.6rem;right:0.6rem;font-family:var(--mono);font-size:0.63rem;font-weight:700;color:#04160c;background:var(--signal);padding:0.16rem 0.48rem;display:flex;gap:0.25rem;align-items:center}
@@ -405,7 +426,7 @@ section+section{border-top:1px solid var(--line)}
 .archive-cat{font-size:0.72rem;color:var(--ink-faint)}
 
 /* ============================================================
-   07 CREATIVE / VISUAL MEDIA
+   09 CREATIVE / VISUAL MEDIA
    ============================================================ */
 .media-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(1.5rem,3vw,2.5rem)}
 @media(max-width:820px){.media-grid{grid-template-columns:1fr}}
@@ -432,10 +453,9 @@ section+section{border-top:1px solid var(--line)}
 .ig-link .h{font-size:0.75rem;font-weight:600;opacity:0.9;display:block}
 
 /* ============================================================
-   08 EDUCATION & CREDENTIALS
+   10 EDUCATION & CREDENTIALS
    ============================================================ */
-.cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,4rem)}
-@media(max-width:820px){.cred-grid{grid-template-columns:1fr}}
+.cred-grid{display:grid;grid-template-columns:1fr;gap:clamp(2rem,4vw,4rem)}
 .cred-col h3{font-family:var(--serif-display);font-size:1.1rem;font-weight:700;margin-bottom:1.25rem}
 .cert-list{display:flex;flex-direction:column}
 .cert-line{
@@ -453,7 +473,7 @@ section+section{border-top:1px solid var(--line)}
 .cert-line.honor i{color:var(--amber)}
 
 /* ============================================================
-   09 CONTACT
+   11 CONTACT
    ============================================================ */
 .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(2rem,4vw,4rem)}
 @media(max-width:820px){.contact-grid{grid-template-columns:1fr}}
@@ -505,15 +525,15 @@ footer{padding:2.2rem 0 3rem;text-align:left;font-family:var(--mono);font-size:0
 .modal-next:hover{transform:translate(3px,-50%)}
 .modal-prev{left:1rem}.modal-next{right:1rem}
 
-.pdf-modal{background:rgba(4,6,5,0.92)}
-.pdf-wrap{display:flex;flex-direction:column;gap:0.75rem;width:min(920px,94vw);height:90vh;position:relative}
-.pdf-head{display:flex;align-items:center;justify-content:space-between;gap:0.6rem}
+.pdf-modal{background:rgba(4,6,5,0.92);padding:0;}
+.pdf-wrap{display:flex;flex-direction:column;gap:0.75rem;width:100vw;height:100vh;padding:1.5rem;position:relative;}
+.pdf-head{display:flex;align-items:center;justify-content:space-between;gap:0.6rem;flex-shrink:0;}
 .pdf-title{font-family:var(--serif-display);font-size:0.92rem;font-weight:700;color:var(--ink);display:flex;gap:0.5rem;align-items:center;min-width:0}
 .pdf-title span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pdf-open{font-size:0.76rem;font-weight:700;color:var(--signal);border:1px solid var(--signal-line);padding:0.4rem 0.85rem;display:inline-flex;gap:0.4rem;align-items:center;border-radius:3px;transition:background .25s ease,color .25s ease,transform .2s ease}
 .pdf-open:hover{background:var(--signal);color:#04160c;transform:translateY(-1px)}
-.pdf-body{flex:1;min-height:0;background:#2a2a2c;border:1px solid var(--line-strong);overflow:hidden;box-shadow:var(--shadow-lg)}
-.pdf-body iframe{width:100%;height:100%;border:0}
+.pdf-body{flex:1;min-height:0;background:#2a2a2c;border:1px solid var(--line-strong);overflow:hidden;box-shadow:var(--shadow-lg);}
+.pdf-body iframe{width:100%;height:100%;border:0;display:block;}
 .pdf-actions{display:flex;gap:0.6rem;align-items:center}
 
 .skills-modal{background:rgba(4,6,5,0.92);z-index:9998}
@@ -521,7 +541,7 @@ footer{padding:2.2rem 0 3rem;text-align:left;font-family:var(--mono);font-size:0
 .skills-card.browse-card{max-width:1000px;max-height:88vh}
 .skills-head{display:flex;align-items:center;gap:0.7rem;padding:1.15rem 1.3rem;border-bottom:1px solid var(--line)}
 .skills-head h3{font-family:var(--serif-display);font-size:1rem;font-weight:700;flex:1}
-.skills-body{padding:1.15rem 1.3rem 1.4rem;overflow-y:auto}
+.skills-body{padding:1.15rem 1.3rem 1.4rem;overflow-y:auto;scroll-behavior:smooth;}
 
 .modal-work-list .work-row{padding:1.6rem 0.6rem;margin:0 -0.6rem}
 .modal-work-list .work-row:first-child{border-top:none}
@@ -532,10 +552,14 @@ footer{padding:2.2rem 0 3rem;text-align:left;font-family:var(--mono);font-size:0
   .wrap{padding:0 1.1rem}
   .intro-actions{flex-direction:column;align-items:stretch}
   .intro-actions .btn{justify-content:center}
-  .pdf-wrap{height:92vh}
+  .pdf-wrap{padding:1rem;}
   .intro-stats{gap:1.1rem}
   .archive-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:0.8rem}
   .work-row:hover,.tl-entry:hover,.cap-block:hover{background:transparent}
+  .workstyle-grid{grid-template-columns:1fr;}
+  .hobby-grid{grid-template-columns:1fr 1fr;}
+  .ws-item{padding:1.1rem 1rem;}
+  .hobby-card{padding:1.1rem 0.9rem;}
 }
 </style>
 </head>
@@ -547,17 +571,19 @@ footer{padding:2.2rem 0 3rem;text-align:left;font-family:var(--mono);font-size:0
   <div class="index-list" id="indexList">
     <a class="index-item" data-target="intro" href="#intro" aria-label="Intro"><i class="fas fa-house"></i><span class="num">00</span><span class="label">Intro</span></a>
     <a class="index-item" data-target="about" href="#about" aria-label="About"><i class="fas fa-user"></i><span class="num">01</span><span class="label">About</span></a>
-    <a class="index-item" data-target="experience" href="#experience" aria-label="Experience"><i class="fas fa-briefcase"></i><span class="num">02</span><span class="label">Experience</span></a>
-    <a class="index-item" data-target="capabilities" href="#capabilities" aria-label="Capabilities"><i class="fas fa-bolt"></i><span class="num">03</span><span class="label">Capabilities</span></a>
-    <a class="index-item" data-target="work" href="#work" aria-label="Selected Work"><i class="fas fa-diagram-project"></i><span class="num">04</span><span class="label">Selected Work</span></a>
-    <a class="index-item" data-target="designs" href="#designs" aria-label="Design Archive"><i class="fas fa-images"></i><span class="num">05</span><span class="label">Design Archive</span></a>
-    <a class="index-item" data-target="media" href="#media" aria-label="Creative Work"><i class="fas fa-film"></i><span class="num">06</span><span class="label">Creative Work</span></a>
-    <a class="index-item" data-target="credentials" href="#credentials" aria-label="Credentials"><i class="fas fa-award"></i><span class="num">07</span><span class="label">Credentials</span></a>
-    <a class="index-item" data-target="contact" href="#contact" aria-label="Contact"><i class="fas fa-envelope"></i><span class="num">08</span><span class="label">Contact</span></a>
+    <a class="index-item" data-target="workstyle" href="#workstyle" aria-label="Work Style"><i class="fas fa-gears"></i><span class="num">02</span><span class="label">Work Style</span></a>
+    <a class="index-item" data-target="hobbies" href="#hobbies" aria-label="Hobbies"><i class="fas fa-heart"></i><span class="num">03</span><span class="label">Hobbies</span></a>
+    <a class="index-item" data-target="experience" href="#experience" aria-label="Experience"><i class="fas fa-briefcase"></i><span class="num">04</span><span class="label">Experience</span></a>
+    <a class="index-item" data-target="capabilities" href="#capabilities" aria-label="Skills"><i class="fas fa-bolt"></i><span class="num">05</span><span class="label">Skills</span></a>
+    <a class="index-item" data-target="work" href="#work" aria-label="Selected Work"><i class="fas fa-diagram-project"></i><span class="num">06</span><span class="label">Selected Work</span></a>
+    <a class="index-item" data-target="designs" href="#designs" aria-label="Design Archive"><i class="fas fa-images"></i><span class="num">07</span><span class="label">Design Archive</span></a>
+    <a class="index-item" data-target="media" href="#media" aria-label="Creative Work"><i class="fas fa-film"></i><span class="num">08</span><span class="label">Creative Work</span></a>
+    <a class="index-item" data-target="credentials" href="#credentials" aria-label="Credentials"><i class="fas fa-award"></i><span class="num">09</span><span class="label">Credentials</span></a>
+    <a class="index-item" data-target="contact" href="#contact" aria-label="Contact"><i class="fas fa-envelope"></i><span class="num">10</span><span class="label">Contact</span></a>
   </div>
   <div class="index-foot">
-    hanahmendoza78@gmail.com<br>
-    Calapan City, PH
+    <div>hanahmendoza78@gmail.com</div>
+    <div>Calapan City, PH</div>
   </div>
 </nav>
 
@@ -571,7 +597,7 @@ footer{padding:2.2rem 0 3rem;text-align:left;font-family:var(--mono);font-size:0
         <div class="intro-eyebrow"><span class="intro-dot"></span><span class="eyebrow">AVAILABLE FOR WORK</span></div>
         <h1>Maria Hanah G. Mendoza</h1>
         <p class="intro-role" id="introRole">Software QA Analyst</p>
-        <p class="intro-desc">Software QA Specialist, Technical Writer, and UI/UX Designer building and breaking systems in equal measure — from test cases and bug reports to interfaces and documentation.</p>
+        <p class="intro-desc">Quality-driven professional with a designer's eye — bridging the gap between robust software and intuitive user experiences through meticulous testing and thoughtful design.</p>
         <p class="intro-loc"><i class="fas fa-map-marker-alt" style="color:var(--signal)"></i> Metro Manila, Philippines</p>
         <div class="intro-actions">
           <a href="mailto:hanahmendoza78@gmail.com" class="btn btn-line"><i class="fas fa-envelope"></i> Send Email</a>
@@ -594,21 +620,13 @@ footer{padding:2.2rem 0 3rem;text-align:left;font-family:var(--mono);font-size:0
 
   <!-- ============ 01 ABOUT ============ -->
   <section id="about">
-    <div class="section-head" data-reveal><h2>About</h2><span class="section-tag">01 / 08</span></div>
+    <div class="section-head" data-reveal><h2>About</h2><span class="section-tag">01 / 10</span></div>
     <div class="about-grid">
       <div>
         <p class="about-lead">Detail-oriented across <span class="accent">QA</span>, <span class="accent">design</span>, and <span class="accent">support</span> — someone who catches what others miss and documents it clearly enough for the whole team to act on.</p>
         <p class="about-side">Graduated Cum Laude in BS Information Technology from Mindoro State University, with hands-on experience spanning software QA, technical support, UI/UX design, and virtual assistance.</p>
-
-        <div class="workstyle-block">
-          <h3>Work Style</h3>
-          <div class="ws-grid">
-            <div class="ws-item"><i class="fas fa-sitemap"></i><div><h4>Detail-Oriented</h4><p>Pixel-precise in design, thorough in QA — I catch what others miss.</p></div></div>
-            <div class="ws-item"><i class="fas fa-users-gear"></i><div><h4>Collaborative</h4><p>I bridge developers, designers, and stakeholders through clear communication.</p></div></div>
-            <div class="ws-item"><i class="fas fa-file-lines"></i><div><h4>Documentation-Driven</h4><p>Good docs keep teams aligned — I treat writing as part of the product.</p></div></div>
-            <div class="ws-item"><i class="fas fa-rotate"></i><div><h4>Iterative Thinker</h4><p>Test, feedback, refine — whether in design, QA, or documentation.</p></div></div>
-          </div>
-          <p style="font-size:0.8rem;color:var(--ink-faint);margin-top:1.2rem;margin-bottom:0.4rem;">Tech interests</p>
+        <div style="margin-top:1.8rem;">
+          <p style="font-size:0.8rem;color:var(--ink-faint);margin-bottom:0.4rem;">Tech interests</p>
           <div class="interest-tags">
             <span>UI/UX Research</span><span>Design Systems</span><span>Accessibility</span><span>HCI</span><span>QA Automation</span><span>Bug Tracking</span><span>Responsive Design</span>
           </div>
@@ -623,30 +641,42 @@ footer{padding:2.2rem 0 3rem;text-align:left;font-family:var(--mono);font-size:0
           <div class="role-row"><i class="fas fa-pen-ruler"></i><div><h3>Graphic Designer</h3><p>UI/UX and visual design across web, branding, and print — from concepts to polished mockups.</p></div></div>
           <div class="role-row"><i class="fas fa-swatchbook"></i><div><h3>UI/UX Designer</h3><p>Wireframes, prototypes, and interface design grounded in usability — designing experiences, not just screens.</p></div></div>
         </div>
-
-        <div class="hobby-strip">
-          <h3>Hobbies &amp; Interests</h3>
-          <div class="hobby-cols">
-            <div class="hobby-col"><b><i class="fas fa-camera"></i>Visual Arts</b><ul><li>Photography</li><li>Videography</li><li>Editing</li></ul></div>
-            <div class="hobby-col"><b><i class="fas fa-film"></i>Film &amp; Media</b><ul><li>Films</li><li>Music</li><li>Podcasts</li></ul></div>
-            <div class="hobby-col"><b><i class="fas fa-book-open"></i>Literature</b><ul><li>Reading</li><li>Thrifting</li><li>Styling</li></ul></div>
-            <div class="hobby-col"><b><i class="fas fa-palette"></i>Creative</b><ul><li>Writing</li><li>Visual Design</li></ul></div>
-          </div>
-          <div class="hobby-insights">
-            <div class="hobby-insight"><i class="fas fa-paint-brush"></i><div><h5>Creative Eye</h5><p>Photography &amp; film sharpen visual composition for UI work.</p></div></div>
-            <div class="hobby-insight"><i class="fas fa-magnifying-glass"></i><div><h5>Attention to Detail</h5><p>Editing &amp; styling train the eye — crucial in QA &amp; design.</p></div></div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ 02 EXPERIENCE ============ -->
+  <!-- ============ 02 WORK STYLE ============ -->
+  <section id="workstyle">
+    <div class="section-head" data-reveal><h2>Work Style</h2><span class="section-tag">02 / 10</span></div>
+    <div class="workstyle-grid">
+      <div class="ws-item"><i class="fas fa-sitemap"></i><div><h4>Detail-Oriented</h4><p>Pixel-precise in design, thorough in QA — I catch what others miss.</p></div></div>
+      <div class="ws-item"><i class="fas fa-users-gear"></i><div><h4>Collaborative</h4><p>I bridge developers, designers, and stakeholders through clear communication.</p></div></div>
+      <div class="ws-item"><i class="fas fa-file-lines"></i><div><h4>Documentation-Driven</h4><p>Good docs keep teams aligned — I treat writing as part of the product.</p></div></div>
+      <div class="ws-item"><i class="fas fa-rotate"></i><div><h4>Iterative Thinker</h4><p>Test, feedback, refine — whether in design, QA, or documentation.</p></div></div>
+    </div>
+  </section>
+
+  <!-- ============ 03 HOBBIES ============ -->
+  <section id="hobbies">
+    <div class="section-head" data-reveal><h2>Hobbies &amp; Interests</h2><span class="section-tag">03 / 10</span></div>
+    <div class="hobby-grid">
+      <div class="hobby-card"><b><i class="fas fa-camera"></i>Visual Arts</b><ul><li>Photography</li><li>Videography</li><li>Editing</li></ul></div>
+      <div class="hobby-card"><b><i class="fas fa-film"></i>Film &amp; Media</b><ul><li>Films</li><li>Music</li><li>Podcasts</li></ul></div>
+      <div class="hobby-card"><b><i class="fas fa-book-open"></i>Literature</b><ul><li>Reading</li><li>Thrifting</li><li>Styling</li></ul></div>
+      <div class="hobby-card"><b><i class="fas fa-palette"></i>Creative</b><ul><li>Writing</li><li>Visual Design</li></ul></div>
+    </div>
+    <div class="hobby-insights">
+      <div class="hobby-insight"><i class="fas fa-paint-brush"></i><div><h5>Creative Eye</h5><p>Photography &amp; film sharpen visual composition for UI work.</p></div></div>
+      <div class="hobby-insight"><i class="fas fa-magnifying-glass"></i><div><h5>Attention to Detail</h5><p>Editing &amp; styling train the eye — crucial in QA &amp; design.</p></div></div>
+    </div>
+  </section>
+
+  <!-- ============ 04 EXPERIENCE ============ -->
   <section id="experience">
-    <div class="section-head" data-reveal><h2>Experience &amp; Education</h2><span class="section-tag">02 / 08</span></div>
+    <div class="section-head" data-reveal><h2>Experience &amp; Education</h2><span class="section-tag">04 / 10</span></div>
     <div class="timeline">
       <div class="tl-entry">
-        <div class="tl-date">2025- 2026</div>
+        <div class="tl-date">2025 – 2026</div>
         <div>
           <h3 class="tl-role">Software Developer · QA Specialist · Technical Writer · Technical Support</h3>
           <p class="tl-org">New San Jose Builders Inc.</p>
@@ -675,9 +705,9 @@ footer{padding:2.2rem 0 3rem;text-align:left;font-family:var(--mono);font-size:0
     </div>
   </section>
 
-  <!-- ============ 03 CAPABILITIES ============ -->
+  <!-- ============ 05 SKILLS ============ -->
   <section id="capabilities">
-    <div class="section-head" data-reveal><h2>Capabilities</h2><span class="section-tag">46 skills — 03 / 08</span></div>
+    <div class="section-head" data-reveal><h2>Skills</h2><span class="section-tag">46 skills — 05 / 10</span></div>
     <div class="cap-grid">
       <div class="cap-block">
         <p class="cap-cat"><i class="fas fa-pen-ruler"></i> DESIGN</p>
@@ -736,9 +766,9 @@ footer{padding:2.2rem 0 3rem;text-align:left;font-family:var(--mono);font-size:0
     </div>
   </section>
 
-  <!-- ============ 04 SELECTED WORK ============ -->
+  <!-- ============ 06 SELECTED WORK ============ -->
   <section id="work">
-    <div class="section-head" data-reveal><h2>Selected Work</h2><span class="section-tag">11 projects — 04 / 08</span></div>
+    <div class="section-head" data-reveal><h2>Selected Work</h2><span class="section-tag">11 projects — 06 / 10</span></div>
     <p class="archive-intro">A collection of web apps, systems, and tools built and tested end to end — every project below links directly to its case study, repository, or documentation.</p>
     <div class="work-list" id="workList"></div>
     <div class="view-all-wrap">
@@ -746,9 +776,9 @@ footer{padding:2.2rem 0 3rem;text-align:left;font-family:var(--mono);font-size:0
     </div>
   </section>
 
-  <!-- ============ 05 DESIGN ARCHIVE ============ -->
+  <!-- ============ 07 DESIGN ARCHIVE ============ -->
   <section id="designs">
-    <div class="section-head" data-reveal><h2>Design Archive</h2><span class="section-tag">14 pieces — 05 / 08</span></div>
+    <div class="section-head" data-reveal><h2>Design Archive</h2><span class="section-tag">14 pieces — 07 / 10</span></div>
     <p class="archive-intro">UI/UX, branding, and visual design work — click any piece to view it full-size, or open the PDF where available.</p>
     <div class="archive-grid" id="archiveGrid"></div>
     <div class="view-all-wrap">
@@ -756,9 +786,9 @@ footer{padding:2.2rem 0 3rem;text-align:left;font-family:var(--mono);font-size:0
     </div>
   </section>
 
-  <!-- ============ 06 CREATIVE WORK ============ -->
+  <!-- ============ 08 CREATIVE WORK ============ -->
   <section id="media">
-    <div class="section-head" data-reveal><h2>Creative Work</h2><span class="section-tag">06 / 08</span></div>
+    <div class="section-head" data-reveal><h2>Creative Work</h2><span class="section-tag">08 / 10</span></div>
     <div class="media-grid">
       <div class="media-block">
         <h3>Films</h3>
@@ -785,9 +815,9 @@ footer{padding:2.2rem 0 3rem;text-align:left;font-family:var(--mono);font-size:0
     </div>
   </section>
 
-  <!-- ============ 07 CREDENTIALS ============ -->
+  <!-- ============ 09 CREDENTIALS ============ -->
   <section id="credentials">
-    <div class="section-head" data-reveal><h2>Education &amp; Credentials</h2><span class="section-tag">07 / 08</span></div>
+    <div class="section-head" data-reveal><h2>Education &amp; Credentials</h2><span class="section-tag">09 / 10</span></div>
     <div class="cred-grid">
       <div class="cred-col">
         <h3>Certifications</h3>
@@ -802,19 +832,12 @@ footer{padding:2.2rem 0 3rem;text-align:left;font-family:var(--mono);font-size:0
           <a class="cert-line" href="assets/files/CodechumPythonProgramming2.pdf" target="_blank"><span class="name">CodeChum Python Programming 2</span><i class="fas fa-arrow-up-right-from-square"></i></a>
         </div>
       </div>
-      <div class="cred-col">
-        <h3>Documents</h3>
-        <div class="cert-list">
-          <a class="cert-line" href="assets/files/MENDOZA_RESUME.pdf" target="_blank"><span class="name">Resume — Maria Hanah G. Mendoza</span><i class="fas fa-download"></i></a>
-          <div class="cert-line" onclick="openDiploma()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openDiploma()"><span class="name">Diploma — BS Information Technology</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- ============ 08 CONTACT ============ -->
+  <!-- ============ 10 CONTACT ============ -->
   <section id="contact">
-    <div class="section-head" data-reveal><h2>Contact</h2><span class="section-tag">08 / 08</span></div>
+    <div class="section-head" data-reveal><h2>Contact</h2><span class="section-tag">10 / 10</span></div>
     <div class="contact-grid">
       <div>
         <div class="contact-info-row"><i class="fas fa-envelope"></i><div><p class="contact-label">Email</p><p class="contact-value">hanahmendoza78@gmail.com</p></div></div>
@@ -892,7 +915,7 @@ footer{padding:2.2rem 0 3rem;text-align:left;font-family:var(--mono);font-size:0
 
 <script>
 /* ============ SMOOTH SIDE NAV + SCROLL SPY ============ */
-const sections = ['intro','about','experience','capabilities','work','designs','media','credentials','contact'];
+const sections = ['intro','about','workstyle','hobbies','experience','capabilities','work','designs','media','credentials','contact'];
 const indexItems = document.querySelectorAll('.index-item');
 function setActive(id){
   indexItems.forEach(el=>el.classList.toggle('active', el.dataset.target===id));
@@ -1052,6 +1075,9 @@ function openDesignsModal(){
   document.getElementById('browseModalTitle').textContent = `All Designs (${designs.length})`;
   document.getElementById('browseModalBody').innerHTML = `<div class="modal-archive-grid">${designs.map((d,i)=>archiveItemHTML(d,i,designs.length)).join('')}</div>`;
   openBrowseModal();
+  // ensure scroll starts at top
+  const body = document.getElementById('browseModalBody');
+  if(body) body.scrollTop = 0;
 }
 
 function openDesign(idx){
@@ -1091,16 +1117,18 @@ document.addEventListener('keydown', function(e){
   if(e.key==='ArrowRight') lightboxChange(1);
 });
 
-/* ============ PDF MODAL ============ */
+/* ============ PDF MODAL (with scroll lock fix) ============ */
 function openPdfModal(src,title){
   document.getElementById('pdfFrame').src=src;
   document.getElementById('pdfModalTitle').textContent=title||'Document';
   document.getElementById('pdfModalOpenLink').href=src;
   document.getElementById('pdfModal').classList.add('active');
+  document.body.style.overflow='hidden';
 }
 function closePdfModal(){
   document.getElementById('pdfModal').classList.remove('active');
   document.getElementById('pdfFrame').src='';
+  document.body.style.overflow='';
 }
 document.getElementById('pdfModal').addEventListener('click', function(e){ if(e.target===this) closePdfModal(); });
 document.addEventListener('keydown', function(e){
@@ -1108,11 +1136,18 @@ document.addEventListener('keydown', function(e){
   if(modal.classList.contains('active') && e.key==='Escape') closePdfModal();
 });
 
-/* ============ BROWSE MODAL (All Projects / All Designs) ============ */
-function openBrowseModal(){ document.getElementById('browseModal').classList.add('active'); }
+/* ============ BROWSE MODAL ============ */
+function openBrowseModal(){ 
+  document.getElementById('browseModal').classList.add('active');
+  document.body.style.overflow='hidden';
+  // scroll to top of modal body
+  const body = document.getElementById('browseModalBody');
+  if(body) body.scrollTop = 0;
+}
 function closeBrowseModal(){
   document.getElementById('browseModal').classList.remove('active');
   document.getElementById('browseModalBody').innerHTML='';
+  document.body.style.overflow='';
 }
 document.getElementById('browseModal').addEventListener('click', function(e){ if(e.target===this) closeBrowseModal(); });
 document.addEventListener('keydown', function(e){
