@@ -430,334 +430,189 @@ section+section{border-top:1px solid var(--line)}
 .view-all-btn:hover i{transform:translate(2px,-2px)}
 
 /* ============================================================
-   07 DESIGN ARCHIVE — MIXED EDITORIAL COMPOSITION
+   07 DESIGN ARCHIVE — CREATIVE MASONRY / TILT / GRADIENT BORDERS
    ============================================================ */
+.archive-intro{font-size:0.92rem;line-height:1.65;color:var(--ink-dim);max-width:60ch;margin-bottom:2rem}
 
-/* Section wrapper with a subtle background texture */
-.archive-section{
-  position:relative;
-  overflow:hidden;
+/* Masonry-style grid using CSS columns for organic feel */
+.archive-grid{
+  column-count:4;
+  column-gap:1.1rem;
 }
+@media(max-width:1000px){.archive-grid{column-count:3}}
+@media(max-width:700px){.archive-grid{column-count:2}}
+@media(max-width:420px){.archive-grid{column-count:1}}
 
-.archive-intro{
-  font-size:0.92rem;
-  line-height:1.65;
-  color:var(--ink-dim);
-  max-width:60ch;
-  margin-bottom:2.6rem;
-}
-
-/* ==== THE COMPOSITION ==== */
-/* Row-based flex with mixed card widths and off-grid offsets */
-.archive-composition{
-  display:flex;
-  flex-direction:column;
-  gap:2.4rem;
-  position:relative;
-}
-
-/* Individual editorial rows — each with custom alignment */
-.archive-row{
-  display:flex;
-  gap:1.4rem;
-  align-items:flex-start;
-  position:relative;
-}
-.archive-row.row-1{gap:1.6rem;}
-.archive-row.row-2{margin-top:-3rem;padding-left:5%;}
-.archive-row.row-3{gap:1.6rem;padding-right:4%;}
-.archive-row.row-4{margin-top:-2rem;padding-left:3%;gap:1.6rem;}
-
-/* Responsive collapse */
-@media(max-width:900px){
-  .archive-row.row-2,
-  .archive-row.row-4{margin-top:0;padding-left:0;}
-  .archive-row.row-3{padding-right:0;}
-}
-
-/* ==== CARD BASE ==== */
-.design-card{
-  position:relative;
+.archive-item{
   cursor:pointer;
-  flex:1;
-  min-width:0;
+  break-inside:avoid;
+  margin-bottom:1.1rem;
+  display:block;
   opacity:0;
-  transform:translateY(30px);
-  animation:cardIn .8s var(--ease) forwards;
+  transform:translateY(20px) scale(0.96);
+  animation:archiveIn .6s var(--ease) forwards;
 }
-@keyframes cardIn{
-  to{opacity:1;transform:translateY(0)}
+@keyframes archiveIn{
+  to{opacity:1;transform:translateY(0) scale(1)}
 }
-.design-card:nth-child(1){animation-delay:.05s}
-.design-card:nth-child(2){animation-delay:.15s}
-.design-card:nth-child(3){animation-delay:.25s}
-.design-card:nth-child(4){animation-delay:.35s}
-.design-card:nth-child(5){animation-delay:.45s}
-.design-card:nth-child(6){animation-delay:.55s}
-.design-card:nth-child(7){animation-delay:.65s}
-.design-card:nth-child(8){animation-delay:.75s}
+/* Staggered delays */
+.archive-item:nth-child(1){animation-delay:.04s}
+.archive-item:nth-child(2){animation-delay:.08s}
+.archive-item:nth-child(3){animation-delay:.12s}
+.archive-item:nth-child(4){animation-delay:.16s}
+.archive-item:nth-child(5){animation-delay:.20s}
+.archive-item:nth-child(6){animation-delay:.24s}
+.archive-item:nth-child(7){animation-delay:.28s}
+.archive-item:nth-child(8){animation-delay:.32s}
+.archive-item:nth-child(9){animation-delay:.36s}
+.archive-item:nth-child(10){animation-delay:.40s}
+.archive-item:nth-child(11){animation-delay:.44s}
+.archive-item:nth-child(12){animation-delay:.48s}
+.archive-item:nth-child(13){animation-delay:.52s}
+.archive-item:nth-child(14){animation-delay:.56s}
 
-/* ==== CARD VARIANTS — each one feels different ==== */
-
-/* Variant A — Large landscape hero (spans full row) */
-.design-card.v-hero{flex:2.2;}
-
-/* Variant B — Tall portrait */
-.design-card.v-tall{flex:1;}
-
-/* Variant C — Square-ish medium */
-.design-card.v-medium{flex:1.2;}
-
-/* Variant D — Wide banner */
-.design-card.v-wide{flex:1.6;}
-
-/* Variant E — Small square */
-.design-card.v-small{flex:0.8;}
-
-/* Variant F — Offset tall (shifted down) */
-.design-card.v-offset{margin-top:3rem;}
-
-/* Variant G — Offset up */
-.design-card.v-rise{margin-top:-2.5rem;}
-
-@media(max-width:900px){
-  .design-card.v-hero,
-  .design-card.v-tall,
-  .design-card.v-medium,
-  .design-card.v-wide,
-  .design-card.v-small{flex:1;}
-  .design-card.v-offset,
-  .design-card.v-rise{margin-top:0;}
+/* The frame — gradient border wrapper with 3D tilt */
+.archive-frame{
+  position:relative;
+  border-radius:12px;
+  padding:2px;
+  background:linear-gradient(135deg, rgba(238,242,238,0.10), rgba(238,242,238,0.03));
+  transition:background .5s var(--ease), transform .5s var(--ease), box-shadow .5s var(--ease);
+  transform-style:preserve-3d;
+  perspective:800px;
+  box-shadow:0 4px 20px -10px rgba(0,0,0,0.5);
 }
-
-/* ==== CARD FRAME ==== */
-.design-frame{
+.archive-item:hover .archive-frame{
+  background:linear-gradient(135deg, var(--signal), var(--violet), var(--cyan));
+  transform:translateY(-6px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+  box-shadow:0 28px 50px -20px rgba(73,224,138,0.4), 0 0 0 1px rgba(73,224,138,0.2);
+}
+.archive-frame-inner{
   position:relative;
   overflow:hidden;
+  border-radius:10px;
   background:var(--moss);
-  border-radius:14px;
-  transition:transform .5s var(--ease), box-shadow .5s var(--ease);
-  box-shadow:0 10px 30px -18px rgba(0,0,0,0.7);
+  aspect-ratio:4/5;
 }
-.design-card:hover .design-frame{
-  transform:translateY(-6px) scale(1.01);
-  box-shadow:0 30px 60px -25px rgba(0,0,0,0.8), 0 0 0 1px var(--signal-line);
+.archive-frame-inner img{
+  width:100%;height:100%;object-fit:contain;padding:0.6rem;
+  transition:transform .8s var(--ease);
+  transform-origin:center;
+}
+.archive-item:hover .archive-frame-inner img{
+  transform:scale(1.08) rotate(0.5deg);
 }
 
-/* Corner tag — "01 · UI/UX" */
-.design-tag{
-  position:absolute;
-  top:0.85rem;
-  left:0.85rem;
-  z-index:5;
-  font-family:var(--mono);
-  font-size:0.6rem;
-  font-weight:600;
-  letter-spacing:0.08em;
+/* Number badge — floats top-left, morphs on hover */
+.archive-badge{
+  position:absolute;top:0.7rem;left:0.7rem;
+  font-family:var(--mono);font-size:0.62rem;font-weight:600;
   color:var(--ink-dim);
   background:rgba(6,9,7,0.7);
-  backdrop-filter:blur(10px);
-  padding:0.32rem 0.6rem;
+  backdrop-filter:blur(6px);
+  padding:0.18rem 0.5rem;
   border-radius:20px;
-  border:1px solid rgba(238,242,238,0.1);
-  display:flex;
-  align-items:center;
-  gap:0.4rem;
+  border:1px solid rgba(238,242,238,0.08);
   transition:all .4s var(--ease);
+  z-index:2;
 }
-.design-tag .dot{
-  width:5px;height:5px;border-radius:50%;
-  background:var(--signal);
-  transition:transform .3s ease;
-}
-.design-card:hover .design-tag{
-  color:var(--signal);
-  border-color:var(--signal-line);
-  background:rgba(6,9,7,0.9);
-}
-.design-card:hover .design-tag .dot{transform:scale(1.4);}
-
-/* PDF indicator — top right circle */
-.design-pdf{
-  position:absolute;
-  top:0.85rem;
-  right:0.85rem;
-  z-index:5;
-  width:34px;height:34px;
-  border-radius:50%;
-  background:linear-gradient(135deg,var(--signal),var(--signal-deep));
+.archive-item:hover .archive-badge{
   color:#04160c;
-  display:flex;align-items:center;justify-content:center;
-  font-size:0.8rem;
-  box-shadow:0 6px 18px -4px rgba(73,224,138,0.6);
+  background:var(--signal);
+  border-color:var(--signal);
+  transform:translateX(2px) scale(1.05);
+}
+
+/* PDF badge — animated corner ribbon */
+.archive-pdf{
+  position:absolute;top:0.7rem;right:0.7rem;
+  font-family:var(--mono);font-size:0.6rem;font-weight:700;
+  color:#04160c;
+  background:linear-gradient(135deg,var(--signal),var(--signal-deep));
+  padding:0.2rem 0.5rem;
+  border-radius:4px;
+  display:flex;gap:0.25rem;align-items:center;
+  box-shadow:0 4px 12px -4px rgba(73,224,138,0.5);
+  z-index:2;
+  animation:pdfPulse 2.5s ease-in-out infinite;
+}
+@keyframes pdfPulse{
+  0%,100%{box-shadow:0 4px 12px -4px rgba(73,224,138,0.5)}
+  50%{box-shadow:0 4px 18px -2px rgba(73,224,138,0.8)}
+}
+
+/* Overlay — radial gradient with floating "View" pill */
+.archive-overlay{
+  position:absolute;inset:0;
+  background:radial-gradient(circle at center bottom, rgba(6,9,7,0.9), rgba(6,9,7,0.4) 60%, transparent 80%);
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:1.2rem;
+  opacity:0;
+  transition:opacity .4s ease;
+  z-index:1;
+}
+.archive-item:hover .archive-overlay{opacity:1}
+.archive-view{
+  font-size:0.7rem;font-weight:700;letter-spacing:0.02em;
+  color:#04160c;
+  background:var(--signal);
+  border:none;
+  padding:0.45rem 1rem;
+  border-radius:30px;
+  display:inline-flex;align-items:center;gap:0.4rem;
+  box-shadow:0 8px 20px -8px rgba(73,224,138,0.6);
+  transform:translateY(12px);
   transition:transform .4s var(--ease);
 }
-.design-card:hover .design-pdf{transform:scale(1.12) rotate(-6deg);}
-
-/* Image area — sizes vary by card variant */
-.design-image{
-  position:relative;
-  width:100%;
-  overflow:hidden;
-  background:linear-gradient(135deg, var(--moss), var(--pine-2));
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.design-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:transform 1s var(--ease), filter .5s ease;
-  filter:brightness(0.95);
-}
-.design-card:hover .design-image img{
-  transform:scale(1.06);
-  filter:brightness(1.05);
-}
-
-/* Aspect ratios per variant */
-.v-hero .design-image{aspect-ratio:16/10;}
-.v-tall .design-image{aspect-ratio:4/5;}
-.v-medium .design-image{aspect-ratio:5/4;}
-.v-wide .design-image{aspect-ratio:16/9;}
-.v-small .design-image{aspect-ratio:1/1;}
-
-/* Hover overlay with slide-up metadata */
-.design-overlay{
-  position:absolute;
-  left:0;right:0;bottom:0;
-  padding:1.4rem 1.15rem 1rem;
-  background:linear-gradient(to top, rgba(6,9,7,0.96), rgba(6,9,7,0.75) 55%, transparent);
-  z-index:3;
-  transform:translateY(0);
-  transition:transform .5s var(--ease);
-}
-.design-overlay-inner{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:0.8rem;
-  transform:translateY(8px);
-  opacity:0;
-  transition:transform .45s var(--ease) .05s, opacity .35s ease;
-}
-.design-card:hover .design-overlay-inner{
-  transform:translateY(0);
-  opacity:1;
-}
-.design-overlay-text{flex:1;min-width:0;}
-.design-overlay-title{
-  font-family:var(--serif-display);
-  font-size:0.88rem;
-  font-weight:700;
-  color:var(--ink);
-  line-height:1.3;
-  margin-bottom:0.15rem;
-}
-.design-overlay-cat{
-  font-family:var(--mono);
-  font-size:0.62rem;
-  color:var(--signal);
-  letter-spacing:0.06em;
-  text-transform:uppercase;
-}
-.design-action{
-  flex-shrink:0;
-  width:38px;height:38px;
-  border-radius:50%;
-  background:var(--signal);
-  color:#04160c;
-  display:flex;align-items:center;justify-content:center;
-  font-size:0.8rem;
-  transition:transform .3s var(--ease), background .3s ease;
-}
-.design-card:hover .design-action{
-  transform:scale(1.1) rotate(-8deg);
-  background:#5aeb98;
-}
-
-/* Bottom caption — only visible on non-hover, fades on hover */
-.design-caption{
-  margin-top:0.75rem;
-  display:flex;
-  align-items:baseline;
-  gap:0.5rem;
-  transition:opacity .3s ease;
-}
-.design-card:hover .design-caption{opacity:0.35;}
-.design-caption .cap-num{
-  font-family:var(--mono);
+.archive-view::before{
+  content:'\f00e';
+  font-family:'Font Awesome 6 Free';
+  font-weight:900;
   font-size:0.65rem;
+}
+.archive-item:hover .archive-view{transform:translateY(0)}
+
+/* Info below the frame */
+.archive-info{
+  margin-top:0.65rem;
+  display:flex;gap:0.5rem;align-items:flex-start;
+  padding:0 0.2rem;
+}
+.archive-info .num{
   color:var(--signal);
-  font-weight:600;
   flex-shrink:0;
+  font-size:0.68rem;
+  font-weight:600;
+  padding-top:0.15rem;
+  transition:transform .3s var(--ease);
 }
-.design-caption .cap-title{
-  font-family:var(--serif-display);
-  font-size:0.82rem;
-  font-weight:700;
-  color:var(--ink);
-  line-height:1.3;
+.archive-item:hover .archive-info .num{transform:translateX(2px)}
+.archive-title{
+  font-size:0.8rem;font-weight:700;line-height:1.35;
+  transition:color .25s ease;
+  margin-bottom:0.1rem;
 }
-.design-caption .cap-cat{
-  font-family:var(--mono);
-  font-size:0.62rem;
-  color:var(--ink-faint);
-  letter-spacing:0.03em;
-  display:block;
-  margin-top:0.1rem;
-}
+.archive-item:hover .archive-title{color:var(--signal)}
+.archive-cat{font-size:0.68rem;color:var(--ink-faint);letter-spacing:0.01em;transition:color .25s ease}
+.archive-item:hover .archive-cat{color:var(--ink-dim)}
 
-/* Decorative number watermark behind each card */
-.design-card::before{
-  content:attr(data-num);
-  position:absolute;
-  top:-1.2rem;
-  right:-0.5rem;
-  font-family:var(--serif-display);
-  font-size:5rem;
-  font-weight:700;
-  color:rgba(238,242,238,0.02);
-  line-height:1;
+/* Floating sparkles on hover (pseudo-element on frame) */
+.archive-frame::after{
+  content:'';
+  position:absolute;inset:0;
+  border-radius:12px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(73,224,138,0.35) 0, transparent 25%),
+    radial-gradient(circle at 80% 70%, rgba(167,139,250,0.3) 0, transparent 25%);
+  opacity:0;
   pointer-events:none;
-  z-index:0;
-  transition:color .4s ease, transform .4s var(--ease);
+  transition:opacity .5s ease;
+  z-index:3;
 }
-.design-card:hover::before{
-  color:rgba(73,224,138,0.06);
-  transform:translateY(-3px);
-}
+.archive-item:hover .archive-frame::after{opacity:1}
 
-/* Remove redundant color dot in tag — keep just number */
-.design-tag .tag-num{
-  color:var(--signal);
-  font-weight:700;
-}
-
-/* View all button */
-.view-all-wrap{display:flex;justify-content:center;margin-top:2.4rem}
-
-/* ==== MODAL version — same composition, condensed ==== */
-.modal-archive-grid .archive-composition{gap:1.6rem;}
-.modal-archive-grid .archive-row{gap:1rem;}
-.modal-archive-grid .archive-row.row-2,
-.modal-archive-grid .archive-row.row-4{margin-top:0;padding-left:0;}
-.modal-archive-grid .archive-row.row-3{padding-right:0;}
-.modal-archive-grid .design-card.v-offset,
-.modal-archive-grid .design-card.v-rise{margin-top:0;}
-.modal-archive-grid .design-caption{display:none;}
-.modal-archive-grid .design-frame{border-radius:10px;}
-
-@media(max-width:820px){
-  .archive-row{flex-wrap:wrap;}
-  .archive-row .design-card{flex:1 1 calc(50% - 0.7rem);}
-  .design-card.v-hero{flex:1 1 100%;}
-}
-@media(max-width:520px){
-  .archive-row{gap:1rem;}
-  .archive-row .design-card{flex:1 1 100%;}
-}
+/* View All button row */
+.view-all-wrap{display:flex;justify-content:center;margin-top:1.6rem}
 
 /* ============================================================
    08 CREATIVE WORK
@@ -872,7 +727,7 @@ footer{padding:1.8rem 0 2.5rem;text-align:left;font-family:var(--mono);font-size
 
 .skills-modal{background:rgba(4,6,5,0.92);z-index:9998}
 .skills-card{width:100%;max-width:600px;max-height:82vh;background:var(--pine-2);border:1px solid var(--line-strong);display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--shadow-lg)}
-.skills-card.browse-card{max-width:1100px;max-height:88vh}
+.skills-card.browse-card{max-width:1000px;max-height:88vh}
 .skills-head{display:flex;align-items:center;gap:0.7rem;padding:1.15rem 1.3rem;border-bottom:1px solid var(--line)}
 .skills-head h3{font-family:var(--serif-display);font-size:1rem;font-weight:700;flex:1}
 .skills-body{padding:1.15rem 1.3rem 1.4rem;overflow-y:auto;scroll-behavior:smooth;}
@@ -880,6 +735,16 @@ footer{padding:1.8rem 0 2.5rem;text-align:left;font-family:var(--mono);font-size
 .modal-work-list .work-row{padding:1.6rem 0.6rem;margin:0 -0.6rem}
 .modal-work-list .work-row:first-child{border-top:none}
 @media(max-width:700px){.modal-work-list .work-row,.modal-work-list .work-row:nth-child(even){grid-template-columns:1fr}.modal-work-list .work-row:nth-child(even) .work-media{order:0}}
+
+/* Modal archive grid — keep the creative masonry feel */
+.modal-archive-grid{
+  column-count:4;
+  column-gap:1rem;
+}
+@media(max-width:900px){.modal-archive-grid{column-count:3}}
+@media(max-width:640px){.modal-archive-grid{column-count:2}}
+@media(max-width:420px){.modal-archive-grid{column-count:1}}
+.modal-archive-grid .archive-item{break-inside:avoid;margin-bottom:1rem;display:block}
 
 /* Skills modal grid */
 .skills-modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem 2.2rem}
@@ -937,6 +802,16 @@ section+section::before{
   50%{opacity:0.6}
 }
 
+.cursor-glow{
+  position:fixed;width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(73,224,138,0.06),transparent 70%);
+  pointer-events:none;z-index:1;
+  transform:translate(-50%,-50%);
+  transition:opacity .4s ease;
+  opacity:0;
+}
+@media(prefers-reduced-motion:reduce){.cursor-glow{display:none}}
+
 .interest-tags span{position:relative;overflow:hidden}
 .interest-tags span::before{
   content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
@@ -964,7 +839,7 @@ section+section::before{
   .hobby-card{padding:0.95rem 0.8rem;}
   section[id]::before{font-size:3.5rem;}
   .orb{display:none}
-  .design-caption{flex-direction:column;gap:0.1rem;}
+  .archive-grid{column-count:2;}
 }
 </style>
 </head>
@@ -974,6 +849,7 @@ section+section::before{
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
 
 <!-- ============ DESKTOP INDEX NAV ============ -->
 <nav class="index-nav" aria-label="Section navigation">
@@ -1177,11 +1053,11 @@ section+section::before{
     </div>
   </section>
 
-  <!-- ============ 06 DESIGN ARCHIVE (MIXED EDITORIAL) ============ -->
-  <section id="designs" data-num="06" class="archive-section">
+  <!-- ============ 06 DESIGN ARCHIVE (CREATIVE) ============ -->
+  <section id="designs" data-num="06">
     <div class="section-head" data-reveal><h2>Design Archive</h2><span class="section-tag">14 pieces — 06 / 09</span></div>
-    <p class="archive-intro">An editorial spread of selected work — large heroes, tall portraits, and offset pieces mixed together so each design gets the attention it deserves. Click any piece to view it full-size, or open the PDF where available.</p>
-    <div class="archive-composition" id="archiveGrid"></div>
+    <p class="archive-intro">UI/UX, branding, and visual design work — hover to feel the gradient shift, click any piece to view it full-size, or open the PDF where available.</p>
+    <div class="archive-grid" id="archiveGrid"></div>
     <div class="view-all-wrap">
       <button class="btn btn-line view-all-btn" onclick="openDesignsModal()">View All Designs <i class="fas fa-arrow-up-right-from-square"></i></button>
     </div>
@@ -1448,6 +1324,23 @@ document.querySelectorAll('[data-reveal]').forEach(el=>revealObserver.observe(el
 function openAvatarModal(){ openLightbox(['assets/images/MENDOZA_PICTURE.jpg'],0,['Maria Hanah G. Mendoza']); }
 function openDiploma(){ openLightbox(['assets/images/MENDOZA_DIPLOMA.jpg'],0,['Cum Laude Diploma — Maria Hanah G. Mendoza']); }
 
+/* ============ CURSOR GLOW ============ */
+(function(){
+  const glow = document.getElementById('cursorGlow');
+  if(!glow) return;
+  let raf = null;
+  document.addEventListener('mousemove', (e)=>{
+    if(raf) return;
+    raf = requestAnimationFrame(()=>{
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+      glow.style.opacity = '1';
+      raf = null;
+    });
+  });
+  document.addEventListener('mouseleave', ()=>{ glow.style.opacity = '0'; });
+})();
+
 /* ============ PROJECTS DATA ============ */
 const projects = [
   { cover:'assets/images/cover-rms-inventory.png', icon:'fa-robot', category:'Capstone Project', title:"RM'S: AI Inventory",
@@ -1547,91 +1440,38 @@ const designs = [
 ];
 
 const DESIGN_PREVIEW_COUNT = 8;
-
-/* Card variant assignment — makes the composition feel organic */
-const CARD_VARIANTS = [
-  'v-hero',    // 1: Large hero (first item)
-  'v-tall',    // 2: Tall portrait
-  'v-medium',  // 3: Medium square
-  'v-tall',    // 4: Tall portrait
-  'v-wide',    // 5: Wide banner
-  'v-small',   // 6: Small
-  'v-medium',  // 7: Medium
-  'v-tall',    // 8: Tall portrait
-];
-
-/* Build one editorial row (custom composition) */
-function buildArchiveRow(cards, rowIndex){
-  const rowClasses = ['row-1','row-2','row-3','row-4'];
-  const rowClass = rowClasses[rowIndex % rowClasses.length];
-  return `<div class="archive-row ${rowClass}">${cards.join('')}</div>`;
-}
-
-/* Build a single design card */
-function designCardHTML(d, globalIndex, total){
-  const num = String(globalIndex+1).padStart(2,'0');
-  const variant = CARD_VARIANTS[globalIndex % CARD_VARIANTS.length];
-  const pdfBadge = d.pdf ? `<span class="design-pdf"><i class="fas fa-file-pdf"></i></span>` : '';
+function archiveItemHTML(d,i,total){
+  const num = String(i+1).padStart(2,'0');
+  const pdfBadge = d.pdf ? `<span class="archive-pdf"><i class="fas fa-file-pdf"></i> PDF</span>` : '';
   return `
-    <div class="design-card ${variant}" data-num="${num}" onclick="openDesign(${globalIndex})">
-      <div class="design-frame">
-        <div class="design-image">
-          <span class="design-tag"><span class="dot"></span><span class="tag-num">${num}</span> · ${d.category.split(' ')[0]}</span>
+    <div class="archive-item" onclick="openDesign(${i})">
+      <div class="archive-frame">
+        <div class="archive-frame-inner">
+          <span class="archive-badge">${num} / ${total}</span>
           ${pdfBadge}
           <img src="${d.file}" alt="${d.title}" loading="lazy">
-          <div class="design-overlay">
-            <div class="design-overlay-inner">
-              <div class="design-overlay-text">
-                <p class="design-overlay-title">${d.title}</p>
-                <p class="design-overlay-cat">${d.category}</p>
-              </div>
-              <span class="design-action"><i class="fas fa-arrow-up-right-from-square"></i></span>
-            </div>
-          </div>
+          <div class="archive-overlay"><span class="archive-view">${d.pdf ? 'Open PDF' : 'View Design'}</span></div>
         </div>
       </div>
-      <div class="design-caption">
-        <span class="cap-num">${num}</span>
-        <div><p class="cap-title">${d.title}</p><p class="cap-cat">${d.category}</p></div>
+      <div class="archive-info">
+        <span class="num">${num}</span>
+        <div><p class="archive-title">${d.title}</p><p class="archive-cat">${d.category}</p></div>
       </div>
     </div>`;
 }
-
-/* Render the editorial composition (row-based) */
-function renderArchiveComposition(container, items){
-  // Group items into editorial rows: [3, 2, 3, 2, ...]
-  const rowSizes = [3, 2, 3, 2, 2];
-  let html = '';
-  let idx = 0;
-  let rowIdx = 0;
-  while(idx < items.length){
-    const size = rowSizes[rowIdx % rowSizes.length];
-    const chunk = items.slice(idx, idx + size);
-    const cards = chunk.map((d, j) => designCardHTML(d, idx + j, items.length));
-    html += buildArchiveRow(cards, rowIdx);
-    idx += size;
-    rowIdx++;
-  }
-  container.innerHTML = html;
-}
-
 function renderArchiveGrid(){
-  const container = document.getElementById('archiveGrid');
-  if(!container) return;
+  const grid = document.getElementById('archiveGrid');
+  if(!grid) return;
   const visible = designs.slice(0, DESIGN_PREVIEW_COUNT);
-  renderArchiveComposition(container, visible);
+  grid.innerHTML = visible.map((d,i)=>archiveItemHTML(d,i,designs.length)).join('');
 }
 renderArchiveGrid();
-
 function openDesignsModal(){
   document.getElementById('browseModalTitle').textContent = `All Designs (${designs.length})`;
-  const body = document.getElementById('browseModalBody');
-  body.innerHTML = `<div class="modal-archive-grid" id="modalArchiveGrid"></div>`;
-  const modalGrid = document.getElementById('modalArchiveGrid');
-  renderArchiveComposition(modalGrid, designs);
+  document.getElementById('browseModalBody').innerHTML = `<div class="modal-archive-grid">${designs.map((d,i)=>archiveItemHTML(d,i,designs.length)).join('')}</div>`;
   openBrowseModal();
-  const bodyEl = document.getElementById('browseModalBody');
-  if(bodyEl) bodyEl.scrollTop = 0;
+  const body = document.getElementById('browseModalBody');
+  if(body) body.scrollTop = 0;
 }
 
 function openDesign(idx){
