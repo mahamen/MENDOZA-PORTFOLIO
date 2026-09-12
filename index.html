@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-<!-- PDF.js for in-modal PDF rendering (works even on file://) -->
+<!-- PDF.js for in-modal PDF rendering -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
 /* ============================================================
@@ -568,43 +568,89 @@ footer{padding:1.8rem 0 2.5rem;text-align:left;font-family:var(--mono);font-size
 .modal-next:hover{transform:translate(3px,-50%)}
 .modal-prev{left:1rem}.modal-next{right:1rem}
 
-/* ---------- PDF MODAL ---------- */
-.pdf-modal{background:rgba(4,6,5,0.94);padding:0;z-index:10000;}
-.pdf-wrap{display:flex;flex-direction:column;gap:0.75rem;width:100vw;height:100vh;padding:1.5rem;position:relative;}
-.pdf-head{display:flex;align-items:center;justify-content:space-between;gap:0.6rem;flex-shrink:0;}
-.pdf-title{font-family:var(--serif-display);font-size:0.92rem;font-weight:700;color:var(--ink);display:flex;gap:0.5rem;align-items:center;min-width:0}
-.pdf-title span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pdf-open{font-size:0.76rem;font-weight:700;color:var(--signal);border:1px solid var(--signal-line);padding:0.4rem 0.85rem;display:inline-flex;gap:0.4rem;align-items:center;border-radius:3px;transition:background .25s ease,color .25s ease,transform .2s ease}
-.pdf-open:hover{background:var(--signal);color:#04160c;transform:translateY(-1px)}
-.pdf-body{
-  flex:1;min-height:0;
-  background:#2a2a2c;
+/* ---------- PDF MODAL — CENTERED CARD, NOT FULLSCREEN ---------- */
+.pdf-modal{
+  background:rgba(4,6,5,0.85);
+  padding:1.5rem;
+  z-index:10000;
+}
+.pdf-wrap{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  width:min(880px, 92vw);
+  max-height:88vh;
+  background:var(--pine-2);
   border:1px solid var(--line-strong);
-  overflow:auto;
-  box-shadow:var(--shadow-lg);
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 40px 80px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(238,242,238,0.05);
+  position:relative;
+}
+.pdf-head{
+  display:flex;align-items:center;justify-content:space-between;gap:0.6rem;
+  padding:0.9rem 1.1rem;
+  background:linear-gradient(180deg,var(--moss),var(--pine-2));
+  border-bottom:1px solid var(--line);
+  flex-shrink:0;
+}
+.pdf-title{font-family:var(--serif-display);font-size:0.9rem;font-weight:700;color:var(--ink);display:flex;gap:0.55rem;align-items:center;min-width:0}
+.pdf-title i{color:var(--signal)}
+.pdf-title span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pdf-open{font-size:0.72rem;font-weight:700;color:var(--signal);border:1px solid var(--signal-line);padding:0.35rem 0.75rem;display:inline-flex;gap:0.4rem;align-items:center;border-radius:3px;transition:background .25s ease,color .25s ease,transform .2s ease}
+.pdf-open:hover{background:var(--signal);color:#04160c;transform:translateY(-1px)}
+.pdf-close{
+  font-size:1.3rem;line-height:1;color:var(--ink-dim);
+  width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;
+  border-radius:4px;transition:color .2s ease,background .2s ease,transform .25s var(--ease);
+  flex-shrink:0;
+}
+.pdf-close:hover{color:var(--signal);background:rgba(73,224,138,0.1);transform:rotate(90deg)}
+.pdf-body{
+  flex:1;
+  min-height:0;
+  background:#20232a;
+  overflow-y:auto;
+  overflow-x:hidden;
   position:relative;
   display:flex;flex-direction:column;align-items:center;
-  padding:1rem;
+  padding:1.2rem;
   gap:1rem;
+  scroll-behavior:smooth;
 }
-.pdf-body iframe{width:100%;height:100%;border:0;display:block;background:#2a2a2c;}
+.pdf-body::-webkit-scrollbar{width:10px}
+.pdf-body::-webkit-scrollbar-track{background:rgba(0,0,0,0.2)}
+.pdf-body::-webkit-scrollbar-thumb{background:var(--moss-2);border-radius:20px}
+.pdf-body::-webkit-scrollbar-thumb:hover{background:var(--signal-line)}
+
+.pdf-body iframe{width:100%;height:100%;border:0;display:block;background:#20232a;border-radius:4px}
 .pdf-body canvas{
   max-width:100%;
   height:auto;
   background:#fff;
-  box-shadow:0 4px 16px rgba(0,0,0,0.4);
+  box-shadow:0 6px 24px rgba(0,0,0,0.5);
+  border-radius:4px;
   display:block;
 }
 .pdf-loading,.pdf-error{
   color:var(--ink-dim);
   font-family:var(--mono);
-  font-size:0.85rem;
-  padding:2rem;
+  font-size:0.82rem;
+  padding:2.5rem 1rem;
   text-align:center;
 }
 .pdf-error{color:#ff8a8a;}
-.pdf-error a{color:var(--signal);text-decoration:underline;}
-.pdf-actions{display:flex;gap:0.6rem;align-items:center}
+.pdf-error a{color:var(--signal);text-decoration:underline}
+.pdf-actions{display:flex;gap:0.5rem;align-items:center}
+
+@media(max-width:640px){
+  .pdf-modal{padding:0.75rem}
+  .pdf-wrap{width:100%;max-height:92vh;border-radius:8px}
+  .pdf-head{padding:0.75rem 0.9rem}
+  .pdf-title{font-size:0.82rem}
+  .pdf-open{padding:0.3rem 0.6rem;font-size:0.68rem}
+  .pdf-body{padding:0.8rem;gap:0.7rem}
+}
 
 .skills-modal{background:rgba(4,6,5,0.92);z-index:9998}
 .skills-card{width:100%;max-width:600px;max-height:82vh;background:var(--pine-2);border:1px solid var(--line-strong);display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--shadow-lg)}
@@ -618,7 +664,6 @@ footer{padding:1.8rem 0 2.5rem;text-align:left;font-family:var(--mono);font-size
 @media(max-width:700px){.modal-work-list .work-row,.modal-work-list .work-row:nth-child(even){grid-template-columns:1fr}.modal-work-list .work-row:nth-child(even) .work-media{order:0}}
 .modal-archive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1.1rem}
 
-/* Skills modal grid */
 .skills-modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem 2.2rem}
 @media(max-width:640px){.skills-modal-grid{grid-template-columns:1fr}}
 .skills-modal-block h4{font-family:var(--mono);font-size:0.72rem;color:var(--signal);margin-bottom:0.7rem;display:flex;align-items:center;gap:0.5rem;letter-spacing:0.01em}
@@ -692,8 +737,6 @@ section+section::before{
   .wrap{padding:0 1.1rem}
   .intro-actions{flex-direction:column;align-items:stretch}
   .intro-actions .btn{justify-content:center}
-  .pdf-wrap{padding:1rem;}
-  .pdf-body{padding:0.5rem;gap:0.5rem;}
   .intro-stats{gap:0.4rem}
   .archive-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:0.8rem}
   .work-row:hover,.tl-entry:hover,.cap-block:hover{background:transparent}
@@ -1026,19 +1069,17 @@ section+section::before{
   </div>
 </div>
 
-<!-- ============ PDF MODAL ============ -->
+<!-- ============ PDF MODAL (centered card) ============ -->
 <div id="pdfModal" class="pdf-modal">
   <div class="pdf-wrap">
     <div class="pdf-head">
-      <div class="pdf-title"><i class="fas fa-file-pdf" style="color:var(--signal)"></i><span id="pdfModalTitle">Document</span></div>
+      <div class="pdf-title"><i class="fas fa-file-pdf"></i><span id="pdfModalTitle">Document</span></div>
       <div class="pdf-actions">
         <a id="pdfModalOpenLink" href="#" target="_blank" class="pdf-open"><i class="fas fa-arrow-up-right-from-square"></i> Open in new tab</a>
-        <span class="modal-close" style="position:static" onclick="closePdfModal()">&times;</span>
+        <button class="pdf-close" onclick="closePdfModal()" title="Close" aria-label="Close">&times;</button>
       </div>
     </div>
-    <div class="pdf-body" id="pdfBody">
-      <!-- PDF.js canvases get appended here -->
-    </div>
+    <div class="pdf-body" id="pdfBody"></div>
   </div>
 </div>
 
@@ -1376,12 +1417,13 @@ document.addEventListener('keydown', function(e){
   if(e.key==='ArrowRight') lightboxChange(1);
 });
 
-/* ============ PDF MODAL — Renders PDFs via PDF.js inside the modal ============ */
+/* ============ PDF MODAL — centered card, PDF.js render ============ */
 let currentPdfTask = null;
 
 function resetPdfBody(){
   const body = document.getElementById('pdfBody');
   body.innerHTML = '';
+  body.scrollTop = 0;
   return body;
 }
 
@@ -1392,7 +1434,7 @@ function openImageInModal(src, title){
   const img = document.createElement('img');
   img.src = src;
   img.alt = title || 'Image';
-  img.style.cssText = 'max-width:100%;max-height:100%;object-fit:contain;display:block;background:#111;';
+  img.style.cssText = 'max-width:100%;max-height:100%;object-fit:contain;display:block;border-radius:4px;box-shadow:0 6px 24px rgba(0,0,0,0.5);';
   body.appendChild(img);
   document.getElementById('pdfModal').classList.add('active');
   document.body.style.overflow = 'hidden';
@@ -1404,7 +1446,6 @@ function openPdfModal(src, title){
   document.getElementById('pdfModalTitle').textContent = title || 'PDF Document';
   document.getElementById('pdfModalOpenLink').href = src;
 
-  // Show modal immediately with loading indicator
   const loading = document.createElement('div');
   loading.className = 'pdf-loading';
   loading.textContent = 'Loading PDF…';
@@ -1412,7 +1453,6 @@ function openPdfModal(src, title){
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
 
-  // If PDF.js failed to load (offline), fall back to iframe
   if(!window.pdfjsLib){
     body.innerHTML = '';
     const iframe = document.createElement('iframe');
@@ -1422,18 +1462,14 @@ function openPdfModal(src, title){
     return;
   }
 
-  // Cancel any previous render
   if(currentPdfTask){ try{ currentPdfTask.destroy(); }catch(e){} currentPdfTask = null; }
 
-  // Render via PDF.js — works even on file:// because we read the file with fetch/XHR
   const loadingTask = pdfjsLib.getDocument(src);
   currentPdfTask = loadingTask;
 
   loadingTask.promise.then(function(pdf){
     body.innerHTML = '';
     const totalPages = pdf.numPages;
-
-    // Render pages sequentially
     let chain = Promise.resolve();
     for(let pageNum = 1; pageNum <= totalPages; pageNum++){
       chain = chain.then(function(){
@@ -1441,7 +1477,6 @@ function openPdfModal(src, title){
           const viewport = page.getViewport({ scale: 1.5 });
           const canvas = document.createElement('canvas');
           const ctx = canvas.getContext('2d');
-          // Scale canvas for crisp rendering on HiDPI screens
           const outputScale = window.devicePixelRatio || 1;
           canvas.width = Math.floor(viewport.width * outputScale);
           canvas.height = Math.floor(viewport.height * outputScale);
@@ -1463,13 +1498,10 @@ function openPdfModal(src, title){
   }).catch(function(err){
     console.error('PDF.js render error:', err);
     body.innerHTML = '';
-    // Fallback: iframe (works on http/https, may be blank on file://)
     const iframe = document.createElement('iframe');
     iframe.src = src;
     iframe.title = title || 'PDF';
     body.appendChild(iframe);
-
-    // Also offer direct download link
     const errBox = document.createElement('div');
     errBox.className = 'pdf-error';
     errBox.innerHTML = 'Could not render inline. <a href="' + src + '" target="_blank">Open the PDF directly</a>.';
