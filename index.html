@@ -885,7 +885,7 @@ section+section::before{
     </div>
   </section>
 
-  <!-- ============ 06 DESIGN ARCHIVE — ORIGINAL GRID ============ -->
+  <!-- ============ 06 DESIGN ARCHIVE ============ -->
   <section id="designs" data-num="06">
     <div class="section-head" data-reveal><h2>Design Archive</h2><span class="section-tag">14 pieces — 06 / 09</span></div>
     <p class="archive-intro">UI/UX, branding, and visual design work — click any piece to view it full-size, or open the PDF where available.</p>
@@ -1154,7 +1154,7 @@ document.querySelectorAll('[data-reveal]').forEach(el=>revealObserver.observe(el
 })();
 
 function openAvatarModal(){ openLightbox(['assets/images/MENDOZA_PICTURE.jpg'],0,['Maria Hanah G. Mendoza']); }
-function openDiploma(){ openLightbox(['assets/images/MENDOZA_DIPLOMA.jpg'],0,['Cum Laude Diploma — Maria Hanah G. Mendoza']); }
+function openDiploma(){ openPdfModal('assets/images/MENDOZA_DIPLOMA.jpg', 'Cum Laude Diploma — Maria Hanah G. Mendoza', true); }
 
 /* ============ PROJECTS DATA ============ */
 const projects = [
@@ -1339,18 +1339,57 @@ document.addEventListener('keydown', function(e){
   if(e.key==='ArrowRight') lightboxChange(1);
 });
 
-/* ============ PDF MODAL ============ */
-function openPdfModal(src,title){
-  document.getElementById('pdfFrame').src=src;
-  document.getElementById('pdfModalTitle').textContent=title||'Document';
-  document.getElementById('pdfModalOpenLink').href=src;
-  document.getElementById('pdfModal').classList.add('active');
-  document.body.style.overflow='hidden';
+/* ============ PDF MODAL (always renders inside the modal) ============ */
+/* isImage = true when the "PDF" is actually an image (e.g. diploma scan) */
+function openPdfModal(src, title, isImage){
+  const frame = document.getElementById('pdfFrame');
+  const modal = document.getElementById('pdfModal');
+  const titleEl = document.getElementById('pdfModalTitle');
+  const openLink = document.getElementById('pdfModalOpenLink');
+
+  titleEl.textContent = title || 'Document';
+  openLink.href = src;
+
+  if(isImage){
+    /* Render image inside the same modal body via an inner <img> */
+    frame.src = '';
+    frame.style.display = 'none';
+    let img = document.getElementById('pdfImageFallback');
+    if(!img){
+      img = document.createElement('img');
+      img.id = 'pdfImageFallback';
+      img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;background:#2a2a2c;';
+      frame.parentElement.appendChild(img);
+    }
+    img.src = src;
+    img.style.display = 'block';
+  } else {
+    /* Hide image fallback if it was used before */
+    const img = document.getElementById('pdfImageFallback');
+    if(img) img.style.display = 'none';
+    frame.style.display = 'block';
+
+    /* Decide embed source:
+       - file:// → use Google Docs viewer (browsers block local PDF iframes)
+       - http(s):// → use the PDF directly (native browser viewer) */
+    const isLocal = location.protocol === 'file:';
+    const absoluteSrc = new URL(src, location.href).href;
+    const embedSrc = isLocal
+      ? 'https://docs.google.com/viewer?url=' + encodeURIComponent(absoluteSrc) + '&embedded=true'
+      : src;
+    frame.src = embedSrc;
+  }
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 function closePdfModal(){
   document.getElementById('pdfModal').classList.remove('active');
-  document.getElementById('pdfFrame').src='';
-  document.body.style.overflow='';
+  document.getElementById('pdfFrame').src = '';
+  const img = document.getElementById('pdfImageFallback');
+  if(img){ img.src = ''; img.style.display = 'none'; }
+  document.getElementById('pdfFrame').style.display = 'block';
+  document.body.style.overflow = '';
 }
 document.getElementById('pdfModal').addEventListener('click', function(e){ if(e.target===this) closePdfModal(); });
 document.addEventListener('keydown', function(e){
