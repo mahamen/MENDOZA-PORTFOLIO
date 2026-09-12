@@ -12,6 +12,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+<!-- PDF.js for in-modal PDF rendering (works even on file://) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
 /* ============================================================
    TOKENS
@@ -566,15 +568,42 @@ footer{padding:1.8rem 0 2.5rem;text-align:left;font-family:var(--mono);font-size
 .modal-next:hover{transform:translate(3px,-50%)}
 .modal-prev{left:1rem}.modal-next{right:1rem}
 
-.pdf-modal{background:rgba(4,6,5,0.92);padding:0;}
+/* ---------- PDF MODAL ---------- */
+.pdf-modal{background:rgba(4,6,5,0.94);padding:0;z-index:10000;}
 .pdf-wrap{display:flex;flex-direction:column;gap:0.75rem;width:100vw;height:100vh;padding:1.5rem;position:relative;}
 .pdf-head{display:flex;align-items:center;justify-content:space-between;gap:0.6rem;flex-shrink:0;}
 .pdf-title{font-family:var(--serif-display);font-size:0.92rem;font-weight:700;color:var(--ink);display:flex;gap:0.5rem;align-items:center;min-width:0}
 .pdf-title span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pdf-open{font-size:0.76rem;font-weight:700;color:var(--signal);border:1px solid var(--signal-line);padding:0.4rem 0.85rem;display:inline-flex;gap:0.4rem;align-items:center;border-radius:3px;transition:background .25s ease,color .25s ease,transform .2s ease}
 .pdf-open:hover{background:var(--signal);color:#04160c;transform:translateY(-1px)}
-.pdf-body{flex:1;min-height:0;background:#2a2a2c;border:1px solid var(--line-strong);overflow:hidden;box-shadow:var(--shadow-lg);}
-.pdf-body iframe{width:100%;height:100%;border:0;display:block;}
+.pdf-body{
+  flex:1;min-height:0;
+  background:#2a2a2c;
+  border:1px solid var(--line-strong);
+  overflow:auto;
+  box-shadow:var(--shadow-lg);
+  position:relative;
+  display:flex;flex-direction:column;align-items:center;
+  padding:1rem;
+  gap:1rem;
+}
+.pdf-body iframe{width:100%;height:100%;border:0;display:block;background:#2a2a2c;}
+.pdf-body canvas{
+  max-width:100%;
+  height:auto;
+  background:#fff;
+  box-shadow:0 4px 16px rgba(0,0,0,0.4);
+  display:block;
+}
+.pdf-loading,.pdf-error{
+  color:var(--ink-dim);
+  font-family:var(--mono);
+  font-size:0.85rem;
+  padding:2rem;
+  text-align:center;
+}
+.pdf-error{color:#ff8a8a;}
+.pdf-error a{color:var(--signal);text-decoration:underline;}
 .pdf-actions{display:flex;gap:0.6rem;align-items:center}
 
 .skills-modal{background:rgba(4,6,5,0.92);z-index:9998}
@@ -664,6 +693,7 @@ section+section::before{
   .intro-actions{flex-direction:column;align-items:stretch}
   .intro-actions .btn{justify-content:center}
   .pdf-wrap{padding:1rem;}
+  .pdf-body{padding:0.5rem;gap:0.5rem;}
   .intro-stats{gap:0.4rem}
   .archive-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:0.8rem}
   .work-row:hover,.tl-entry:hover,.cap-block:hover{background:transparent}
@@ -1006,7 +1036,9 @@ section+section::before{
         <span class="modal-close" style="position:static" onclick="closePdfModal()">&times;</span>
       </div>
     </div>
-    <div class="pdf-body"><iframe id="pdfFrame" src="" title="PDF preview"></iframe></div>
+    <div class="pdf-body" id="pdfBody">
+      <!-- PDF.js canvases get appended here -->
+    </div>
   </div>
 </div>
 
@@ -1122,6 +1154,11 @@ section+section::before{
 </div>
 
 <script>
+/* ============ PDF.JS WORKER ============ */
+if(window.pdfjsLib){
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
+
 /* ============ SMOOTH SIDE NAV + SCROLL SPY ============ */
 const sections = ['intro','about','experience','capabilities','workstyle','work','designs','media','credentials','contact'];
 const indexItems = document.querySelectorAll('.index-item');
@@ -1154,7 +1191,7 @@ document.querySelectorAll('[data-reveal]').forEach(el=>revealObserver.observe(el
 })();
 
 function openAvatarModal(){ openLightbox(['assets/images/MENDOZA_PICTURE.jpg'],0,['Maria Hanah G. Mendoza']); }
-function openDiploma(){ openPdfModal('assets/images/MENDOZA_DIPLOMA.jpg', 'Cum Laude Diploma — Maria Hanah G. Mendoza', true); }
+function openDiploma(){ openImageInModal('assets/images/MENDOZA_DIPLOMA.jpg', 'Cum Laude Diploma — Maria Hanah G. Mendoza'); }
 
 /* ============ PROJECTS DATA ============ */
 const projects = [
@@ -1339,56 +1376,111 @@ document.addEventListener('keydown', function(e){
   if(e.key==='ArrowRight') lightboxChange(1);
 });
 
-/* ============ PDF MODAL (always renders inside the modal) ============ */
-/* isImage = true when the "PDF" is actually an image (e.g. diploma scan) */
-function openPdfModal(src, title, isImage){
-  const frame = document.getElementById('pdfFrame');
-  const modal = document.getElementById('pdfModal');
-  const titleEl = document.getElementById('pdfModalTitle');
-  const openLink = document.getElementById('pdfModalOpenLink');
+/* ============ PDF MODAL — Renders PDFs via PDF.js inside the modal ============ */
+let currentPdfTask = null;
 
-  titleEl.textContent = title || 'Document';
-  openLink.href = src;
+function resetPdfBody(){
+  const body = document.getElementById('pdfBody');
+  body.innerHTML = '';
+  return body;
+}
 
-  if(isImage){
-    /* Render image inside the same modal body via an inner <img> */
-    frame.src = '';
-    frame.style.display = 'none';
-    let img = document.getElementById('pdfImageFallback');
-    if(!img){
-      img = document.createElement('img');
-      img.id = 'pdfImageFallback';
-      img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;background:#2a2a2c;';
-      frame.parentElement.appendChild(img);
-    }
-    img.src = src;
-    img.style.display = 'block';
-  } else {
-    /* Hide image fallback if it was used before */
-    const img = document.getElementById('pdfImageFallback');
-    if(img) img.style.display = 'none';
-    frame.style.display = 'block';
-
-    /* Decide embed source:
-       - file:// → use Google Docs viewer (browsers block local PDF iframes)
-       - http(s):// → use the PDF directly (native browser viewer) */
-    const isLocal = location.protocol === 'file:';
-    const absoluteSrc = new URL(src, location.href).href;
-    const embedSrc = isLocal
-      ? 'https://docs.google.com/viewer?url=' + encodeURIComponent(absoluteSrc) + '&embedded=true'
-      : src;
-    frame.src = embedSrc;
-  }
-
-  modal.classList.add('active');
+function openImageInModal(src, title){
+  const body = resetPdfBody();
+  document.getElementById('pdfModalTitle').textContent = title || 'Image';
+  document.getElementById('pdfModalOpenLink').href = src;
+  const img = document.createElement('img');
+  img.src = src;
+  img.alt = title || 'Image';
+  img.style.cssText = 'max-width:100%;max-height:100%;object-fit:contain;display:block;background:#111;';
+  body.appendChild(img);
+  document.getElementById('pdfModal').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
+
+function openPdfModal(src, title){
+  const modal = document.getElementById('pdfModal');
+  const body = resetPdfBody();
+  document.getElementById('pdfModalTitle').textContent = title || 'PDF Document';
+  document.getElementById('pdfModalOpenLink').href = src;
+
+  // Show modal immediately with loading indicator
+  const loading = document.createElement('div');
+  loading.className = 'pdf-loading';
+  loading.textContent = 'Loading PDF…';
+  body.appendChild(loading);
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  // If PDF.js failed to load (offline), fall back to iframe
+  if(!window.pdfjsLib){
+    body.innerHTML = '';
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = title || 'PDF';
+    body.appendChild(iframe);
+    return;
+  }
+
+  // Cancel any previous render
+  if(currentPdfTask){ try{ currentPdfTask.destroy(); }catch(e){} currentPdfTask = null; }
+
+  // Render via PDF.js — works even on file:// because we read the file with fetch/XHR
+  const loadingTask = pdfjsLib.getDocument(src);
+  currentPdfTask = loadingTask;
+
+  loadingTask.promise.then(function(pdf){
+    body.innerHTML = '';
+    const totalPages = pdf.numPages;
+
+    // Render pages sequentially
+    let chain = Promise.resolve();
+    for(let pageNum = 1; pageNum <= totalPages; pageNum++){
+      chain = chain.then(function(){
+        return pdf.getPage(pageNum).then(function(page){
+          const viewport = page.getViewport({ scale: 1.5 });
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          // Scale canvas for crisp rendering on HiDPI screens
+          const outputScale = window.devicePixelRatio || 1;
+          canvas.width = Math.floor(viewport.width * outputScale);
+          canvas.height = Math.floor(viewport.height * outputScale);
+          canvas.style.width = '100%';
+          canvas.style.maxWidth = viewport.width + 'px';
+          const transform = outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null;
+
+          body.appendChild(canvas);
+
+          return page.render({
+            canvasContext: ctx,
+            transform: transform,
+            viewport: viewport
+          }).promise;
+        });
+      });
+    }
+    return chain;
+  }).catch(function(err){
+    console.error('PDF.js render error:', err);
+    body.innerHTML = '';
+    // Fallback: iframe (works on http/https, may be blank on file://)
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = title || 'PDF';
+    body.appendChild(iframe);
+
+    // Also offer direct download link
+    const errBox = document.createElement('div');
+    errBox.className = 'pdf-error';
+    errBox.innerHTML = 'Could not render inline. <a href="' + src + '" target="_blank">Open the PDF directly</a>.';
+    body.appendChild(errBox);
+  });
+}
+
 function closePdfModal(){
   document.getElementById('pdfModal').classList.remove('active');
-  document.getElementById('pdfFrame').src = '';
-  const img = document.getElementById('pdfImageFallback');
-  if(img){ img.src = ''; img.style.display = 'none'; }
-  document.getElementById('pdfFrame').style.display = 'block';
+  document.getElementById('pdfBody').innerHTML = '';
+  if(currentPdfTask){ try{ currentPdfTask.destroy(); }catch(e){} currentPdfTask = null; }
   document.body.style.overflow = '';
 }
 document.getElementById('pdfModal').addEventListener('click', function(e){ if(e.target===this) closePdfModal(); });
