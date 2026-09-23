@@ -280,9 +280,73 @@ section+section{border-top:1px solid var(--line)}
 .role-row h3{font-size:0.98rem;font-weight:700;margin-bottom:0.3rem}
 .role-row p{font-size:0.84rem;line-height:1.55;color:var(--ink-dim);max-width:56ch}
 
-.interest-tags{display:flex;flex-wrap:wrap;gap:0.45rem;margin-top:1.15rem}
-.interest-tags span{font-size:0.74rem;font-weight:600;padding:0.32rem 0.75rem;border:1px solid var(--line-strong);border-radius:20px;color:var(--ink-dim);transition:border-color .25s ease,color .25s ease,transform .25s ease}
-.interest-tags span:hover{border-color:var(--signal-line);color:var(--signal);transform:translateY(-1px)}
+/* ---- Expandable "Read more" (About section) ---- */
+.role-expand{
+  margin-top:0;
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:max-height .5s var(--ease), opacity .35s ease, margin-top .4s var(--ease);
+}
+.role-row.expanded .role-expand{
+  max-height:520px;
+  opacity:1;
+  margin-top:0.7rem;
+}
+.role-expand p{
+  font-size:0.83rem;
+  line-height:1.65;
+  color:var(--ink-dim);
+  max-width:58ch;
+}
+.role-expand p + p{margin-top:0.55rem}
+.role-expand p b{color:var(--ink);font-weight:600}
+.role-expand p .hl{color:var(--signal);font-weight:600}
+.role-expand .role-chips{
+  display:flex;flex-wrap:wrap;gap:0.35rem;
+  margin-top:0.75rem;
+}
+.role-expand .role-chips span{
+  font-family:var(--mono);
+  font-size:0.64rem;
+  font-weight:500;
+  letter-spacing:0.02em;
+  padding:0.2rem 0.5rem;
+  border:1px solid var(--line-strong);
+  border-radius:20px;
+  color:var(--ink-faint);
+  background:rgba(238,242,238,0.015);
+}
+.role-row:hover .role-expand .role-chips span{
+  border-color:var(--signal-line);
+  color:var(--ink-dim);
+}
+
+.role-toggle{
+  display:inline-flex;
+  align-items:center;
+  gap:0.4rem;
+  margin-top:0.55rem;
+  font-family:var(--mono);
+  font-size:0.68rem;
+  font-weight:600;
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+  color:var(--signal);
+  transition:color .2s ease, gap .25s var(--ease);
+}
+.role-toggle:hover{color:#5aeb98;gap:0.55rem}
+.role-toggle i{
+  color:var(--signal);
+  font-size:0.7rem;
+  transition:transform .35s var(--ease);
+  margin-top:0;
+}
+.role-row.expanded .role-toggle i{transform:rotate(180deg)}
+.role-row.expanded .role-toggle .toggle-label-open{display:inline}
+.role-row.expanded .role-toggle .toggle-label-closed{display:none}
+.role-toggle .toggle-label-open{display:none}
+.role-toggle .toggle-label-closed{display:inline}
 
 /* ============================================================
    03 EXPERIENCE
@@ -441,7 +505,7 @@ section+section{border-top:1px solid var(--line)}
 .view-all-btn:hover i{transform:translate(2px,-2px)}
 
 /* ============================================================
-   07 DESIGN ARCHIVE — ORIGINAL GRID LAYOUT
+   07 DESIGN ARCHIVE
    ============================================================ */
 .archive-intro{font-size:0.92rem;line-height:1.65;color:var(--ink-dim);max-width:60ch;margin-bottom:2rem}
 .archive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.2rem}
@@ -824,12 +888,114 @@ section+section::before{
       </div>
 
       <div>
+        <!-- ============ ROLE INDEX with expandable detail ============ -->
         <div class="role-index">
-          <div class="role-row"><i class="fas fa-shield-halved"></i><div><h3>Software QA Analyst</h3><p>Manual and exploratory testing, test case creation, and bug tracking — making sure what ships actually works.</p></div></div>
-          <div class="role-row"><i class="fas fa-headset"></i><div><h3>IT Admin / Technical Support</h3><p>Helpdesk support, system administration, and troubleshooting that keep day-to-day operations running.</p></div></div>
-          <div class="role-row"><i class="fas fa-user-clock"></i><div><h3>Virtual Assistant</h3><p>Data entry, scheduling, appointment setting, and admin support — organized and detail-driven.</p></div></div>
-          <div class="role-row"><i class="fas fa-pen-ruler"></i><div><h3>Graphic Designer</h3><p>UI/UX and visual design across web, branding, and print — from concepts to polished mockups.</p></div></div>
-          <div class="role-row"><i class="fas fa-swatchbook"></i><div><h3>UI/UX Designer</h3><p>Wireframes, prototypes, and interface design grounded in usability — designing experiences, not just screens.</p></div></div>
+
+          <!-- 1. Software QA Analyst -->
+          <div class="role-row">
+            <i class="fas fa-shield-halved"></i>
+            <div>
+              <h3>Software QA Analyst</h3>
+              <p>Manual and exploratory testing, test case creation, and bug tracking — making sure what ships actually works.</p>
+              <button class="role-toggle" type="button" onclick="toggleRole(this)" aria-expanded="false">
+                <span class="toggle-label-closed">Read more</span>
+                <span class="toggle-label-open">Show less</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="role-expand">
+                <p>I design and execute <b>manual and exploratory test plans</b> that expose edge cases, regression risks, and hidden defects before they ever reach users. From writing clear, repeatable test cases to logging bugs with the exact steps to reproduce them, I make sure every release is <span class="hl">verified, documented, and trustworthy</span>.</p>
+                <p>Beyond testing, I collaborate closely with developers to reproduce issues, verify fixes, and improve the QA process itself — because quality isn't just a phase, it's a habit baked into every sprint.</p>
+                <div class="role-chips">
+                  <span>Test Cases</span><span>Bug Tracking</span><span>Manual QA</span><span>Exploratory</span><span>Regression</span><span>UAT</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. IT Admin / Technical Support -->
+          <div class="role-row">
+            <i class="fas fa-headset"></i>
+            <div>
+              <h3>IT Admin / Technical Support</h3>
+              <p>Helpdesk support, system administration, and troubleshooting that keep day-to-day operations running.</p>
+              <button class="role-toggle" type="button" onclick="toggleRole(this)" aria-expanded="false">
+                <span class="toggle-label-closed">Read more</span>
+                <span class="toggle-label-open">Show less</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="role-expand">
+                <p>I keep the day-to-day <b>running smoothly</b> — from helpdesk tickets and system administration to hands-on troubleshooting across hardware, software, and network issues. Whether it's a locked account, a misbehaving workstation, or a system rollout, I diagnose the root cause and get the user back to work <span class="hl">fast and clearly</span>.</p>
+                <p>I also handle documentation, user onboarding, and light system maintenance, treating every ticket as an opportunity to leave the setup better than I found it.</p>
+                <div class="role-chips">
+                  <span>Helpdesk</span><span>Troubleshooting</span><span>Sysadmin</span><span>Onboarding</span><span>Documentation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Virtual Assistant -->
+          <div class="role-row">
+            <i class="fas fa-user-clock"></i>
+            <div>
+              <h3>Virtual Assistant</h3>
+              <p>Data entry, scheduling, appointment setting, and admin support — organized and detail-driven.</p>
+              <button class="role-toggle" type="button" onclick="toggleRole(this)" aria-expanded="false">
+                <span class="toggle-label-closed">Read more</span>
+                <span class="toggle-label-open">Show less</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="role-expand">
+                <p>I handle the <b>detail-heavy work</b> that keeps founders and teams focused on the big picture — accurate data entry, calendar management, appointment setting, inbox triage, and admin coordination. I'm organized by default, communicate proactively, and never let a task slip through the cracks.</p>
+                <p>Whether it's a one-off data cleanup or ongoing weekly support, I show up reliable, responsive, and <span class="hl">genuinely invested</span> in making your workflow lighter.</p>
+                <div class="role-chips">
+                  <span>Data Entry</span><span>Scheduling</span><span>Email Mgmt</span><span>Appointments</span><span>Admin</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Graphic Designer -->
+          <div class="role-row">
+            <i class="fas fa-pen-ruler"></i>
+            <div>
+              <h3>Graphic Designer</h3>
+              <p>UI/UX and visual design across web, branding, and print — from concepts to polished mockups.</p>
+              <button class="role-toggle" type="button" onclick="toggleRole(this)" aria-expanded="false">
+                <span class="toggle-label-closed">Read more</span>
+                <span class="toggle-label-open">Show less</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="role-expand">
+                <p>I create visual identities and design assets across <b>web, branding, social media, and print</b> — from logo explorations and brand kits to posters, decks, and marketing collateral. Every piece is built with intention: the right hierarchy, the right palette, and the right tone for the audience it's speaking to.</p>
+                <p>I move comfortably from rough concept sketches to <span class="hl">polished, production-ready mockups</span> — making sure the final output looks as good as the idea behind it.</p>
+                <div class="role-chips">
+                  <span>Branding</span><span>Posters</span><span>Social Media</span><span>Print</span><span>Canva</span><span>Layout</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. UI/UX Designer -->
+          <div class="role-row">
+            <i class="fas fa-swatchbook"></i>
+            <div>
+              <h3>UI/UX Designer</h3>
+              <p>Wireframes, prototypes, and interface design grounded in usability — designing experiences, not just screens.</p>
+              <button class="role-toggle" type="button" onclick="toggleRole(this)" aria-expanded="false">
+                <span class="toggle-label-closed">Read more</span>
+                <span class="toggle-label-open">Show less</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="role-expand">
+                <p>I design interfaces that feel <b>effortless to use</b> — starting with user flows, wireframes, and low-fidelity prototypes, then refining into clean, accessible UI that respects both the user's time and the developer's sanity. I think in systems, not screens: consistent spacing, reusable components, and predictable behavior.</p>
+                <p>Every design decision is grounded in usability — because the goal isn't just something that <span class="hl">looks good</span>, it's something that <span class="hl">works beautifully</span> for the people using it.</p>
+                <div class="role-chips">
+                  <span>Wireframes</span><span>Prototypes</span><span>User Flows</span><span>Design Systems</span><span>Accessibility</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -1230,6 +1396,13 @@ document.querySelectorAll('[data-reveal]').forEach(el=>revealObserver.observe(el
     setTimeout(()=>{ i=(i+1)%roles.length; el.textContent=roles[i]; el.style.opacity=1; },300);
   },2400);
 })();
+
+/* ============ ABOUT: EXPAND / COLLAPSE ROLE DETAILS ============ */
+function toggleRole(btn){
+  const row = btn.closest('.role-row');
+  const expanded = row.classList.toggle('expanded');
+  btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+}
 
 function openAvatarModal(){ openLightbox(['assets/images/MENDOZA_PICTURE.jpg'],0,['Maria Hanah G. Mendoza']); }
 function openDiploma(){ openImageInModal('assets/images/MENDOZA_DIPLOMA.jpg', 'Cum Laude Diploma — Maria Hanah G. Mendoza'); }
