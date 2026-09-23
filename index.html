@@ -242,12 +242,25 @@ section+section{border-top:1px solid var(--line)}
 .intro-frame-tag i{color:var(--signal);transition:transform .3s var(--ease);flex-shrink:0}
 .intro-frame:hover .intro-frame-tag i{transform:scale(1.15)}
 
-.intro-stats{display:flex;gap:0.55rem;margin-top:1.15rem;justify-content:center;flex-wrap:wrap;max-width:min(320px,80vw)}
+/* ---- INTRO STATS: forced onto a single line ---- */
+.intro-stats{
+  display:flex;
+  gap:0.55rem;
+  margin-top:1.15rem;
+  justify-content:center;
+  flex-wrap:nowrap;
+  max-width:100%;
+  width:100%;
+}
 .intro-stat{
-  text-align:center;padding:0.5rem 0.85rem;
-  border:1px solid var(--line);border-radius:40px;
+  text-align:center;
+  padding:0.5rem 0.85rem;
+  border:1px solid var(--line);
+  border-radius:40px;
   background:rgba(238,242,238,0.02);
   transition:border-color .25s var(--ease),transform .25s var(--ease),background .25s var(--ease);
+  flex-shrink:0;
+  white-space:nowrap;
 }
 .intro-stat:hover{border-color:var(--signal-line);transform:translateY(-3px);background:var(--signal-dim)}
 .intro-stat span{
@@ -261,6 +274,19 @@ section+section{border-top:1px solid var(--line)}
 .intro-stat span i{color:var(--signal);font-size:0.72rem}
 .intro-stat:hover span{color:var(--signal)}
 
+/* Smaller pills on very narrow screens to keep them on one line */
+@media(max-width:540px){
+  .intro-stats{gap:0.35rem}
+  .intro-stat{padding:0.4rem 0.6rem}
+  .intro-stat span{font-size:0.6rem}
+  .intro-stat span i{font-size:0.65rem}
+}
+@media(max-width:360px){
+  .intro-stats{gap:0.25rem}
+  .intro-stat{padding:0.35rem 0.5rem}
+  .intro-stat span{font-size:0.55rem}
+}
+
 /* ============================================================
    02 ABOUT — HORIZONTAL ROLE CARDS
    ============================================================ */
@@ -270,7 +296,6 @@ section+section{border-top:1px solid var(--line)}
 .about-lead .accent{color:var(--signal)}
 .about-side{font-size:0.91rem;line-height:1.7;color:var(--ink-dim);max-width:60ch;margin-top:1.35rem}
 
-/* Role cards — fluid grid, collapses gracefully at any width */
 .role-index{
   margin-top:0;
   display:grid;
@@ -303,7 +328,6 @@ section+section{border-top:1px solid var(--line)}
 .role-row h3{font-size:0.92rem;font-weight:700;margin-bottom:0.3rem;line-height:1.3;overflow-wrap:break-word}
 .role-row p{font-size:0.79rem;line-height:1.5;color:var(--ink-dim);overflow-wrap:break-word}
 
-/* Read-more button */
 .role-readmore{
   display:inline-flex;align-items:center;gap:0.4rem;
   margin-top:0.6rem;
@@ -976,7 +1000,6 @@ pre,code{white-space:pre-wrap;word-break:break-word}
   .wrap{padding:0 1.1rem}
   .intro-actions{flex-direction:column;align-items:stretch}
   .intro-actions .btn{justify-content:center}
-  .intro-stats{gap:0.4rem}
   .archive-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.7rem}
   .work-row:hover,.tl-entry:hover,.cap-block:hover{background:transparent}
   .ws-item{padding:0.95rem 0.85rem;}
