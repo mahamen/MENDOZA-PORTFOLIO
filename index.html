@@ -275,10 +275,27 @@ section+section{border-top:1px solid var(--line)}
 }
 .role-row:last-child{border-bottom:1px solid var(--line)}
 .role-row:hover{background:rgba(238,242,238,0.03);padding-left:0.9rem}
-.role-row i{color:var(--signal);font-size:1rem;margin-top:0.15rem;transition:transform .25s var(--ease)}
-.role-row:hover i{transform:scale(1.15)}
+.role-row i.role-icon{color:var(--signal);font-size:1rem;margin-top:0.15rem;transition:transform .25s var(--ease)}
+.role-row:hover i.role-icon{transform:scale(1.15)}
 .role-row h3{font-size:0.98rem;font-weight:700;margin-bottom:0.3rem}
 .role-row p{font-size:0.84rem;line-height:1.55;color:var(--ink-dim);max-width:56ch}
+
+/* Read-more button inside role rows */
+.role-readmore{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  margin-top:0.6rem;
+  font-family:var(--mono);
+  font-size:0.7rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;
+  color:var(--signal);
+  padding:0.3rem 0.7rem;
+  border:1px solid var(--signal-line);
+  border-radius:40px;
+  background:var(--signal-dim);
+  transition:background .2s ease,color .2s ease,transform .2s var(--ease),gap .25s var(--ease);
+}
+.role-readmore:hover{background:var(--signal);color:#04160c;transform:translateY(-1px);gap:0.6rem}
+.role-readmore i{font-size:0.62rem;transition:transform .25s var(--ease)}
+.role-readmore:hover i{transform:translateX(2px)}
 
 .interest-tags{display:flex;flex-wrap:wrap;gap:0.45rem;margin-top:1.15rem}
 .interest-tags span{font-size:0.74rem;font-weight:600;padding:0.32rem 0.75rem;border:1px solid var(--line-strong);border-radius:20px;color:var(--ink-dim);transition:border-color .25s ease,color .25s ease,transform .25s ease}
@@ -552,9 +569,9 @@ footer{padding:1.8rem 0 2.5rem;text-align:left;font-family:var(--mono);font-size
 /* ============================================================
    MODALS
    ============================================================ */
-.lightbox,.pdf-modal,.skills-modal{display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:1rem;opacity:0;transition:opacity .28s var(--ease);backdrop-filter:blur(0px)}
-.lightbox.active,.pdf-modal.active,.skills-modal.active{display:flex;opacity:1;backdrop-filter:blur(6px)}
-.lightbox.active .lightbox-wrap,.pdf-modal.active .pdf-wrap,.skills-modal.active .skills-card{animation:modalIn .32s var(--ease)}
+.lightbox,.pdf-modal,.skills-modal,.role-modal{display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:1rem;opacity:0;transition:opacity .28s var(--ease);backdrop-filter:blur(0px)}
+.lightbox.active,.pdf-modal.active,.skills-modal.active,.role-modal.active{display:flex;opacity:1;backdrop-filter:blur(6px)}
+.lightbox.active .lightbox-wrap,.pdf-modal.active .pdf-wrap,.skills-modal.active .skills-card,.role-modal.active .role-card{animation:modalIn .32s var(--ease)}
 @keyframes modalIn{from{opacity:0;transform:scale(0.96) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .lightbox{background:rgba(4,6,5,0.92)}
 .lightbox-wrap{display:flex;flex-direction:column;align-items:center;gap:0.85rem;max-width:min(92vw,880px)}
@@ -567,6 +584,167 @@ footer{padding:1.8rem 0 2.5rem;text-align:left;font-family:var(--mono);font-size
 .modal-prev:hover{transform:translate(-3px,-50%)}
 .modal-next:hover{transform:translate(3px,-50%)}
 .modal-prev{left:1rem}.modal-next{right:1rem}
+
+/* ---------- ROLE DETAIL MODAL (centered card) ---------- */
+.role-modal{
+  background:rgba(4,6,5,0.85);
+  padding:1.5rem;
+  z-index:10001;
+}
+.role-card{
+  display:flex;
+  flex-direction:column;
+  width:min(760px, 94vw);
+  max-height:88vh;
+  background:var(--pine-2);
+  border:1px solid var(--line-strong);
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 40px 80px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(238,242,238,0.05);
+  position:relative;
+}
+.role-card-head{
+  display:flex;align-items:center;justify-content:space-between;gap:0.9rem;
+  padding:1.1rem 1.3rem;
+  background:linear-gradient(180deg,var(--moss),var(--pine-2));
+  border-bottom:1px solid var(--line);
+  flex-shrink:0;
+}
+.role-card-head-left{display:flex;align-items:center;gap:0.85rem;min-width:0}
+.role-card-icon{
+  width:42px;height:42px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--signal-dim);
+  border:1px solid var(--signal-line);
+  border-radius:8px;
+  color:var(--signal);
+  font-size:1.05rem;
+  flex-shrink:0;
+}
+.role-card-titles{min-width:0}
+.role-card-title{
+  font-family:var(--serif-display);
+  font-size:1.05rem;font-weight:700;
+  letter-spacing:-0.01em;
+  line-height:1.25;
+  color:var(--ink);
+  margin-bottom:0.15rem;
+}
+.role-card-subtitle{
+  font-family:var(--mono);
+  font-size:0.68rem;
+  color:var(--signal);
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+}
+.role-card-close{
+  font-size:1.3rem;line-height:1;color:var(--ink-dim);
+  width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;
+  border-radius:4px;transition:color .2s ease,background .2s ease,transform .25s var(--ease);
+  flex-shrink:0;
+}
+.role-card-close:hover{color:var(--signal);background:rgba(73,224,138,0.1);transform:rotate(90deg)}
+.role-card-body{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  padding:1.4rem 1.5rem 1.6rem;
+  scroll-behavior:smooth;
+}
+.role-card-body::-webkit-scrollbar{width:9px}
+.role-card-body::-webkit-scrollbar-track{background:transparent}
+.role-card-body::-webkit-scrollbar-thumb{background:var(--moss-2);border-radius:20px}
+.role-card-body::-webkit-scrollbar-thumb:hover{background:var(--signal-line)}
+
+.role-card-body p.lede{
+  font-size:0.95rem;
+  line-height:1.7;
+  color:var(--ink);
+  margin-bottom:1.4rem;
+  padding-left:0.9rem;
+  border-left:2px solid var(--signal);
+}
+.role-card-section{margin-bottom:1.5rem}
+.role-card-section:last-child{margin-bottom:0}
+.role-card-section h4{
+  font-family:var(--mono);
+  font-size:0.72rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--signal);
+  margin-bottom:0.75rem;
+  display:flex;align-items:center;gap:0.5rem;
+}
+.role-card-section h4 i{font-size:0.8rem}
+.role-card-list{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:0.55rem;
+}
+.role-card-list li{
+  position:relative;
+  padding-left:1.25rem;
+  font-size:0.87rem;
+  line-height:1.6;
+  color:var(--ink-dim);
+}
+.role-card-list li::before{
+  content:'';
+  position:absolute;
+  left:0;top:0.62em;
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--signal);
+}
+.role-card-list li b{color:var(--ink);font-weight:600}
+
+.role-tools{
+  display:flex;flex-wrap:wrap;gap:0.4rem;
+}
+.role-tools span{
+  font-size:0.74rem;font-weight:600;
+  padding:0.3rem 0.7rem;
+  border:1px solid var(--line-strong);
+  border-radius:3px;
+  color:var(--ink-dim);
+  display:inline-flex;align-items:center;gap:0.4rem;
+  transition:border-color .2s ease,color .2s ease,transform .2s ease;
+}
+.role-tools span:hover{border-color:var(--signal-line);color:var(--signal);transform:translateY(-1px)}
+.role-tools span i{color:var(--signal);font-size:0.78rem}
+
+.role-strengths{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:0.7rem;
+}
+.role-strength{
+  padding:0.85rem 0.9rem;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:rgba(238,242,238,0.015);
+  transition:border-color .25s ease,transform .25s ease,background .25s ease;
+}
+.role-strength:hover{border-color:var(--signal-line);transform:translateY(-2px);background:rgba(73,224,138,0.03)}
+.role-strength b{
+  display:flex;align-items:center;gap:0.5rem;
+  font-size:0.82rem;font-weight:700;
+  color:var(--ink);
+  margin-bottom:0.35rem;
+}
+.role-strength b i{color:var(--signal);font-size:0.85rem}
+.role-strength p{font-size:0.75rem;line-height:1.5;color:var(--ink-dim)}
+
+@media(max-width:640px){
+  .role-modal{padding:0.75rem}
+  .role-card{width:100%;max-height:92vh;border-radius:8px}
+  .role-card-head{padding:0.9rem 1rem}
+  .role-card-title{font-size:0.95rem}
+  .role-card-body{padding:1.1rem 1rem 1.2rem}
+  .role-card-body p.lede{font-size:0.88rem;padding-left:0.75rem}
+  .role-card-list li{font-size:0.83rem}
+}
 
 /* ---------- PDF MODAL — CENTERED CARD, NOT FULLSCREEN ---------- */
 .pdf-modal{
@@ -680,7 +858,7 @@ footer{padding:1.8rem 0 2.5rem;text-align:left;font-family:var(--mono);font-size
 @keyframes float{
   0%,100%{transform:translate(0,0) scale(1)}
   33%{transform:translate(30px,-40px) scale(1.08)}
-  66%{transform:translate(-20px,30px) scale(0.95)}
+  66%{transform:translate(-20px,-10px) scale(0.95)}
 }
 @media(prefers-reduced-motion:reduce){.orb{animation:none}}
 
@@ -727,7 +905,7 @@ section+section::before{
 }
 .interest-tags span:hover::before{left:100%}
 
-.role-row:hover i{animation:iconBounce .5s var(--ease)}
+.role-row:hover i.role-icon{animation:iconBounce .5s var(--ease)}
 @keyframes iconBounce{
   0%,100%{transform:scale(1.15) translateY(0)}
   50%{transform:scale(1.15) translateY(-3px)}
@@ -825,11 +1003,46 @@ section+section::before{
 
       <div>
         <div class="role-index">
-          <div class="role-row"><i class="fas fa-shield-halved"></i><div><h3>Software QA Analyst</h3><p>Manual and exploratory testing, test case creation, and bug tracking — making sure what ships actually works.</p></div></div>
-          <div class="role-row"><i class="fas fa-headset"></i><div><h3>IT Admin / Technical Support</h3><p>Helpdesk support, system administration, and troubleshooting that keep day-to-day operations running.</p></div></div>
-          <div class="role-row"><i class="fas fa-user-clock"></i><div><h3>Virtual Assistant</h3><p>Data entry, scheduling, appointment setting, and admin support — organized and detail-driven.</p></div></div>
-          <div class="role-row"><i class="fas fa-pen-ruler"></i><div><h3>Graphic Designer</h3><p>UI/UX and visual design across web, branding, and print — from concepts to polished mockups.</p></div></div>
-          <div class="role-row"><i class="fas fa-swatchbook"></i><div><h3>UI/UX Designer</h3><p>Wireframes, prototypes, and interface design grounded in usability — designing experiences, not just screens.</p></div></div>
+          <div class="role-row">
+            <i class="fas fa-shield-halved role-icon"></i>
+            <div>
+              <h3>Software QA Analyst</h3>
+              <p>Manual and exploratory testing, test case creation, and bug tracking — making sure what ships actually works.</p>
+              <button class="role-readmore" onclick="openRoleModal('qa')">Read more <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+          <div class="role-row">
+            <i class="fas fa-headset role-icon"></i>
+            <div>
+              <h3>IT Admin / Technical Support</h3>
+              <p>Helpdesk support, system administration, and troubleshooting that keep day-to-day operations running.</p>
+              <button class="role-readmore" onclick="openRoleModal('itadmin')">Read more <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+          <div class="role-row">
+            <i class="fas fa-user-clock role-icon"></i>
+            <div>
+              <h3>Virtual Assistant</h3>
+              <p>Data entry, scheduling, appointment setting, and admin support — organized and detail-driven.</p>
+              <button class="role-readmore" onclick="openRoleModal('va')">Read more <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+          <div class="role-row">
+            <i class="fas fa-pen-ruler role-icon"></i>
+            <div>
+              <h3>Graphic Designer</h3>
+              <p>UI/UX and visual design across web, branding, and print — from concepts to polished mockups.</p>
+              <button class="role-readmore" onclick="openRoleModal('graphic')">Read more <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+          <div class="role-row">
+            <i class="fas fa-swatchbook role-icon"></i>
+            <div>
+              <h3>UI/UX Designer</h3>
+              <p>Wireframes, prototypes, and interface design grounded in usability — designing experiences, not just screens.</p>
+              <button class="role-readmore" onclick="openRoleModal('uiux')">Read more <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1058,6 +1271,23 @@ section+section::before{
 </div>
 </div>
 
+<!-- ============ ROLE DETAIL MODAL ============ -->
+<div id="roleModal" class="role-modal">
+  <div class="role-card">
+    <div class="role-card-head">
+      <div class="role-card-head-left">
+        <div class="role-card-icon"><i id="roleModalIcon" class="fas fa-shield-halved"></i></div>
+        <div class="role-card-titles">
+          <h3 class="role-card-title" id="roleModalTitle">Role</h3>
+          <span class="role-card-subtitle" id="roleModalSubtitle">Role details</span>
+        </div>
+      </div>
+      <button class="role-card-close" onclick="closeRoleModal()" title="Close" aria-label="Close">&times;</button>
+    </div>
+    <div class="role-card-body" id="roleModalBody"></div>
+  </div>
+</div>
+
 <!-- ============ LIGHTBOX ============ -->
 <div id="lightbox" class="lightbox">
   <span class="modal-close" onclick="closeLightbox()">&times;</span>
@@ -1199,6 +1429,201 @@ section+section::before{
 if(window.pdfjsLib){
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 }
+
+/* ============ ROLE DETAIL DATA ============ */
+const roleDetails = {
+  qa: {
+    title: 'Software QA Analyst',
+    subtitle: 'Quality Assurance & Testing',
+    icon: 'fas fa-shield-halved',
+    lede: "I ensure that every release actually works — methodically testing features, documenting defects with clarity, and verifying fixes before they reach users. QA isn't just finding bugs; it's building confidence that the product behaves as designed.",
+    responsibilities: [
+      "<b>Test case creation & execution</b> — writing structured cases that cover happy paths, edge cases, and negative flows.",
+      "<b>Manual & exploratory testing</b> — scripted runs plus unscripted probing to surface issues users would actually hit.",
+      "<b>Bug reporting & tracking</b> — documenting defects with clear repro steps, screenshots, and severity so devs can fix fast.",
+      "<b>Verification & regression</b> — re-testing fixed bugs and running regression suites to ensure nothing breaks.",
+      "<b>Test documentation</b> — maintaining user manuals, test plans, and QA checklists for the team."
+    ],
+    tools: [
+      ['fas fa-list-check', 'Test Case Writing'],
+      ['fas fa-bug', 'Bug Tracking'],
+      ['fas fa-clipboard-check', 'Acceptance Testing'],
+      ['fas fa-rotate-left', 'Regression'],
+      ['fas fa-hand', 'Manual Testing'],
+      ['fas fa-file-lines', 'Documentation'],
+      ['fas fa-diagram-project', 'Integration'],
+      ['fas fa-user-check', 'Usability']
+    ],
+    strengths: [
+      ['fas fa-magnifying-glass', 'Detail Obsessed', 'I catch what others miss — even the smallest off-by-one pixel or mislabeled button.'],
+      ['fas fa-comments', 'Clear Reporting', 'Bugs are documented so devs immediately understand what, where, and how to reproduce.'],
+      ['fas fa-list-check', 'Structured', 'My test plans and checklists are reusable, versioned, and team-friendly.']
+    ]
+  },
+  itadmin: {
+    title: 'IT Admin / Technical Support',
+    subtitle: 'Helpdesk & Systems',
+    icon: 'fas fa-headset',
+    lede: "I keep the day-to-day running — handling helpdesk tickets, maintaining systems, troubleshooting issues, and making sure people can get back to work quickly with minimal friction.",
+    responsibilities: [
+      "<b>Helpdesk support</b> — first-line response for hardware, software, and account issues across departments.",
+      "<b>System & platform administration</b> — user accounts, permissions, and platform settings kept clean and secure.",
+      "<b>Troubleshooting</b> — methodical diagnosis of software, network, and configuration issues to root cause.",
+      "<b>End-user training</b> — walking staff through tools and systems so they can work confidently on their own.",
+      "<b>Documentation</b> — writing internal guides and known-issue notes to reduce repeat tickets."
+    ],
+    tools: [
+      ['fas fa-headset', 'Helpdesk'],
+      ['fas fa-user-gear', 'Administration'],
+      ['fas fa-server', 'System Admin'],
+      ['fas fa-keyboard', 'Data Entry'],
+      ['fas fa-wrench', 'Troubleshooting'],
+      ['fas fa-chalkboard-user', 'User Training'],
+      ['fas fa-ticket', 'Ticketing'],
+      ['fas fa-shield-halved', 'Security Basics']
+    ],
+    strengths: [
+      ['fas fa-clock', 'Responsive', 'I prioritize fast response and clear updates so users are never left guessing.'],
+      ['fas fa-sitemap', 'Systematic', 'I follow a repeatable diagnostic flow — no random guesswork in troubleshooting.'],
+      ['fas fa-people-group', 'Patient', 'I explain technical issues in plain language — no jargon, no confusion.']
+    ]
+  },
+  va: {
+    title: 'Virtual Assistant',
+    subtitle: 'Admin & Operations Support',
+    icon: 'fas fa-user-clock',
+    lede: "I handle the behind-the-scenes work that keeps projects moving — data entry, scheduling, appointment setting, and administrative support — so the people I support can focus on higher-value work.",
+    responsibilities: [
+      "<b>Data entry & management</b> — accurate entry into spreadsheets, CRMs, and internal tools with consistent formatting.",
+      "<b>Calendar & scheduling</b> — booking meetings, managing time zones, and resolving conflicts proactively.",
+      "<b>Appointment setting</b> — coordinating with clients and stakeholders to lock in times that work for everyone.",
+      "<b>Email & inbox management</b> — sorting, drafting, and following up on routine correspondence.",
+      "<b>Ad-hoc admin support</b> — research, document preparation, and light project coordination as needed."
+    ],
+    tools: [
+      ['fas fa-keyboard', 'Data Entry'],
+      ['fas fa-calendar-days', 'Calendar Mgmt'],
+      ['fas fa-calendar-check', 'Appointments'],
+      ['fas fa-envelope', 'Email Handling'],
+      ['fas fa-table', 'Spreadsheets'],
+      ['fas fa-users', 'Coordination'],
+      ['fas fa-file-lines', 'Document Prep'],
+      ['fas fa-clock', 'Time Management']
+    ],
+    strengths: [
+      ['fas fa-list-check', 'Organized', 'I maintain clear trackers so nothing slips through the cracks — tasks, deadlines, follow-ups.'],
+      ['fas fa-check-double', 'Reliable', 'Deadlines are met, work is double-checked, and expectations are managed upfront.'],
+      ['fas fa-comments', 'Professional Communication', 'Written and verbal communication that reads clearly and politely.']
+    ]
+  },
+  graphic: {
+    title: 'Graphic Designer',
+    subtitle: 'Visual & Brand Design',
+    icon: 'fas fa-pen-ruler',
+    lede: "I design visuals that communicate clearly — from social media and branding to print materials — with a strong sense of typography, color, and composition that makes every piece feel intentional.",
+    responsibilities: [
+      "<b>Social media design</b> — post graphics, carousels, and story assets that match brand guidelines.",
+      "<b>Branding & identity</b> — logos, color systems, typography, and brand kits built for consistency.",
+      "<b>Print design</b> — posters, book covers, brochures, and event materials ready for print.",
+      "<b>Presentation design</b> — decks and slides that communicate ideas clearly and look polished.",
+      "<b>Visual storytelling</b> — translating concepts into visuals that support the message, not compete with it."
+    ],
+    tools: [
+      ['fas fa-palette', 'Color Theory'],
+      ['fas fa-font', 'Typography'],
+      ['fas fa-layer-group', 'Composition'],
+      ['fas fa-vector-square', 'Layout'],
+      ['fas fa-c', 'Canva'],
+      ['fas fa-object-group', 'Branding'],
+      ['fas fa-image', 'Print Design'],
+      ['fas fa-film', 'CapCut']
+    ],
+    strengths: [
+      ['fas fa-eye', 'Design Eye', 'A trained sense of balance, hierarchy, and contrast that makes every piece readable at a glance.'],
+      ['fas fa-bullseye', 'Brief-Driven', 'I design to the brief — meeting the goal, not just making something pretty.'],
+      ['fas fa-rotate', 'Iterative', 'I expect revisions and treat feedback as a normal part of getting to the best version.']
+    ]
+  },
+  uiux: {
+    title: 'UI/UX Designer',
+    subtitle: 'User Experience & Interface',
+    icon: 'fas fa-swatchbook',
+    lede: "I design experiences, not just screens — starting from user needs and goals, then shaping interfaces and flows that feel intuitive, accessible, and consistent. Every element has a reason to exist.",
+    responsibilities: [
+      "<b>User research</b> — understanding who the users are, what they need, and where they struggle.",
+      "<b>Wireframing & prototyping</b> — low-to-high fidelity mockups that let teams test ideas before building.",
+      "<b>Interface design</b> — clean, consistent UI grounded in clear hierarchy, spacing, and typography.",
+      "<b>Design systems</b> — reusable components, tokens, and patterns that keep products consistent as they grow.",
+      "<b>Usability testing</b> — watching real users interact with designs and iterating based on what actually happens."
+    ],
+    tools: [
+      ['fas fa-vector-square', 'Wireframing'],
+      ['fas fa-layer-group', 'Design Systems'],
+      ['fas fa-magnifying-glass-chart', 'User Research'],
+      ['fas fa-diagram-project', 'User Flows'],
+      ['fas fa-user-check', 'Usability Testing'],
+      ['fas fa-mobile-screen', 'Responsive'],
+      ['fas fa-universal-access', 'Accessibility'],
+      ['fas fa-pen-nib', 'Prototyping']
+    ],
+    strengths: [
+      ['fas fa-user', 'User-First', 'I start with real user needs, not with the latest design trend.'],
+      ['fas fa-cube', 'Systems Thinker', 'I build components and patterns that scale across a whole product, not one-off screens.'],
+      ['fas fa-rotate', 'Iterative', 'Design is never done in one pass — I test, learn, refine.']
+    ]
+  }
+};
+
+function openRoleModal(key){
+  const data = roleDetails[key];
+  if(!data) return;
+
+  document.getElementById('roleModalTitle').textContent = data.title;
+  document.getElementById('roleModalSubtitle').textContent = data.subtitle;
+  document.getElementById('roleModalIcon').className = data.icon;
+
+  const body = document.getElementById('roleModalBody');
+  const listHtml = data.responsibilities.map(r=>`<li>${r}</li>`).join('');
+  const toolsHtml = data.tools.map(([ic,label])=>`<span><i class="${ic}"></i> ${label}</span>`).join('');
+  const strengthsHtml = data.strengths.map(([ic,title,txt])=>`
+    <div class="role-strength">
+      <b><i class="${ic}"></i> ${title}</b>
+      <p>${txt}</p>
+    </div>`).join('');
+
+  body.innerHTML = `
+    <p class="lede">${data.lede}</p>
+
+    <div class="role-card-section">
+      <h4><i class="fas fa-list-check"></i> What I do</h4>
+      <ul class="role-card-list">${listHtml}</ul>
+    </div>
+
+    <div class="role-card-section">
+      <h4><i class="fas fa-toolbox"></i> Skills &amp; Tools</h4>
+      <div class="role-tools">${toolsHtml}</div>
+    </div>
+
+    <div class="role-card-section">
+      <h4><i class="fas fa-star"></i> Strengths</h4>
+      <div class="role-strengths">${strengthsHtml}</div>
+    </div>
+  `;
+
+  body.scrollTop = 0;
+  document.getElementById('roleModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeRoleModal(){
+  document.getElementById('roleModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.getElementById('roleModal').addEventListener('click', function(e){ if(e.target===this) closeRoleModal(); });
+document.addEventListener('keydown', function(e){
+  const modal=document.getElementById('roleModal');
+  if(modal.classList.contains('active') && e.key==='Escape') closeRoleModal();
+});
 
 /* ============ SMOOTH SIDE NAV + SCROLL SPY ============ */
 const sections = ['intro','about','experience','capabilities','workstyle','work','designs','media','credentials','contact'];
