@@ -258,43 +258,61 @@ section+section{border-top:1px solid var(--line)}
 .intro-stat:hover span{color:var(--signal)}
 
 /* ============================================================
-   02 ABOUT
+   02 ABOUT — HORIZONTAL ROLE CARDS
    ============================================================ */
-.about-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:clamp(2rem,5vw,4.5rem)}
-@media(max-width:900px){.about-grid{grid-template-columns:1fr}}
+.about-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:clamp(2rem,5vw,4.5rem);align-items:start}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:2rem}}
 .about-lead{font-family:var(--serif-display);font-size:clamp(1.25rem,2.6vw,1.6rem);font-weight:600;line-height:1.45;letter-spacing:-0.012em;color:var(--ink)}
 .about-lead .accent{color:var(--signal)}
 .about-side{font-size:0.91rem;line-height:1.7;color:var(--ink-dim);max-width:60ch;margin-top:1.35rem}
 
-.role-index{margin-top:2.3rem;display:flex;flex-direction:column}
-.role-row{
-  display:grid;grid-template-columns:32px 1fr;gap:1rem;
-  padding:1.2rem 0.6rem 1.2rem 0;border-top:1px solid var(--line);
-  margin:0 -0.6rem;padding-left:0.6rem;border-radius:6px;
-  transition:background .25s ease,padding-left .25s ease;
+/* Role cards in 2-col grid, no extra bottom space */
+.role-index{
+  margin-top:0;
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:0.85rem;
 }
-.role-row:last-child{border-bottom:1px solid var(--line)}
-.role-row:hover{background:rgba(238,242,238,0.03);padding-left:0.9rem}
-.role-row i.role-icon{color:var(--signal);font-size:1rem;margin-top:0.15rem;transition:transform .25s var(--ease)}
-.role-row:hover i.role-icon{transform:scale(1.15)}
-.role-row h3{font-size:0.98rem;font-weight:700;margin-bottom:0.3rem}
-.role-row p{font-size:0.84rem;line-height:1.55;color:var(--ink-dim);max-width:56ch}
+.role-index .role-row:nth-child(5){grid-column:span 2}
+@media(max-width:1100px){
+  .role-index{grid-template-columns:1fr}
+  .role-index .role-row:nth-child(5){grid-column:auto}
+}
 
-/* Read-more button inside role rows */
+.role-row{
+  display:grid;grid-template-columns:32px 1fr;gap:0.9rem;
+  padding:1rem 1rem 1.05rem 1rem;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:rgba(238,242,238,0.015);
+  transition:border-color .3s var(--ease),background .3s ease,transform .3s var(--ease),box-shadow .3s var(--ease);
+}
+.role-row:hover{
+  border-color:var(--signal-line);
+  background:rgba(73,224,138,0.03);
+  transform:translateY(-3px);
+  box-shadow:0 16px 32px -20px rgba(73,224,138,0.35);
+}
+.role-row i.role-icon{color:var(--signal);font-size:1rem;margin-top:0.1rem;transition:transform .25s var(--ease)}
+.role-row:hover i.role-icon{transform:scale(1.15)}
+.role-row h3{font-size:0.92rem;font-weight:700;margin-bottom:0.3rem;line-height:1.3}
+.role-row p{font-size:0.79rem;line-height:1.5;color:var(--ink-dim)}
+
+/* Read-more button */
 .role-readmore{
   display:inline-flex;align-items:center;gap:0.4rem;
   margin-top:0.6rem;
   font-family:var(--mono);
-  font-size:0.7rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;
+  font-size:0.68rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;
   color:var(--signal);
-  padding:0.3rem 0.7rem;
+  padding:0.28rem 0.68rem;
   border:1px solid var(--signal-line);
   border-radius:40px;
   background:var(--signal-dim);
   transition:background .2s ease,color .2s ease,transform .2s var(--ease),gap .25s var(--ease);
 }
 .role-readmore:hover{background:var(--signal);color:#04160c;transform:translateY(-1px);gap:0.6rem}
-.role-readmore i{font-size:0.62rem;transition:transform .25s var(--ease)}
+.role-readmore i{font-size:0.6rem;transition:transform .25s var(--ease)}
 .role-readmore:hover i{transform:translateX(2px)}
 
 .interest-tags{display:flex;flex-wrap:wrap;gap:0.45rem;margin-top:1.15rem}
@@ -986,7 +1004,7 @@ section+section::before{
     </div>
   </section>
 
-  <!-- ============ 01 ABOUT ============ -->
+  <!-- ============ 01 ABOUT — HORIZONTAL ROLE CARDS ============ -->
   <section id="about" data-num="01">
     <div class="section-head" data-reveal><h2>About</h2><span class="section-tag">01 / 09</span></div>
     <div class="about-grid">
