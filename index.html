@@ -420,35 +420,68 @@ section + section{border-top:1px solid var(--line)}
   align-items: center;
   order: 1;
 }
+
+/* NEW — ambient glow behind portrait */
+.hero-visual::before {
+  content: '';
+  position: absolute;
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(77, 224, 138, 0.18) 0%,
+    rgba(77, 224, 138, 0.06) 40%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  z-index: 0;
+  pointer-events: none;
+  animation: breatheGlow 6s ease-in-out infinite;
+}
+@keyframes breatheGlow {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.08); }
+}
+
 @media (max-width: 960px) {
   .hero-visual { order: 2; }
 }
+
+/* ---- PORTRAIT: refined size + layered background ---- */
 .portrait-wrapper {
   position: relative;
   width: 100%;
-  max-width: 380px;
+  max-width: clamp(240px, 32vw, 320px);  /* was: 380px — now capped at 320px */
   aspect-ratio: 3/4;
+  margin: 0 auto;                         /* keep it centered */
+  z-index: 2;
 }
+
 .portrait-wrapper::before {
   content: '';
   position: absolute;
-  inset: -20px;
+  inset: -14px;                          /* was -20px — tighter */
   border: 1px solid var(--accent-line);
   border-radius: 50%;
-  opacity: 0.4;
+  opacity: 0.55;
+  box-shadow: 0 0 40px -8px rgba(77, 224, 138, 0.25);  /* NEW: glow */
   animation: spinSlow 30s linear infinite;
 }
+
 .portrait-wrapper::after {
   content: '';
   position: absolute;
-  inset: -40px;
-  border: 1px dashed rgba(77,224,138,0.12);
+  inset: -30px;                          /* was -40px */
+  border: 1px dashed rgba(77, 224, 138, 0.14);
   border-radius: 50%;
   animation: spinSlow 45s linear infinite reverse;
 }
+
 @keyframes spinSlow {
   to { transform: rotate(360deg); }
 }
+
 .portrait-frame {
   position: relative;
   width: 100%;
@@ -457,15 +490,23 @@ section + section{border-top:1px solid var(--line)}
   overflow: hidden;
   border: 1px solid var(--line-med);
   background: var(--bg-card);
-  box-shadow: var(--shadow-3);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,   /* top highlight */
+    0 20px 50px -20px rgba(0, 0, 0, 0.7),      /* depth */
+    0 0 60px -20px rgba(77, 224, 138, 0.15);   /* accent tint */
   z-index: 2;
   cursor: pointer;
-  transition: transform 0.5s var(--ease), border-color 0.4s ease, box-shadow 0.4s ease;
+  transition: transform 0.5s var(--ease),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
 }
 .portrait-frame:hover {
   transform: translateY(-6px);
   border-color: var(--accent-line);
-  box-shadow: 0 40px 80px -20px rgba(77,224,138,0.25);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 30px 60px -20px rgba(0, 0, 0, 0.8),
+    0 0 80px -20px rgba(77, 224, 138, 0.3);
 }
 .portrait-frame img {
   width: 100%;
@@ -496,21 +537,36 @@ section + section{border-top:1px solid var(--line)}
   border-bottom: 2px solid var(--accent);
   border-right: 2px solid var(--accent);
 }
+
+/* NEW — decorative precision dots */
+.portrait-wrapper .corner-tl::before,
+.portrait-wrapper .corner-br::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px 2px rgba(77, 224, 138, 0.6);
+}
+.portrait-wrapper .corner-tl::before { top: -2px; left: -2px; }
+.portrait-wrapper .corner-br::before { bottom: -2px; right: -2px; }
+
 .portrait-badge {
   position: absolute;
-  bottom: 20px;
+  bottom: 14px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.45rem 1rem;
+  padding: 0.38rem 0.85rem;
   background: rgba(8,11,9,0.85);
   backdrop-filter: blur(8px);
   border: 1px solid var(--line-med);
   border-radius: 20px;
   font-family: var(--mono);
-  font-size: 0.55rem;
+  font-size: 0.52rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -522,6 +578,7 @@ section + section{border-top:1px solid var(--line)}
   color: var(--accent);
   font-size: 0.6rem;
 }
+
 .hero-content {
   order: 0;
   display: flex;
@@ -1698,11 +1755,17 @@ section + section{border-top:1px solid var(--line)}
   .portrait-wrapper::before,
   .portrait-wrapper::after { animation: none; }
   .scroll-indicator { animation: none; }
+  .hero-visual::before { animation: none; }
 }
 
 /* ============================================================
    RESPONSIVE SAFETY
    ============================================================ */
+@media(max-width:640px){
+  .portrait-wrapper { max-width: 240px; }
+  .portrait-wrapper::after { inset: -22px; }
+  .portrait-wrapper::before { inset: -10px; }
+}
 @media(max-width:480px){
   .hero-actions .btn{width:100%;justify-content:center}
   .modal-head{padding:0.95rem 1rem}
@@ -1791,6 +1854,10 @@ section + section{border-top:1px solid var(--line)}
         <!-- Right: Content -->
         <div class="hero-content">
      
+          <div class="hero-status">
+            <span class="dot"></span>
+            Available for work
+          </div>
 
           <div class="hero-name">
             <span class="greeting">Hi, my name is</span>
