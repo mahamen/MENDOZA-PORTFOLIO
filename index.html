@@ -303,7 +303,8 @@ section{
   padding:clamp(3.5rem,8vw,6.5rem) 0;
   position:relative;
 }
-section + section{border-top:1px solid var(--line)}
+/* Removed section borders to fix "box" illusion */
+section + section{border-top:none}
 
 .section-head{
   display:grid;
@@ -366,23 +367,10 @@ section + section{border-top:1px solid var(--line)}
   padding: clamp(6rem, 12vw, 8rem) 0 clamp(3rem, 6vw, 5rem);
   overflow: hidden;
   border-top: none;
-  background:
-    radial-gradient(ellipse 80% 60% at 70% 20%, rgba(77,224,138,0.06), transparent 60%),
-    radial-gradient(ellipse 50% 50% at 10% 80%, rgba(77,224,138,0.03), transparent 60%),
-    var(--bg);
+  /* Removed specific background layers to make it seamless */
+  background: transparent;
 }
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(238,242,238,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(238,242,238,0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent);
-  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent);
-}
+/* Removed .hero::before grid pattern to eliminate the enclosed feeling */
 .hero-container {
   width: 100%;
   max-width: var(--max);
@@ -1782,7 +1770,7 @@ section + section{border-top:1px solid var(--line)}
         </div>
 
         <div class="hero-content">
-           
+
           <div class="hero-name">
             <h1>
               Maria Hanah G.
@@ -1813,7 +1801,7 @@ section + section{border-top:1px solid var(--line)}
 
           <div class="hero-meta">
             <span><i class="fas fa-map-marker-alt"></i> Metro Manila, PH</span>
-            <span><i class="fas fa-graduation-cap"></i> Cum Laude · BSIT</span>
+            <span><i class="fas fa-graduation-cap"></i> BSIT</span>
             <span><i class="fas fa-briefcase"></i> Open to opportunities</span>
           </div>
         </div>
@@ -1857,7 +1845,7 @@ section + section{border-top:1px solid var(--line)}
     <div class="about-grid">
       <div data-reveal>
         <p class="about-lead">Someone who catches what others miss — and documents it clearly enough for the whole team to act on.</p>
-        <p class="about-body">Graduated Cum Laude in BS Information Technology from Mindoro State University, with hands-on experience spanning software QA, technical support, UI/UX design, and virtual assistance.</p>
+        <p class="about-body">Graduated in BS Information Technology from Mindoro State University, with hands-on experience spanning software QA, technical support, UI/UX design, and virtual assistance.</p>
         <p class="about-body">I work at the intersection of quality and design — testing that the product works, designing that it feels right, and documenting so the team stays aligned.</p>
         <div class="about-interests">
           <p class="lbl">Areas of interest</p>
@@ -1896,12 +1884,6 @@ section + section{border-top:1px solid var(--line)}
             <div class="rc-icon"><i class="fas fa-pen-ruler"></i></div>
             <h3>Graphic Designer</h3>
             <p>UI/UX and visual design across web, branding, and print — from concepts to polished mockups.</p>
-            <span class="rc-more">Read more <i class="fas fa-arrow-right"></i></span>
-          </div>
-          <div class="role-card" onclick="openRoleModal('va')">
-            <div class="rc-icon"><i class="fas fa-user-clock"></i></div>
-            <h3>Virtual Assistant</h3>
-            <p>Data entry, scheduling, appointment setting, and admin support — organized and detail-driven.</p>
             <span class="rc-more">Read more <i class="fas fa-arrow-right"></i></span>
           </div>
         </div>
@@ -1944,7 +1926,7 @@ section + section{border-top:1px solid var(--line)}
           <button class="diploma-btn" onclick="openDiploma()">
             <i class="fas fa-graduation-cap"></i>
             <div class="db-text">
-              <div class="db-title">Graduated Cum Laude · GWA 1.47</div>
+              <div class="db-title">Graduated · GWA 1.47</div>
               <div class="db-sub">Click to view diploma</div>
             </div>
             <i class="fas fa-arrow-up-right-from-square"></i>
@@ -2227,7 +2209,7 @@ section + section{border-top:1px solid var(--line)}
         <div class="ci-left">
           <div class="ci-icon"><i class="fas fa-award"></i></div>
           <div>
-            <div class="ci-name">Latin Honor Graduate — Cum Laude (GWA 1.47)</div>
+            <div class="ci-name">BS Information Technology — GWA 1.47</div>
             <div class="ci-sub">Mindoro State University</div>
           </div>
         </div>
@@ -2509,7 +2491,7 @@ document.querySelectorAll('[data-reveal]').forEach(el=>revealObs.observe(el));
 
 /* ============ AVATAR / LIGHTBOX ============ */
 function openAvatarModal(){ openLightbox(['assets/images/MENDOZA_PICTURE.jpg'], 0, ['Maria Hanah G. Mendoza']); }
-function openDiploma(){ openImageInModal('assets/images/MENDOZA_DIPLOMA.jpg', 'Cum Laude Diploma — Maria Hanah G. Mendoza'); }
+function openDiploma(){ openImageInModal('assets/images/MENDOZA_DIPLOMA.jpg', 'BS Information Technology Diploma — Maria Hanah G. Mendoza'); }
 
 /* ============ ROLE DETAIL DATA ============ */
 const roleDetails = {
@@ -2538,19 +2520,6 @@ const roleDetails = {
     ],
     tools: [['fas fa-headset','Helpdesk'],['fas fa-user-gear','Administration'],['fas fa-server','System Admin'],['fas fa-keyboard','Data Entry'],['fas fa-wrench','Troubleshooting'],['fas fa-chalkboard-user','User Training'],['fas fa-ticket','Ticketing'],['fas fa-shield-halved','Security Basics']],
     strengths: [['fas fa-clock','Responsive','I prioritize fast response and clear updates.'],['fas fa-sitemap','Systematic','I follow a repeatable diagnostic flow.'],['fas fa-people-group','Patient','I explain technical issues in plain language.']]
-  },
-  va: {
-    title: 'Virtual Assistant', subtitle: 'Admin & Operations Support', icon: 'fas fa-user-clock',
-    lede: "I handle the behind-the-scenes work that keeps projects moving — data entry, scheduling, appointment setting, and administrative support.",
-    responsibilities: [
-      "<b>Data entry & management</b> — accurate entry into spreadsheets, CRMs, and internal tools.",
-      "<b>Calendar & scheduling</b> — booking meetings, managing time zones, and resolving conflicts.",
-      "<b>Appointment setting</b> — coordinating with clients and stakeholders.",
-      "<b>Email & inbox management</b> — sorting, drafting, and following up.",
-      "<b>Ad-hoc admin support</b> — research, document preparation, and light project coordination."
-    ],
-    tools: [['fas fa-keyboard','Data Entry'],['fas fa-calendar-days','Calendar Mgmt'],['fas fa-calendar-check','Appointments'],['fas fa-envelope','Email Handling'],['fas fa-table','Spreadsheets'],['fas fa-users','Coordination'],['fas fa-file-lines','Document Prep'],['fas fa-clock','Time Management']],
-    strengths: [['fas fa-list-check','Organized','I maintain clear trackers.'],['fas fa-check-double','Reliable','Deadlines are met, work is double-checked.'],['fas fa-comments','Professional Communication','Written and verbal communication that reads clearly.']]
   },
   graphic: {
     title: 'Graphic Designer', subtitle: 'Visual & Brand Design', icon: 'fas fa-pen-ruler',
