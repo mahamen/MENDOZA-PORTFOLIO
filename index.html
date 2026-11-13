@@ -1277,11 +1277,11 @@ section:not(.hero){
 }
 
 /* ============================================================
-   FIX: MODAL STACKING ORDER
-   Each modal gets a distinct z-index so a newly-opened modal
-   always renders above any previously-opened modal (e.g. the
-   browse grid). Prevents the "click design → nothing shows"
-   bug where the target modal rendered behind the browse grid.
+   MODAL STACKING ORDER
+   Each modal has a distinct z-index so a newly opened modal always
+   renders above the one underneath it (e.g. the "View all" grid).
+   Opening a design/project no longer closes the grid, so closing the
+   viewer returns you to the grid.
    ============================================================ */
 #browseModal  { z-index: 1000; }
 #lightbox     { z-index: 1100; }
@@ -2061,6 +2061,13 @@ function loadPdfJs(){
   return pdfJsPromise;
 }
 
+/* ============ MODAL SCROLL LOCK ============ */
+/* Page scroll stays locked while ANY modal is open,
+   and is released only when the last one closes. */
+function syncBodyScroll(){
+  document.body.style.overflow = document.querySelector('.modal.active') ? 'hidden' : '';
+}
+
 /* ============ NAV BEHAVIOR ============ */
 const rail = document.getElementById('rail');
 const topbar = document.getElementById('topbar');
@@ -2245,11 +2252,11 @@ function openRoleModal(key){
     </div>`;
   body.scrollTop = 0;
   document.getElementById('roleModal').classList.add('active');
-  document.body.style.overflow = 'hidden';
+  syncBodyScroll();
 }
 function closeRoleModal(){
   document.getElementById('roleModal').classList.remove('active');
-  document.body.style.overflow = '';
+  syncBodyScroll();
 }
 document.getElementById('roleModal').addEventListener('click', function(e){ if(e.target===this) closeRoleModal(); });
 
@@ -2392,11 +2399,10 @@ function openWorkModal(){
 }
 
 /* ============ PROJECT CASE STUDY MODAL ============ */
+/* FIX: does NOT close the browse modal. The case study opens on top
+   (z-index 1140 > 1000), so closing it returns you to the full list. */
 function openProjectModal(idx){
   const p = projects[idx]; if(!p) return;
-  /* FIX: close the browse modal first so the case study modal
-     is never rendered behind the still-open browse grid. */
-  closeBrowseModal();
   document.getElementById('projectModalTitle').textContent = p.title;
   document.getElementById('projectModalSubtitle').textContent = p.category + ' · Case study';
   document.getElementById('projectModalLink').href = p.link;
@@ -2439,11 +2445,11 @@ function openProjectModal(idx){
     </div>`;
   body.scrollTop = 0;
   document.getElementById('projectModal').classList.add('active');
-  document.body.style.overflow = 'hidden';
+  syncBodyScroll();
 }
 function closeProjectModal(){
   document.getElementById('projectModal').classList.remove('active');
-  document.body.style.overflow = '';
+  syncBodyScroll();
 }
 document.getElementById('projectModal').addEventListener('click', function(e){ if(e.target===this) closeProjectModal(); });
 
@@ -2499,14 +2505,12 @@ function openDesignsModal(){
   openBrowseModal();
 }
 
-/* FIX: close the browse modal BEFORE opening the viewer.
-   Previously the browse grid stayed open at the same z-index as
-   the PDF/lightbox, so the newly-opened viewer rendered BEHIND
-   the grid and clicks looked like no-ops. */
+/* FIX: does NOT close the browse modal. The PDF viewer / lightbox opens
+   ON TOP (higher z-index), so closing it reveals the "All Designs" grid
+   again, exactly as you left it (same scroll position). */
 function openDesign(idx){
   const d = designs[idx];
   if(!d) return;
-  closeBrowseModal();
   if(d.pdf){ openPdfModal(d.pdf, d.title); }
   else { openLightbox(designs.map(x=>x.file), idx, designs.map(x=>`${x.title} — ${x.category}`)); }
 }
@@ -2522,11 +2526,16 @@ function openLightbox(images, idx, captions){
   if(lbCaptions.length){ cap.textContent = lbCaptions[idx]; cap.style.display = 'block'; }
   else { cap.style.display = 'none'; }
   modal.classList.add('active');
+  syncBodyScroll();
   const showNav = images.length > 1;
   modal.querySelector('.lb-prev').style.display = showNav ? '' : 'none';
   modal.querySelector('.lb-next').style.display = showNav ? '' : 'none';
 }
-function closeLightbox(){ document.getElementById('lightbox').classList.remove('active'); lbImages = []; lbCaptions = []; document.body.style.overflow=''; }
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('active');
+  lbImages = []; lbCaptions = [];
+  syncBodyScroll();
+}
 function lightboxChange(dir){
   if(!lbImages.length) return;
   lbIdx = (lbIdx + dir + lbImages.length) % lbImages.length;
@@ -2558,7 +2567,7 @@ function openImageInModal(src, title){
   img.style.cssText = 'max-width:100%;max-height:100%;object-fit:contain;display:block;border-radius:2px;box-shadow:0 6px 24px rgba(0,0,0,0.5);';
   body.appendChild(img);
   document.getElementById('pdfModal').classList.add('active');
-  document.body.style.overflow = 'hidden';
+  syncBodyScroll();
 }
 function openPdfModal(src, title){
   const modal = document.getElementById('pdfModal');
@@ -2569,7 +2578,7 @@ function openPdfModal(src, title){
   loading.className = 'pdf-loading'; loading.textContent = 'Loading PDF…';
   body.appendChild(loading);
   modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  syncBodyScroll();
 
   const token = ++pdfRenderToken;
   if(currentPdfTask){ try{ currentPdfTask.destroy(); }catch(e){} currentPdfTask = null; }
@@ -2624,36 +2633,37 @@ function closePdfModal(){
   document.getElementById('pdfModal').classList.remove('active');
   document.getElementById('pdfBody').innerHTML = '';
   if(currentPdfTask){ try{ currentPdfTask.destroy(); }catch(e){} currentPdfTask = null; }
-  document.body.style.overflow = '';
+  syncBodyScroll();
 }
 document.getElementById('pdfModal').addEventListener('click', function(e){ if(e.target===this) closePdfModal(); });
 
 /* ============ BROWSE MODAL ============ */
 function openBrowseModal(){
   document.getElementById('browseModal').classList.add('active');
-  document.body.style.overflow = 'hidden';
+  syncBodyScroll();
   const body = document.getElementById('browseModalBody');
   if(body) body.scrollTop = 0;
 }
 function closeBrowseModal(){
   document.getElementById('browseModal').classList.remove('active');
   document.getElementById('browseModalBody').innerHTML = '';
-  /* Only restore body scroll if no other modal is still open */
-  if(!document.querySelector('.modal.active')){
-    document.body.style.overflow = '';
-  }
+  syncBodyScroll();
 }
 document.getElementById('browseModal').addEventListener('click', function(e){ if(e.target===this) closeBrowseModal(); });
 
-/* ============ GLOBAL ESC ============ */
+/* ============ GLOBAL ESC (closes only the top-most modal) ============ */
+/* Order = highest z-index first (role 1160 > project 1140 > pdf 1120 > lightbox 1100 > browse 1000) */
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){
-    document.querySelectorAll('.modal.active').forEach(m=>{
-      m.classList.remove('active');
-    });
-    pdfRenderToken++;
-    document.getElementById('pdfBody').innerHTML = '';
-    document.body.style.overflow = '';
+  if(e.key !== 'Escape') return;
+  const closers = [
+    ['roleModal',    closeRoleModal],
+    ['projectModal', closeProjectModal],
+    ['pdfModal',     closePdfModal],
+    ['lightbox',     closeLightbox],
+    ['browseModal',  closeBrowseModal]
+  ];
+  for(const [id, fn] of closers){
+    if(document.getElementById(id).classList.contains('active')){ fn(); break; }
   }
 });
 
